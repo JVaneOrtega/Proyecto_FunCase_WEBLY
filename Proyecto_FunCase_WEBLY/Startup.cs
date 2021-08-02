@@ -1,8 +1,6 @@
-﻿using Microsoft.Owin;
-using Owin;
+﻿using Owin;
 
-[assembly: OwinStartupAttribute(typeof(Proyecto_FunCase_WEBLY.Startup))]
-namespace Proyecto_FunCase_WEBLY
+namespace IdentitySample
 {
     public partial class Startup
     {

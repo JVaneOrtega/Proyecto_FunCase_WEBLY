@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using IdentitySample.Models;
 
 namespace Proyecto_FunCase_WEBLY.Models
 {
