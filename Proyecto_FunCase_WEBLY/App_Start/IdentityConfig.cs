@@ -123,11 +123,26 @@ namespace IdentitySample.Models
             if (role == null) {
                 role = new IdentityRole(roleName);
                 var roleresult = roleManager.Create(role);
-                var roleEmpleado = new IdentityRole("Empleado");
+            }
+
+            var roleEmpleado = roleManager.FindByName("Empleado");
+            if(roleEmpleado == null)
+            {
+                roleEmpleado = new IdentityRole("Empleado");
                 roleManager.Create(roleEmpleado);
-                var roleCliente = new IdentityRole("Cliente");
+            }
+
+            var roleCliente = roleManager.FindByName("Cliente");
+            if(roleCliente == null)
+            {
+                roleCliente = new IdentityRole("Cliente");
                 roleManager.Create(roleCliente);
-                var roleDesigner = new IdentityRole("Diseñador");
+            }
+
+            var roleDesigner = roleManager.FindByName("Diseñador");
+            if(roleDesigner == null)
+            {
+                roleDesigner = new IdentityRole("Diseñador");
                 roleManager.Create(roleDesigner);
             }
 

@@ -11,6 +11,6 @@ namespace Proyecto_FunCase_WEBLY.Models
         public int DesignerID { get; set; }
         public string nombrePresentacion { get; set; }
         public virtual Persona Persona { get; set; }
-        public virtual RegisterViewModel User { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

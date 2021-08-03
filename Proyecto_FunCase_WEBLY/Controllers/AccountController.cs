@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Proyecto_FunCase_WEBLY.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -22,6 +23,7 @@ namespace IdentitySample.Controllers
             SignInManager = signInManager;
         }
 
+        private FunCaseModelContext db = new FunCaseModelContext();
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
         {
@@ -149,6 +151,10 @@ namespace IdentitySample.Controllers
         {
             if (ModelState.IsValid)
             {
+                var persona = new Persona { Nombre = model.Nombre, Apellido1 = model.Apellido1, Apellido2 = model.Apellido2, Telefono = model.Telefono };
+                var objPersona = db.Personas.Add(persona);
+                db.SaveChanges();
+
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -157,6 +163,17 @@ namespace IdentitySample.Controllers
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     ViewBag.Link = callbackUrl;
+                    
+                    if(model.Tipo == "Cliente")
+                    {
+                        var cliente = new Cliente { fechaNacimiento = model.fechaNacimiento, Persona = objPersona, User = user };
+                        var objCliente = db.Clientes.Add(cliente);
+                        db.SaveChanges();
+                    } else
+                    {
+                        var designer = new Designer { nombrePresentacion = model.nombrePresentacion, Persona = persona, User = user };
+                    }
+                    
                     return View("DisplayEmail");
                 }
                 AddErrors(result);

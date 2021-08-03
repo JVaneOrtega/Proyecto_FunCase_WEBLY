@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Proyecto_FunCase_WEBLY.Models.Cliente>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaNacimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaNacimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ClienteID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ClienteID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ClienteID })
+        </td>
+    </tr>
+}
+
+</table>
