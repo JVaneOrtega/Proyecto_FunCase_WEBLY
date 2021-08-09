@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using IdentitySample.Models;
+using Proyecto_FunCase_WEBLY.Models;
 
 namespace Proyecto_FunCase_WEBLY.Controllers
 {
     public class ClienteController : Controller
     {
+        public ApplicationUserManager UserManager;
+
         // GET: Cliente
         public ActionResult Index()
         {

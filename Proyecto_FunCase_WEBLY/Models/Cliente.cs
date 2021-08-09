@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using IdentitySample.Models;
 
 namespace Proyecto_FunCase_WEBLY.Models
@@ -12,11 +13,12 @@ namespace Proyecto_FunCase_WEBLY.Models
         [DataType(DataType.Date)]
         [Display(Name ="Fecha de Nacimiento")]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime fechaNacimiento { get; set; }
+        public DateTime FechaNacimiento { get; set; }
         [Required]
-        [Display(Name = "Datos Personales")]
-        public virtual Persona Persona { get; set; }
         [Display(Name = "Datos de Usuario")]
+        [Key]
+        public string UserId { get; set; }
+        [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
     }
 }

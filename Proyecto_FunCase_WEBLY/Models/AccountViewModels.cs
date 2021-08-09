@@ -66,24 +66,17 @@ namespace IdentitySample.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Tipo de Usuario")]
         public string Tipo { get; set; }
         [Required]
         public string Nombre { get; set; }
         [Required]
         [Display(Name = "Apellido Paterno")]
         public string Apellido1 { get; set; }
-        [Required]
+
         [Display(Name = "Apellido Materno")]
         public string Apellido2 { get; set; }
         public string Telefono { get; set; }
-
-        [DataType(DataType.Date)]
-        [Display(Name = "Fecha de Nacimiento")]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime fechaNacimiento { get; set; }
-
-        [Display(Name = "Nombre de diseñador")]
-        public string nombrePresentacion { get; set; }
 
         [Required]
         [EmailAddress]
@@ -98,7 +91,7 @@ namespace IdentitySample.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirme la contraseña")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Las contraseñas no coinciden")]
         public string ConfirmPassword { get; set; }
     }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -13,6 +14,10 @@ namespace Proyecto_FunCase_WEBLY.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
         }
 
         public virtual DbSet<Cliente> Clientes { get; set; }
@@ -28,7 +33,7 @@ namespace Proyecto_FunCase_WEBLY.Models
         public virtual DbSet<MetodosPago> MetodosPagos { get; set; }
         public virtual DbSet<Modelo> Modelos { get; set; }
         public virtual DbSet<Pedido> Pedidos { get; set; }
-        public virtual DbSet<Persona> Personas { get; set; }
         public virtual DbSet<Producto> Productos { get; set; }
+
     }
 }
