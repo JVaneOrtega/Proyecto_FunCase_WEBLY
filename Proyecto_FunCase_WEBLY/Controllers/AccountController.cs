@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Proyecto_FunCase_WEBLY.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -22,6 +23,7 @@ namespace IdentitySample.Controllers
             SignInManager = signInManager;
         }
 
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
         {
@@ -157,6 +159,23 @@ namespace IdentitySample.Controllers
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     ViewBag.Link = callbackUrl;
+
+                    if (model.Tipo == "Cliente")
+                    {
+                        var roleUser = UserManager.GetRoles(user.Id);
+                        if(!roleUser.Contains("Cliente"))
+                        {
+                            var rolCliente = UserManager.AddToRole(user.Id, "Cliente");
+                        }
+                    } else
+                    {
+                        var roleUser = UserManager.GetRoles(user.Id);
+                        if (!roleUser.Contains("De"))
+                        {
+                            var rolCliente = UserManager.AddToRole(user.Id, "Cliente");
+                        }
+                    }
+                    
                     return View("DisplayEmail");
                 }
                 AddErrors(result);

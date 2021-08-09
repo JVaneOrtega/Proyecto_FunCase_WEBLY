@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace IdentitySample.Models
@@ -65,19 +66,32 @@ namespace IdentitySample.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Tipo de Usuario")]
+        public string Tipo { get; set; }
+        [Required]
+        public string Nombre { get; set; }
+        [Required]
+        [Display(Name = "Apellido Paterno")]
+        public string Apellido1 { get; set; }
+
+        [Display(Name = "Apellido Materno")]
+        public string Apellido2 { get; set; }
+        public string Telefono { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "La {0} debe tener al menos {2} carácteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirme la contraseña")]
+        [Compare("Password", ErrorMessage = "Las contraseñas no coinciden")]
         public string ConfirmPassword { get; set; }
     }
 

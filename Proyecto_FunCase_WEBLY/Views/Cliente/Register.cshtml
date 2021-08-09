@@ -1,7 +1,7 @@
-﻿@model IdentitySample.Models.RegisterViewModel
+﻿
+@model Proyecto_FunCase_WEBLY.Models.RegisterCliente
 @{
     ViewBag.Title = "Register";
-    string[] TipoUsuario = { "Cliente", "Diseñador" };
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -12,21 +12,7 @@
     <h4>Crear una nueva cuenta</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
-    <h4>Tipo de cuenta</h4>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Tipo, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @foreach (var tipo in TipoUsuario)
-            {
-                @Html.RadioButtonFor(model => model.Tipo, tipo, new { @class = "form-check-input" })
-                <label class="form-check-label">
-                    @tipo
-                </label>
-            }
-        </div>
-    </div>
-    <hr />
-    <h4>Datos personales</h4>
+    <h4>Datos Personales</h4>
     <div class="form-group">
         @Html.LabelFor(m => m.Nombre, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
@@ -51,24 +37,16 @@
             @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control" })
         </div>
     </div>
-    <hr />
-    <h4>Datos de cuenta</h4>
     <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.FechaNacimiento, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.FechaNacimiento, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.User, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.User, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
