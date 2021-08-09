@@ -1,0 +1,58 @@
+﻿@model Proyecto_FunCase_WEBLY.Models.Modelo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Modelo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ancho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ancho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Grosor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Grosor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagenReferencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImagenReferencia)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ModeloID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

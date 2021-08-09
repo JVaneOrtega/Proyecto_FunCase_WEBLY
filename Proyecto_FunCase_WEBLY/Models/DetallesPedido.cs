@@ -11,5 +11,7 @@ namespace Proyecto_FunCase_WEBLY.Models
         public int Cantidad { get; set; }
         public virtual Producto Producto { get; set; }
         public virtual Cliente Cliente { get; set; }
+
+        public virtual Pedido Pedido { get; set; }
     }
 }
