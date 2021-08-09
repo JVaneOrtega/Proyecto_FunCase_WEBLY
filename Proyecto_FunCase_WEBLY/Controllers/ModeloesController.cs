@@ -6,13 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using IdentitySample.Models;
 using Proyecto_FunCase_WEBLY.Models;
 
 namespace Proyecto_FunCase_WEBLY.Controllers
 {
     public class ModeloesController : Controller
     {
-        private FunCaseModelContext db = new FunCaseModelContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Modeloes
         public ActionResult Index()

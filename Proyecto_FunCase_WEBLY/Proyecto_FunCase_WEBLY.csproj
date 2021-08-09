@@ -172,19 +172,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModeloesController.cs" />
-    <Compile Include="FunCaseMigrations\202107290651228_FunCaseInitial.cs" />
-    <Compile Include="FunCaseMigrations\202107290651228_FunCaseInitial.Designer.cs">
-      <DependentUpon>202107290651228_FunCaseInitial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FunCaseMigrations\202108022106103_FunCaseInitial1.cs" />
-    <Compile Include="FunCaseMigrations\202108022106103_FunCaseInitial1.Designer.cs">
-      <DependentUpon>202108022106103_FunCaseInitial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FunCaseMigrations\202108092009566_FunCaseInitial2.cs" />
-    <Compile Include="FunCaseMigrations\202108092009566_FunCaseInitial2.Designer.cs">
-      <DependentUpon>202108092009566_FunCaseInitial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FunCaseMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -195,7 +182,6 @@
     <Compile Include="Models\DetallesPedido.cs" />
     <Compile Include="Models\Direccion.cs" />
     <Compile Include="Models\Estado.cs" />
-    <Compile Include="Models\FunCaseModelContext.cs" />
     <Compile Include="Models\Funda_Diseno.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Imagen.cs" />
@@ -292,6 +278,7 @@
     <Content Include="Views\Persona\Create.cshtml" />
     <Content Include="Views\Cliente\Create.cshtml" />
     <Content Include="Views\Cliente\Register.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -308,17 +295,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="FunCaseMigrations\202107290651228_FunCaseInitial.resx">
-      <DependentUpon>202107290651228_FunCaseInitial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108022106103_FunCaseInitial1.resx">
-      <DependentUpon>202108022106103_FunCaseInitial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108092009566_FunCaseInitial2.resx">
-      <DependentUpon>202108092009566_FunCaseInitial2.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

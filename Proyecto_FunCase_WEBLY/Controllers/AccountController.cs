@@ -23,7 +23,7 @@ namespace IdentitySample.Controllers
             SignInManager = signInManager;
         }
 
-        private FunCaseModelContext db = new FunCaseModelContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
         {
