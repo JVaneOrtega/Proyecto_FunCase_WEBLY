@@ -175,15 +175,10 @@
     <Compile Include="Controllers\ModeloesController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
-    <Compile Include="FunCaseMigrations\202108092305266_FunCaseInitial.cs" />
-    <Compile Include="FunCaseMigrations\202108092305266_FunCaseInitial.Designer.cs">
-      <DependentUpon>202108092305266_FunCaseInitial.cs</DependentUpon>
+    <Compile Include="FunCaseMigrations\202108100516489_FunCaseInitial.cs" />
+    <Compile Include="FunCaseMigrations\202108100516489_FunCaseInitial.Designer.cs">
+      <DependentUpon>202108100516489_FunCaseInitial.cs</DependentUpon>
     </Compile>
-    <Compile Include="FunCaseMigrations\202108092314123_FunCaseInitial1.cs" />
-    <Compile Include="FunCaseMigrations\202108092314123_FunCaseInitial1.Designer.cs">
-      <DependentUpon>202108092314123_FunCaseInitial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FunCaseMigrations\Configuration.cs" />
     <Compile Include="FunCaseMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -195,6 +190,7 @@
     <Compile Include="Models\DetallesPedido.cs" />
     <Compile Include="Models\Direccion.cs" />
     <Compile Include="Models\Estado.cs" />
+    <Compile Include="Models\FunCaseModelContext.cs" />
     <Compile Include="Models\Funda_Diseno.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Imagen.cs" />
@@ -311,6 +307,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FunCaseMigrations\202108100516489_FunCaseInitial.resx">
+      <DependentUpon>202108100516489_FunCaseInitial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
