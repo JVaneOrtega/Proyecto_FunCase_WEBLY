@@ -11,7 +11,7 @@ namespace Proyecto_FunCase_WEBLY.Models
     public class Designer
     {
         public int DesignerID { get; set; }
-        public string nombrePresentacion { get; set; }
+        public string NombrePresentacion { get; set; }
 
         [Required]
         [Display(Name = "Datos de Usuario")]

@@ -16,6 +16,16 @@ namespace IdentitySample.Models
     {
         public string Id { get; set; }
 
+        [Required]
+        public string Nombre { get; set; }
+        [Required]
+        [Display(Name = "Apellido Paterno")]
+        public string Apellido1 { get; set; }
+
+        [Display(Name = "Apellido Materno")]
+        public string Apellido2 { get; set; }
+        public string Telefono { get; set; }
+
         [Required(AllowEmptyStrings = false)]
         [Display(Name = "Email")]
         [EmailAddress]

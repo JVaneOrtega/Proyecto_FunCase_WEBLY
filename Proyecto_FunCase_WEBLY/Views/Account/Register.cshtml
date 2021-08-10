@@ -1,7 +1,7 @@
 ﻿@model IdentitySample.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
-    string[] TipoUsuario = {"Cliente", "Diseñador"};
+    string[] TipoUsuario = { "Cliente", "Diseñador" };
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -16,8 +16,9 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Tipo, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @foreach (var tipo in TipoUsuario) {
-                @Html.RadioButtonFor(model => model.Tipo, tipo, new { @class = "form-check-input" }) 
+            @foreach (var tipo in TipoUsuario)
+            {
+                @Html.RadioButtonFor(model => model.Tipo, tipo, new { @class = "form-check-input" })
                 <label class="form-check-label">
                     @tipo
                 </label>

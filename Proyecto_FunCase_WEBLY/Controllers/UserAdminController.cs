@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace IdentitySample.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class UsersAdminController : Controller
     {
         public UsersAdminController()
@@ -90,7 +90,7 @@ namespace IdentitySample.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = userViewModel.Email, Email = userViewModel.Email };
+                var user = new ApplicationUser { UserName = userViewModel.Email, Email = userViewModel.Email, Nombre = userViewModel.Nombre, Apellido1 = userViewModel.Apellido1, Apellido2 = userViewModel.Apellido2, Telefono = userViewModel.Telefono };
                 var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
 
                 //Add User to the selected Roles 
@@ -141,6 +141,10 @@ namespace IdentitySample.Controllers
             {
                 Id = user.Id,
                 Email = user.Email,
+                Nombre = user.Nombre,
+                Apellido1 = user.Apellido1,
+                Apellido2 = user.Apellido2,
+                Telefono = user.Telefono,
                 RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
                 {
                     Selected = userRoles.Contains(x.Name),
@@ -154,7 +158,7 @@ namespace IdentitySample.Controllers
         // POST: /Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Email,Id")] EditUserViewModel editUser, params string[] selectedRole)
+        public async Task<ActionResult> Edit([Bind(Include = "Email,Id,Nombre,Apellido1,Apellido2,Telefono")] EditUserViewModel editUser, params string[] selectedRole)
         {
             if (ModelState.IsValid)
             {
@@ -166,6 +170,10 @@ namespace IdentitySample.Controllers
 
                 user.UserName = editUser.Email;
                 user.Email = editUser.Email;
+                user.Nombre = editUser.Nombre;
+                user.Apellido1 = editUser.Apellido1;
+                user.Apellido2 = editUser.Apellido2;
+                user.Telefono = editUser.Telefono;
 
                 var userRoles = await UserManager.GetRolesAsync(user.Id);
 

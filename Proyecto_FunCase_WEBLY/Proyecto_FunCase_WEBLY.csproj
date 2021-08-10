@@ -169,20 +169,19 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\DesignerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModeloesController.cs" />
-    <Compile Include="FunCaseMigrations\202107290651228_FunCaseInitial.cs" />
-    <Compile Include="FunCaseMigrations\202107290651228_FunCaseInitial.Designer.cs">
-      <DependentUpon>202107290651228_FunCaseInitial.cs</DependentUpon>
+    <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="FunCaseMigrations\202108092305266_FunCaseInitial.cs" />
+    <Compile Include="FunCaseMigrations\202108092305266_FunCaseInitial.Designer.cs">
+      <DependentUpon>202108092305266_FunCaseInitial.cs</DependentUpon>
     </Compile>
-    <Compile Include="FunCaseMigrations\202108022106103_FunCaseInitial1.cs" />
-    <Compile Include="FunCaseMigrations\202108022106103_FunCaseInitial1.Designer.cs">
-      <DependentUpon>202108022106103_FunCaseInitial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FunCaseMigrations\202108092009566_FunCaseInitial2.cs" />
-    <Compile Include="FunCaseMigrations\202108092009566_FunCaseInitial2.Designer.cs">
-      <DependentUpon>202108092009566_FunCaseInitial2.cs</DependentUpon>
+    <Compile Include="FunCaseMigrations\202108092314123_FunCaseInitial1.cs" />
+    <Compile Include="FunCaseMigrations\202108092314123_FunCaseInitial1.Designer.cs">
+      <DependentUpon>202108092314123_FunCaseInitial1.cs</DependentUpon>
     </Compile>
     <Compile Include="FunCaseMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -289,8 +288,11 @@
     <Content Include="Views\RolesAdmin\Delete.cshtml" />
     <Content Include="Views\RolesAdmin\Create.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
-    <Content Include="Views\Persona\Create.cshtml" />
     <Content Include="Views\Cliente\Create.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Designer\Index.cshtml" />
+    <Content Include="Views\Cliente\Profile.cshtml" />
     <Content Include="Views\Cliente\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -310,14 +312,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FunCaseMigrations\202107290651228_FunCaseInitial.resx">
-      <DependentUpon>202107290651228_FunCaseInitial.cs</DependentUpon>
+    <EmbeddedResource Include="FunCaseMigrations\202108092305266_FunCaseInitial.resx">
+      <DependentUpon>202108092305266_FunCaseInitial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108022106103_FunCaseInitial1.resx">
-      <DependentUpon>202108022106103_FunCaseInitial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108092009566_FunCaseInitial2.resx">
-      <DependentUpon>202108092009566_FunCaseInitial2.cs</DependentUpon>
+    <EmbeddedResource Include="FunCaseMigrations\202108092314123_FunCaseInitial1.resx">
+      <DependentUpon>202108092314123_FunCaseInitial1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

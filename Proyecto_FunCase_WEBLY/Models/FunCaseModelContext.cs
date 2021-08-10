@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using IdentitySample.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,11 +16,18 @@ namespace Proyecto_FunCase_WEBLY.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
-            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
-            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("AspNetUserLogIns").HasKey<string>(l => l.UserId);
+            modelBuilder.Entity<IdentityRole>().ToTable("AspNetRoles").HasKey<string>(r => r.Id);
+            modelBuilder.Entity<IdentityUserRole>().ToTable("AspNetUserRoles").HasKey(r => new { r.RoleId, r.UserId });
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("AspNetUserClaims");
+            modelBuilder.Entity<ApplicationUser>().ToTable("AspNetUsers");
         }
 
+        public virtual DbSet<IdentityUserLogin> UserLogin { get; set; }
+        public virtual DbSet<IdentityRole> Roles { get; set; }
+        public virtual DbSet<IdentityUserRole> UserRoles { get; set; }
+        public virtual DbSet<IdentityUserClaim> UserClaims { get; set; }
+        public virtual DbSet<ApplicationUser> Users { get; set; }
         public virtual DbSet<Cliente> Clientes { get; set; }
         public virtual DbSet<Designer> Designers { get; set; }
         public virtual DbSet<DetallesPedido> DetallePedidos { get; set; }

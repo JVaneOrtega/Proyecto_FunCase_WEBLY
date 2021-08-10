@@ -23,7 +23,7 @@ namespace IdentitySample.Controllers
             SignInManager = signInManager;
         }
 
-        private FunCaseModelContext db = new FunCaseModelContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
         {
@@ -151,7 +151,7 @@ namespace IdentitySample.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, Apellido1 = model.Apellido1, Apellido2 = model.Apellido2, Telefono = model.Telefono };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -170,9 +170,9 @@ namespace IdentitySample.Controllers
                     } else
                     {
                         var roleUser = UserManager.GetRoles(user.Id);
-                        if (!roleUser.Contains("De"))
+                        if (!roleUser.Contains("Diseñador"))
                         {
-                            var rolCliente = UserManager.AddToRole(user.Id, "Cliente");
+                            var rolDesigner = UserManager.AddToRole(user.Id, "Diseñador");
                         }
                     }
                     
