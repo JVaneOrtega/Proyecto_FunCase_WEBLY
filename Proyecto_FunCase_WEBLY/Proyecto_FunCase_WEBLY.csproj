@@ -184,6 +184,8 @@
       <DependentUpon>202108092314123_FunCaseInitial1.cs</DependentUpon>
     </Compile>
     <Compile Include="FunCaseMigrations\Configuration.cs" />
+    </Compile>
+    <Compile Include="FunCaseMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -194,7 +196,6 @@
     <Compile Include="Models\DetallesPedido.cs" />
     <Compile Include="Models\Direccion.cs" />
     <Compile Include="Models\Estado.cs" />
-    <Compile Include="Models\FunCaseModelContext.cs" />
     <Compile Include="Models\Funda_Diseno.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Imagen.cs" />
@@ -294,6 +295,7 @@
     <Content Include="Views\Designer\Index.cshtml" />
     <Content Include="Views\Cliente\Profile.cshtml" />
     <Content Include="Views\Cliente\Register.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -312,11 +314,14 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FunCaseMigrations\202108092305266_FunCaseInitial.resx">
-      <DependentUpon>202108092305266_FunCaseInitial.cs</DependentUpon>
+    <EmbeddedResource Include="FunCaseMigrations\202107290651228_FunCaseInitial.resx">
+      <DependentUpon>202107290651228_FunCaseInitial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108092314123_FunCaseInitial1.resx">
-      <DependentUpon>202108092314123_FunCaseInitial1.cs</DependentUpon>
+    <EmbeddedResource Include="FunCaseMigrations\202108022106103_FunCaseInitial1.resx">
+      <DependentUpon>202108022106103_FunCaseInitial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunCaseMigrations\202108092009566_FunCaseInitial2.resx">
+      <DependentUpon>202108092009566_FunCaseInitial2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
