@@ -3,7 +3,7 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class FunCaseInitial1 : DbMigration
+    public partial class FunCaseInitial : DbMigration
     {
         public override void Up()
         {
