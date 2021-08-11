@@ -12,6 +12,7 @@ namespace Proyecto_FunCase_WEBLY.Models
         public double ValorNeto { get; set; }
         public virtual Producto Producto { get; set; }
         public virtual Cliente Cliente { get; set; }
+        public virtual DetallesPedido DetallesPedidos { get; set; }
 
     }
 }

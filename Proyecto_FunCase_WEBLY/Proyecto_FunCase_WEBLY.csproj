@@ -170,14 +170,21 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\DesignerController.cs" />
+    <Compile Include="Controllers\DireccionsController.cs" />
+    <Compile Include="Controllers\EstadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MetodosPagoesController.cs" />
     <Compile Include="Controllers\ModeloesController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="FunCaseMigrations\202108100516489_FunCaseInitial.cs" />
     <Compile Include="FunCaseMigrations\202108100516489_FunCaseInitial.Designer.cs">
       <DependentUpon>202108100516489_FunCaseInitial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunCaseMigrations\202108110245599_FunCaseInitial2.cs" />
+    <Compile Include="FunCaseMigrations\202108110245599_FunCaseInitial2.Designer.cs">
+      <DependentUpon>202108110245599_FunCaseInitial2.cs</DependentUpon>
     </Compile>
     <Compile Include="FunCaseMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -190,6 +197,7 @@
     <Compile Include="Models\DetallesPedido.cs" />
     <Compile Include="Models\Direccion.cs" />
     <Compile Include="Models\Estado.cs" />
+    <Compile Include="Models\MetodosPago.cs" />
     <Compile Include="Models\FunCaseModelContext.cs" />
     <Compile Include="Models\Funda_Diseno.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -198,7 +206,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Marca.cs" />
     <Compile Include="Models\Material.cs" />
-    <Compile Include="Models\MetodosPago.cs" />
     <Compile Include="Models\Modelo.cs" />
     <Compile Include="Models\Pedido.cs" />
     <Compile Include="Models\Producto.cs" />
@@ -291,6 +298,21 @@
     <Content Include="Views\Cliente\Profile.cshtml" />
     <Content Include="Views\Cliente\Register.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\MetodosPagoes\Create.cshtml" />
+    <Content Include="Views\MetodosPagoes\Delete.cshtml" />
+    <Content Include="Views\MetodosPagoes\Details.cshtml" />
+    <Content Include="Views\MetodosPagoes\Edit.cshtml" />
+    <Content Include="Views\MetodosPagoes\Index.cshtml" />
+    <Content Include="Views\Direccions\Create.cshtml" />
+    <Content Include="Views\Direccions\Delete.cshtml" />
+    <Content Include="Views\Direccions\Details.cshtml" />
+    <Content Include="Views\Direccions\Edit.cshtml" />
+    <Content Include="Views\Direccions\Index.cshtml" />
+    <Content Include="Views\Estados\Create.cshtml" />
+    <Content Include="Views\Estados\Delete.cshtml" />
+    <Content Include="Views\Estados\Details.cshtml" />
+    <Content Include="Views\Estados\Edit.cshtml" />
+    <Content Include="Views\Estados\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -311,6 +333,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FunCaseMigrations\202108100516489_FunCaseInitial.resx">
       <DependentUpon>202108100516489_FunCaseInitial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunCaseMigrations\202108110245599_FunCaseInitial2.resx">
+      <DependentUpon>202108110245599_FunCaseInitial2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
