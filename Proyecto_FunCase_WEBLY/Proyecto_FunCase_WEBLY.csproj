@@ -173,6 +173,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModeloesController.cs" />
+    <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="FunCaseMigrations\202108131731454_FunCaseInitial.cs" />
@@ -299,6 +300,7 @@
     <Content Include="Views\Cliente\Profile.cshtml" />
     <Content Include="Views\Cliente\Register.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Productos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

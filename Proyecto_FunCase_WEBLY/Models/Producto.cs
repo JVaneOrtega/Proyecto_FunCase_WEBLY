@@ -9,6 +9,7 @@ namespace Proyecto_FunCase_WEBLY.Models
     {
         public int ProductoID { get; set; }
         public string ImagenFinal { get; set; }
+        public string Nombre { get; set; }
         public double Total { get; set; }
         public int Stock { get; set; }
         public virtual Material Material { get; set; }
