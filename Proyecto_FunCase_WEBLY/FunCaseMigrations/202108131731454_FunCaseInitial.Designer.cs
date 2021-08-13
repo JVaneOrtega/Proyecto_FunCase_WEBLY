@@ -13,7 +13,7 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202108100516489_FunCaseInitial"; }
+            get { return "202108131731454_FunCaseInitial"; }
         }
         
         string IMigrationMetadata.Source

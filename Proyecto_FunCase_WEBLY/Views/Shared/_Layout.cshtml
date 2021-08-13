@@ -30,6 +30,16 @@
                         <li>@Html.ActionLink("Mi sección", "Index", "Designer")</li>
                         <li>@Html.ActionLink("Mis imágenes", "Index", "Designer")</li>
                     }
+                    @if (Request.IsAuthenticated && User.IsInRole("Cliente"))
+                    {
+                        <li>@Html.ActionLink("Mi sección", "Index", "Designer")</li>
+                        <li>@Html.ActionLink("Mis compras", "Index", "Designer")</li>
+                    }
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Usuarios", "Index", "UsersAdmin")</li>
+                        <li>@Html.ActionLink("Roles", "Index", "RolesAdmin")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -175,9 +175,17 @@
     <Compile Include="Controllers\ModeloesController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
-    <Compile Include="FunCaseMigrations\202108100516489_FunCaseInitial.cs" />
-    <Compile Include="FunCaseMigrations\202108100516489_FunCaseInitial.Designer.cs">
-      <DependentUpon>202108100516489_FunCaseInitial.cs</DependentUpon>
+    <Compile Include="FunCaseMigrations\202108131731454_FunCaseInitial.cs" />
+    <Compile Include="FunCaseMigrations\202108131731454_FunCaseInitial.Designer.cs">
+      <DependentUpon>202108131731454_FunCaseInitial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunCaseMigrations\202108131742138_FunCaseInitial1.cs" />
+    <Compile Include="FunCaseMigrations\202108131742138_FunCaseInitial1.Designer.cs">
+      <DependentUpon>202108131742138_FunCaseInitial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunCaseMigrations\202108131750441_FunCaseInitial2.cs" />
+    <Compile Include="FunCaseMigrations\202108131750441_FunCaseInitial2.Designer.cs">
+      <DependentUpon>202108131750441_FunCaseInitial2.cs</DependentUpon>
     </Compile>
     <Compile Include="FunCaseMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -309,8 +317,14 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FunCaseMigrations\202108100516489_FunCaseInitial.resx">
-      <DependentUpon>202108100516489_FunCaseInitial.cs</DependentUpon>
+    <EmbeddedResource Include="FunCaseMigrations\202108131731454_FunCaseInitial.resx">
+      <DependentUpon>202108131731454_FunCaseInitial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunCaseMigrations\202108131742138_FunCaseInitial1.resx">
+      <DependentUpon>202108131742138_FunCaseInitial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunCaseMigrations\202108131750441_FunCaseInitial2.resx">
+      <DependentUpon>202108131750441_FunCaseInitial2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
