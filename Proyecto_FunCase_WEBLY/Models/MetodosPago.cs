@@ -9,5 +9,13 @@ namespace Proyecto_FunCase_WEBLY.Models
     {
         public int MetodosPagoID { get; set; }
         public string Nombre { get; set; }
+
+        public MetodosPago()
+        {
+            this.Pedidos = new HashSet<Pedido>();
+        }
+
+        public virtual ICollection<Pedido> Pedidos { get; set; }
+
     }
 }
