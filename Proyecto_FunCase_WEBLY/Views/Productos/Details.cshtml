@@ -1,0 +1,50 @@
+﻿@model Proyecto_FunCase_WEBLY.Models.Producto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>DETALLES</h2>
+
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagenFinal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImagenFinal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stock)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("EDITAR", "Edit", new { id = Model.ProductoID }) |
+    @Html.ActionLink("VOLVER A INICIO", "Index")
+</p>

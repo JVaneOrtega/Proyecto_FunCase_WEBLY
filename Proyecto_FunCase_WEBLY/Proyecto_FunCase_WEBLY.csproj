@@ -296,17 +296,20 @@
     <Content Include="Views\Designer\Index.cshtml" />
     <Content Include="Views\Cliente\Register.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Productos\Index.cshtml" />
     <Content Include="Views\Cliente\Details.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Designer\Details.cshtml" />
     <Content Include="Views\Designer\Edit.cshtml" />
-    <Content Include="Views\Productos\Create.cshtml" />
     <Content Include="Views\Materiales\Create.cshtml" />
     <Content Include="Views\Materiales\Delete.cshtml" />
     <Content Include="Views\Materiales\Details.cshtml" />
     <Content Include="Views\Materiales\Edit.cshtml" />
     <Content Include="Views\Materiales\Index.cshtml" />
+    <Content Include="Views\Productos\Create.cshtml" />
+    <Content Include="Views\Productos\Delete.cshtml" />
+    <Content Include="Views\Productos\Details.cshtml" />
+    <Content Include="Views\Productos\Edit.cshtml" />
+    <Content Include="Views\Productos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
