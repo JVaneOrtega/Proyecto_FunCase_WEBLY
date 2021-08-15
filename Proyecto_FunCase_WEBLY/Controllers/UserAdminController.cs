@@ -53,6 +53,8 @@ namespace IdentitySample.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
+            var roleCliente = RoleManager.Roles.Single(r => r.Name == "Cliente");
+            //var users = UserManager.Users.Where(u => u.Roles.Where(r => r.RoleId == roleCliente.Id));
             return View(await UserManager.Users.ToListAsync());
         }
 

@@ -9,8 +9,8 @@ namespace Proyecto_FunCase_WEBLY.Models
     {
         public int DetallesPedidoID { get; set; }
         public int Cantidad { get; set; }
+        public double PrecioUnitario { get; set; }
         public virtual Producto Producto { get; set; }
-        public virtual Cliente Cliente { get; set; }
 
         public virtual Pedido Pedido { get; set; }
     }

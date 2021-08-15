@@ -17,5 +17,6 @@ namespace Proyecto_FunCase_WEBLY.Models
         public string Referencia { get; set; }
         public double Descuento { get; set; }
         public virtual MetodosPago MetodoPago { get; set; }
+        public virtual Cliente Cliente { get; set; }
     }
 }
