@@ -1,0 +1,65 @@
+﻿@model Proyecto_FunCase_WEBLY.Models.Cliente
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <h4>Cliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Apellido1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Apellido1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Apellido2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Apellido2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaNacimiento)
+        </dd>
+
+    </dl>
+</div>
+
+@if (User.IsInRole("Cliente"))
+{
+    <p>
+        @Html.ActionLink("Editar Perfil", "Edit", new { id = Model.ClienteID }) | 
+        @Html.ActionLink("Regresara al menú", "Index")
+    </p>
+}
+else
+{
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.ClienteID }) | 
+        @Html.ActionLink("Regresar a la Lista", "Index")
+    </p>
+}
+
+

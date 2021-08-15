@@ -36,8 +36,8 @@
                         else if (User.IsInRole("Cliente"))
                         {
                             <li>@Html.ActionLink("Catalogo", "Index", "Productos")</li>
-                            <li>@Html.ActionLink("Mi sección", "Index", "Designer")</li>
-                            <li>@Html.ActionLink("Mis compras", "Index", "Designer")</li>
+                            <li>@Html.ActionLink("Mi sección", "Index", "Cliente")</li>
+                            <li>@Html.ActionLink("Mis compras", "Index", "Cliente")</li>
                         }
                         else if (User.IsInRole("Admin"))
                         {

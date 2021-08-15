@@ -10,12 +10,15 @@ namespace Proyecto_FunCase_WEBLY.Models
 {
     public class Designer
     {
+        [Key]
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DesignerID { get; set; }
+        [Display(Name = "Nombre de Presentación")]
         public string NombrePresentacion { get; set; }
 
         [Required]
         [Display(Name = "Datos de Usuario")]
-        [Key]
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }

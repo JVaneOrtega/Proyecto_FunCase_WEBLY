@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proyecto_FunCase_WEBLY.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,11 @@ namespace Proyecto_FunCase_WEBLY.Controllers
 {
     public class ProductosController : Controller
     {
+        FunCaseModelContext db = new FunCaseModelContext();
         // GET: Productos
         public ActionResult Index()
         {
-            return View();
+            return View(db.Productos.ToList());
         }
 
         // GET: Productos/Details/5

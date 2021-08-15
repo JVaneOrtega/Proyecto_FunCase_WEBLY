@@ -1,43 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Linq;
+using System.Net;
 using System.Web.Mvc;
-using IdentitySample.Models;
 using Proyecto_FunCase_WEBLY.Models;
 
 namespace Proyecto_FunCase_WEBLY.Controllers
 {
+    [Authorize]
     public class ClienteController : Controller
     {
-        public ApplicationUserManager UserManager;
-        public FunCaseModelContext db;
+        public FunCaseModelContext db = new FunCaseModelContext();
 
         // GET: Cliente
         public ActionResult Index()
         {
-            return View();
+            return View(db.Clientes.ToList()); ;
         }
 
         // GET: Cliente/Details/5
         public ActionResult Details(int id)
         {
-            return View();
-        }
-
-        public ActionResult Profile(string name)
-        {
-            var user = db.Users.Single(u => u.UserName == name);
-            var cliente = db.Clientes.Single(c => c.UserId == user.Id);
-            if(cliente == null)
-            {
-                ViewData["UserID"] = user.Id;
-                return RedirectToAction("Register");
-            } else
-            {
-                return View(cliente);
-            }
+            Cliente cliente = db.Clientes.Single(c => c.ClienteID == id);
+            return View(cliente);
         }
 
         public ActionResult Register()
@@ -70,7 +53,14 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // GET: Cliente/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Cliente cliente = db.Clientes.Single(C => C.ClienteID == id);
+
+            return View(cliente);
         }
 
         // POST: Cliente/Edit/5

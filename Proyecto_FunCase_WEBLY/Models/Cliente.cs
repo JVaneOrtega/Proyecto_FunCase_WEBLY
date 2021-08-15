@@ -8,6 +8,9 @@ namespace Proyecto_FunCase_WEBLY.Models
 {
     public class Cliente
     {
+        [Key]
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ClienteID { get; set; }
 
         [DataType(DataType.Date)]
@@ -16,9 +19,11 @@ namespace Proyecto_FunCase_WEBLY.Models
         public DateTime FechaNacimiento { get; set; }
         [Required]
         [Display(Name = "Datos de Usuario")]
-        [Key]
+        
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
+
+        public virtual ICollection<Direccion> Direcciones { get; set; }
     }
 }

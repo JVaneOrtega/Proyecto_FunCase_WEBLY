@@ -11,13 +11,41 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                 "dbo.Clientes",
                 c => new
                     {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        ClienteID = c.Int(nullable: false),
+                        ClienteID = c.Int(nullable: false, identity: true),
                         FechaNacimiento = c.DateTime(nullable: false),
+                        UserId = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => t.UserId)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .PrimaryKey(t => t.ClienteID)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.Direccions",
+                c => new
+                    {
+                        DireccionID = c.Int(nullable: false, identity: true),
+                        Calle = c.String(nullable: false),
+                        NumeroExt = c.String(nullable: false),
+                        NumeroInt = c.String(nullable: false),
+                        Colonia = c.String(),
+                        CodigoPostal = c.String(nullable: false),
+                        Cliente_ClienteID = c.Int(),
+                        Estado_EstadoID = c.Int(),
+                    })
+                .PrimaryKey(t => t.DireccionID)
+                .ForeignKey("dbo.Clientes", t => t.Cliente_ClienteID)
+                .ForeignKey("dbo.Estadoes", t => t.Estado_EstadoID)
+                .Index(t => t.Cliente_ClienteID)
+                .Index(t => t.Estado_EstadoID);
+            
+            CreateTable(
+                "dbo.Estadoes",
+                c => new
+                    {
+                        EstadoID = c.Int(nullable: false, identity: true),
+                        Nombre = c.String(),
+                    })
+                .PrimaryKey(t => t.EstadoID);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -60,12 +88,12 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                 "dbo.Designers",
                 c => new
                     {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        DesignerID = c.Int(nullable: false),
+                        DesignerID = c.Int(nullable: false, identity: true),
                         NombrePresentacion = c.String(),
+                        UserId = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => t.UserId)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .PrimaryKey(t => t.DesignerID)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
             CreateTable(
@@ -102,15 +130,15 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                     {
                         DetallesPedidoID = c.Int(nullable: false, identity: true),
                         Cantidad = c.Int(nullable: false),
-                        Cliente_UserId = c.String(maxLength: 128),
+                        Cliente_ClienteID = c.Int(),
                         Pedido_PedidoID = c.Int(),
                         Producto_ProductoID = c.Int(),
                     })
                 .PrimaryKey(t => t.DetallesPedidoID)
-                .ForeignKey("dbo.Clientes", t => t.Cliente_UserId)
+                .ForeignKey("dbo.Clientes", t => t.Cliente_ClienteID)
                 .ForeignKey("dbo.Pedidoes", t => t.Pedido_PedidoID)
                 .ForeignKey("dbo.Productoes", t => t.Producto_ProductoID)
-                .Index(t => t.Cliente_UserId)
+                .Index(t => t.Cliente_ClienteID)
                 .Index(t => t.Pedido_PedidoID)
                 .Index(t => t.Producto_ProductoID);
             
@@ -142,7 +170,8 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                 c => new
                     {
                         ProductoID = c.Int(nullable: false, identity: true),
-                        ImagenFinal = c.String(),
+                        ImagenFinal = c.String(nullable: false),
+                        Nombre = c.String(),
                         Total = c.Double(nullable: false),
                         Stock = c.Int(nullable: false),
                         Material_MaterialID = c.Int(),
@@ -159,7 +188,7 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                 c => new
                     {
                         MaterialID = c.Int(nullable: false, identity: true),
-                        Nombre = c.String(),
+                        Nombre = c.String(nullable: false),
                         Color = c.String(),
                         Precio = c.Double(nullable: false),
                     })
@@ -191,47 +220,19 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                 .PrimaryKey(t => t.MarcaID);
             
             CreateTable(
-                "dbo.Direccions",
-                c => new
-                    {
-                        DireccionID = c.Int(nullable: false, identity: true),
-                        Calle = c.String(),
-                        NumeroExt = c.String(),
-                        NumeroInt = c.String(),
-                        Colonia = c.String(),
-                        CodigoPosta = c.String(),
-                        Cliente_UserId = c.String(maxLength: 128),
-                        Estado_EstadoID = c.Int(),
-                    })
-                .PrimaryKey(t => t.DireccionID)
-                .ForeignKey("dbo.Clientes", t => t.Cliente_UserId)
-                .ForeignKey("dbo.Estadoes", t => t.Estado_EstadoID)
-                .Index(t => t.Cliente_UserId)
-                .Index(t => t.Estado_EstadoID);
-            
-            CreateTable(
-                "dbo.Estadoes",
-                c => new
-                    {
-                        EstadoID = c.Int(nullable: false, identity: true),
-                        Nombre = c.String(),
-                    })
-                .PrimaryKey(t => t.EstadoID);
-            
-            CreateTable(
                 "dbo.Funda_Diseno",
                 c => new
                     {
                         Funda_DisenoID = c.Int(nullable: false, identity: true),
                         Imagen = c.String(),
                         ValorNeto = c.Double(nullable: false),
-                        Cliente_UserId = c.String(maxLength: 128),
+                        Cliente_ClienteID = c.Int(),
                         Producto_ProductoID = c.Int(),
                     })
                 .PrimaryKey(t => t.Funda_DisenoID)
-                .ForeignKey("dbo.Clientes", t => t.Cliente_UserId)
+                .ForeignKey("dbo.Clientes", t => t.Cliente_ClienteID)
                 .ForeignKey("dbo.Productoes", t => t.Producto_ProductoID)
-                .Index(t => t.Cliente_UserId)
+                .Index(t => t.Cliente_ClienteID)
                 .Index(t => t.Producto_ProductoID);
             
             CreateTable(
@@ -253,13 +254,13 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                 c => new
                     {
                         ImagenID = c.Int(nullable: false, identity: true),
-                        NombreImagen = c.String(),
-                        ruta = c.String(),
-                        Designer_UserId = c.String(maxLength: 128),
+                        NombreImagen = c.String(nullable: false),
+                        Ruta = c.String(),
+                        Designer_DesignerID = c.Int(),
                     })
                 .PrimaryKey(t => t.ImagenID)
-                .ForeignKey("dbo.Designers", t => t.Designer_UserId)
-                .Index(t => t.Designer_UserId);
+                .ForeignKey("dbo.Designers", t => t.Designer_DesignerID)
+                .Index(t => t.Designer_DesignerID);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -276,50 +277,48 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
         {
             DropForeignKey("dbo.AspNetUserRoles", "IdentityRole_Id", "dbo.AspNetRoles");
             DropForeignKey("dbo.Imagen_Diseno", "Imagen_ImagenID", "dbo.Imagens");
-            DropForeignKey("dbo.Imagens", "Designer_UserId", "dbo.Designers");
+            DropForeignKey("dbo.Imagens", "Designer_DesignerID", "dbo.Designers");
             DropForeignKey("dbo.Imagen_Diseno", "FundaDiseno_Funda_DisenoID", "dbo.Funda_Diseno");
             DropForeignKey("dbo.Funda_Diseno", "Producto_ProductoID", "dbo.Productoes");
-            DropForeignKey("dbo.Funda_Diseno", "Cliente_UserId", "dbo.Clientes");
-            DropForeignKey("dbo.Direccions", "Estado_EstadoID", "dbo.Estadoes");
-            DropForeignKey("dbo.Direccions", "Cliente_UserId", "dbo.Clientes");
+            DropForeignKey("dbo.Funda_Diseno", "Cliente_ClienteID", "dbo.Clientes");
             DropForeignKey("dbo.DetallesPedidoes", "Producto_ProductoID", "dbo.Productoes");
             DropForeignKey("dbo.Productoes", "Modelo_ModeloID", "dbo.Modeloes");
             DropForeignKey("dbo.Modeloes", "Marca_MarcaID", "dbo.Marcas");
             DropForeignKey("dbo.Productoes", "Material_MaterialID", "dbo.Materials");
             DropForeignKey("dbo.DetallesPedidoes", "Pedido_PedidoID", "dbo.Pedidoes");
             DropForeignKey("dbo.Pedidoes", "MetodoPago_MetodosPagoID", "dbo.MetodosPagoes");
-            DropForeignKey("dbo.DetallesPedidoes", "Cliente_UserId", "dbo.Clientes");
+            DropForeignKey("dbo.DetallesPedidoes", "Cliente_ClienteID", "dbo.Clientes");
             DropForeignKey("dbo.AspNetUserRoles", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogIns", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Designers", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Clientes", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "ApplicationUser_Id", "dbo.AspNetUsers");
-            DropIndex("dbo.Imagens", new[] { "Designer_UserId" });
+            DropForeignKey("dbo.Direccions", "Estado_EstadoID", "dbo.Estadoes");
+            DropForeignKey("dbo.Direccions", "Cliente_ClienteID", "dbo.Clientes");
+            DropIndex("dbo.Imagens", new[] { "Designer_DesignerID" });
             DropIndex("dbo.Imagen_Diseno", new[] { "Imagen_ImagenID" });
             DropIndex("dbo.Imagen_Diseno", new[] { "FundaDiseno_Funda_DisenoID" });
             DropIndex("dbo.Funda_Diseno", new[] { "Producto_ProductoID" });
-            DropIndex("dbo.Funda_Diseno", new[] { "Cliente_UserId" });
-            DropIndex("dbo.Direccions", new[] { "Estado_EstadoID" });
-            DropIndex("dbo.Direccions", new[] { "Cliente_UserId" });
+            DropIndex("dbo.Funda_Diseno", new[] { "Cliente_ClienteID" });
             DropIndex("dbo.Modeloes", new[] { "Marca_MarcaID" });
             DropIndex("dbo.Productoes", new[] { "Modelo_ModeloID" });
             DropIndex("dbo.Productoes", new[] { "Material_MaterialID" });
             DropIndex("dbo.Pedidoes", new[] { "MetodoPago_MetodosPagoID" });
             DropIndex("dbo.DetallesPedidoes", new[] { "Producto_ProductoID" });
             DropIndex("dbo.DetallesPedidoes", new[] { "Pedido_PedidoID" });
-            DropIndex("dbo.DetallesPedidoes", new[] { "Cliente_UserId" });
+            DropIndex("dbo.DetallesPedidoes", new[] { "Cliente_ClienteID" });
             DropIndex("dbo.AspNetUserRoles", new[] { "IdentityRole_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.AspNetUserLogIns", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.Designers", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.Direccions", new[] { "Estado_EstadoID" });
+            DropIndex("dbo.Direccions", new[] { "Cliente_ClienteID" });
             DropIndex("dbo.Clientes", new[] { "UserId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Imagens");
             DropTable("dbo.Imagen_Diseno");
             DropTable("dbo.Funda_Diseno");
-            DropTable("dbo.Estadoes");
-            DropTable("dbo.Direccions");
             DropTable("dbo.Marcas");
             DropTable("dbo.Modeloes");
             DropTable("dbo.Materials");
@@ -332,6 +331,8 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
             DropTable("dbo.Designers");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.Estadoes");
+            DropTable("dbo.Direccions");
             DropTable("dbo.Clientes");
         }
     }

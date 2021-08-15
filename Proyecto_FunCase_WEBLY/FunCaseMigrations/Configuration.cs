@@ -1,9 +1,10 @@
-namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
+ï»¿namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
 {
     using IdentitySample.Models;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
+    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -18,7 +19,7 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
         protected override void Seed(Proyecto_FunCase_WEBLY.Models.FunCaseModelContext context)
         {
             var roleAdmin = context.Roles.Where(r => r.Name == "Admin").FirstOrDefault();
-            if(roleAdmin == null)
+            if (roleAdmin == null)
             {
                 roleAdmin = context.Roles.Add(new IdentityRole { Name = "Admin" });
             }
@@ -35,20 +36,20 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                 context.Roles.Add(new IdentityRole { Name = "Cliente" });
             }
 
-            var roleDesigner = context.Roles.Where(r => r.Name == "Diseñador").FirstOrDefault();
+            var roleDesigner = context.Roles.Where(r => r.Name == "DiseÃ±ador").FirstOrDefault();
             if (roleDesigner == null)
             {
-                context.Roles.Add(new IdentityRole { Name = "Diseñador" });
+                context.Roles.Add(new IdentityRole { Name = "DiseÃ±ador" });
             }
 
             var userAdmin = context.Users.Where(u => u.Email == "admin@example.com").FirstOrDefault();
-            if(userAdmin == null)
+            if (userAdmin == null)
             {
                 const string name = "admin@example.com";
                 const string password = "Admin@123456";
                 var hasher = new PasswordHasher();
                 userAdmin = context.Users.Add(new ApplicationUser { Nombre = "Admin", Apellido1 = "", Apellido2 = "", UserName = name, Email = name, EmailConfirmed = true, PasswordHash = hasher.HashPassword(password), SecurityStamp = Guid.NewGuid().ToString() });
-                context.UserRoles.Add(new IdentityUserRole { UserId = userAdmin.Id, RoleId = roleAdmin.Id } );
+                context.UserRoles.Add(new IdentityUserRole { UserId = userAdmin.Id, RoleId = roleAdmin.Id });
             }
         }
     }

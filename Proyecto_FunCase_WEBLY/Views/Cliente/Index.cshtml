@@ -1,10 +1,59 @@
-﻿@model Proyecto_FunCase_WEBLY.Models.Cliente
+﻿@model IEnumerable<Proyecto_FunCase_WEBLY.Models.Cliente>
+@{
+    ViewBag.Title = "Index";
+}
 
-<div class="list-group">
-    <a data-url="@Html.ActionLink("Details", "Details", new { id = Model.ClienteID })" class="list-group-item">
-        Ver mi perfil
-    </a>
-    <a data-url="@Html.ActionLink("Details", "Details", new { id = Model.ClienteID })" class="list-group-item">
-        Cambiar mi perfil
-    </a>
-</div>
+@if (User.IsInRole("Cliente"))
+{
+    var Cliente = Model.ToList().Where(c => c.User.UserName == User.Identity.Name).FirstOrDefault();
+    if (Cliente == null)
+    {
+        <script>window.location.href = "@Url.Action("Contact", "Contact", "Home")"</script>
+    }
+
+    <div class="list-group">
+        @Html.ActionLink("Ver mi perfil", "Details", new { id = Cliente.ClienteID }, htmlAttributes: new { @class = "list-group-item" })"
+        @Html.ActionLink("Cambiar mi perfil", "Edit", new { id = Cliente.ClienteID }, htmlAttributes: new { @class = "list-group-item" })"
+    </div>
+}
+else if (User.IsInRole("Admin") || User.IsInRole("Empleado"))
+{
+    <p>
+        @Html.ActionLink("Crear Nuevo Registro", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClienteID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClienteID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ClienteID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ClienteID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ClienteID })
+                </td>
+            </tr>
+        }
+
+    </table>
+}

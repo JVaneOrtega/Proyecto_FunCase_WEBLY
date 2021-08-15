@@ -23,7 +23,7 @@ namespace IdentitySample.Controllers
             SignInManager = signInManager;
         }
 
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private FunCaseModelContext db = new FunCaseModelContext();
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
         {
@@ -166,6 +166,8 @@ namespace IdentitySample.Controllers
                         if(!roleUser.Contains("Cliente"))
                         {
                             var rolCliente = UserManager.AddToRole(user.Id, "Cliente");
+                            db.Clientes.Add(new Cliente { FechaNacimiento = System.DateTime.Today, UserId = user.Id });
+                            db.SaveChanges();
                         }
                     } else
                     {
@@ -173,6 +175,8 @@ namespace IdentitySample.Controllers
                         if (!roleUser.Contains("Diseñador"))
                         {
                             var rolDesigner = UserManager.AddToRole(user.Id, "Diseñador");
+                            db.Designers.Add(new Designer { NombrePresentacion = "", UserId = user.Id });
+                            db.SaveChanges();
                         }
                     }
                     
