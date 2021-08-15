@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Proyecto_FunCase_WEBLY.Controllers
 {
+    [Authorize]
     public class DesignerController : Controller
     {
         FunCaseModelContext db = new FunCaseModelContext();
@@ -24,7 +25,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         }
 
         // GET: Designer/Create
-        public ActionResult Create()
+        /*public ActionResult Create()
         {
             return View();
         }
@@ -43,10 +44,10 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             {
                 return View();
             }
-        }
+        }*/
 
         // GET: Designer/Edit/5
-        public ActionResult Edit(int id)
+        /*public ActionResult Edit(int id)
         {
             Designer designer = db.Designers.Single(d => d.DesignerID == id);
             return View(designer);
@@ -66,7 +67,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             {
                 return View();
             }
-        }
+        }*/
 
         // GET: Designer/Delete/5
         public ActionResult Delete(int id)

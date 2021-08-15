@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using IdentitySample.Models;
 using Proyecto_FunCase_WEBLY.Models;
 
 namespace Proyecto_FunCase_WEBLY.Controllers
@@ -17,30 +19,34 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         }
 
         // GET: Cliente/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            Cliente cliente = db.Clientes.Single(c => c.ClienteID == id);
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Cliente cliente = db.Clientes.Find(id);
+            if(cliente == null)
+            {
+                return HttpNotFound();
+            }
             return View(cliente);
         }
 
-        public ActionResult Register()
-        {
-            return View();
-        }
-
         // GET: Cliente/Create
-        public ActionResult Create()
+        /*public ActionResult Create()
         {
             return View();
         }
 
         // POST: Cliente/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Cliente cliente)
         {
             try
             {
-                // TODO: Add insert logic here
+                ApplicationUser userCliente = new ApplicationUser {  };
+                Cliente objCliente = new Cliente { };
 
                 return RedirectToAction("Index");
             }
@@ -48,10 +54,10 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             {
                 return View();
             }
-        }
+        }*/
 
         // GET: Cliente/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             if(id == null)
             {
@@ -80,18 +86,30 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         }
 
         // GET: Cliente/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Cliente cliente = db.Clientes.Find(id);
+            if(cliente == null)
+            {
+                return HttpNotFound();
+            }
             return View();
         }
 
         // POST: Cliente/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                Cliente cliente = db.Clientes.Find(id);
+                cliente.Estatus = false;
+                db.Entry(cliente).State = EntityState.Modified;
+                db.SaveChanges();
 
                 return RedirectToAction("Index");
             }

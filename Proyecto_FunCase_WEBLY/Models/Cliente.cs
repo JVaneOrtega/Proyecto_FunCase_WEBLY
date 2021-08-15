@@ -17,9 +17,10 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Display(Name ="Fecha de Nacimiento")]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime FechaNacimiento { get; set; }
+        [Display(Name = "Estatus del Cliente")]
+        public bool Estatus;
         [Required]
         [Display(Name = "Datos de Usuario")]
-        
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }

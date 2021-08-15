@@ -184,6 +184,10 @@
     <Compile Include="FunCaseMigrations\202108151710487_FunCaseAdjustment.Designer.cs">
       <DependentUpon>202108151710487_FunCaseAdjustment.cs</DependentUpon>
     </Compile>
+    <Compile Include="FunCaseMigrations\202108151823159_FunCaseAdjustment1.cs" />
+    <Compile Include="FunCaseMigrations\202108151823159_FunCaseAdjustment1.Designer.cs">
+      <DependentUpon>202108151823159_FunCaseAdjustment1.cs</DependentUpon>
+    </Compile>
     <Compile Include="FunCaseMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -289,18 +293,17 @@
     <Content Include="Views\RolesAdmin\Delete.cshtml" />
     <Content Include="Views\RolesAdmin\Create.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
-    <Content Include="Views\Cliente\Create.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\Designer\Index.cshtml" />
-    <Content Include="Views\Cliente\Register.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Productos\Index.cshtml" />
     <Content Include="Views\Cliente\Details.cshtml" />
-    <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Designer\Details.cshtml" />
     <Content Include="Views\Designer\Edit.cshtml" />
     <Content Include="Views\Productos\Create.cshtml" />
+    <Content Include="Views\Cliente\Delete.cshtml" />
+    <Content Include="Views\Cliente\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -324,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FunCaseMigrations\202108151710487_FunCaseAdjustment.resx">
       <DependentUpon>202108151710487_FunCaseAdjustment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunCaseMigrations\202108151823159_FunCaseAdjustment1.resx">
+      <DependentUpon>202108151823159_FunCaseAdjustment1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -16,7 +16,56 @@
         @Html.ActionLink("Cambiar mi perfil", "Edit", new { id = Cliente.ClienteID }, htmlAttributes: new { @class = "list-group-item" })"
     </div>
 }
-else if (User.IsInRole("Admin") || User.IsInRole("Empleado"))
+else if (User.IsInRole("Empleado") || User.IsInRole("Admin") )
+{
+    <p>
+        @Html.ActionLink("Crear Nuevo Registro", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Apellido1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Apellido2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClienteID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ClienteID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ClienteID })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
 {
     <p>
         @Html.ActionLink("Crear Nuevo Registro", "Create")

@@ -16,6 +16,8 @@ namespace Proyecto_FunCase_WEBLY.Models
         public int DesignerID { get; set; }
         [Display(Name = "Nombre de Presentación")]
         public string NombrePresentacion { get; set; }
+        [Display(Name = "Estatus del Diseñador")]
+        public bool Estatus;
 
         [Required]
         [Display(Name = "Datos de Usuario")]

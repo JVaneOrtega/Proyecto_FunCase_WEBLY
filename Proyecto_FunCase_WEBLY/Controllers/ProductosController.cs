@@ -22,6 +22,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Empleado,Admin")]
         // GET: Productos/Create
         public ActionResult Create()
         {
@@ -44,6 +45,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             }
         }
 
+        [Authorize(Roles = "Empleado,Admin")]
         // GET: Productos/Edit/5
         public ActionResult Edit(int id)
         {
@@ -66,6 +68,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             }
         }
 
+        [Authorize(Roles = "Empleado,Admin")]
         // GET: Productos/Delete/5
         public ActionResult Delete(int id)
         {
