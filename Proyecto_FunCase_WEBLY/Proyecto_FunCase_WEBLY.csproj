@@ -172,6 +172,7 @@
     <Compile Include="Controllers\DesignerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MaterialesController.cs" />
     <Compile Include="Controllers\ModeloesController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
@@ -301,6 +302,11 @@
     <Content Include="Views\Designer\Details.cshtml" />
     <Content Include="Views\Designer\Edit.cshtml" />
     <Content Include="Views\Productos\Create.cshtml" />
+    <Content Include="Views\Materiales\Create.cshtml" />
+    <Content Include="Views\Materiales\Delete.cshtml" />
+    <Content Include="Views\Materiales\Details.cshtml" />
+    <Content Include="Views\Materiales\Edit.cshtml" />
+    <Content Include="Views\Materiales\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

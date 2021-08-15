@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Proyecto_FunCase_WEBLY.Models.Material>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>INICIO</h2>
+
+<p>
+    @Html.ActionLink("CREAR NUEVO REGISTRO", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Precio)
+        </td>
+        <td>
+            @Html.ActionLink("EDITAR", "Edit", new { id=item.MaterialID }) |
+            @Html.ActionLink("DETALLES", "Details", new { id=item.MaterialID }) |
+            @Html.ActionLink("ELIMINAR", "Delete", new { id=item.MaterialID })
+        </td>
+    </tr>
+}
+
+</table>
