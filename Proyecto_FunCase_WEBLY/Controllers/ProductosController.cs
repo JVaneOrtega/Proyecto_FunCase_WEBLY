@@ -1,40 +1,34 @@
-﻿using System.Linq;
-using System.Net;
+﻿using Proyecto_FunCase_WEBLY.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using Proyecto_FunCase_WEBLY.Models;
 
 namespace Proyecto_FunCase_WEBLY.Controllers
 {
-    [Authorize]
-    public class ClienteController : Controller
+    public class ProductosController : Controller
     {
-        public FunCaseModelContext db = new FunCaseModelContext();
-
-        // GET: Cliente
+        FunCaseModelContext db = new FunCaseModelContext();
+        // GET: Productos
         public ActionResult Index()
         {
-            return View(db.Clientes.ToList()); ;
+            return View(db.Productos.ToList());
         }
 
-        // GET: Cliente/Details/5
+        // GET: Productos/Details/5
         public ActionResult Details(int id)
-        {
-            Cliente cliente = db.Clientes.Single(c => c.ClienteID == id);
-            return View(cliente);
-        }
-
-        public ActionResult Register()
         {
             return View();
         }
 
-        // GET: Cliente/Create
+        // GET: Productos/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Cliente/Create
+        // POST: Productos/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -50,20 +44,13 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             }
         }
 
-        // GET: Cliente/Edit/5
+        // GET: Productos/Edit/5
         public ActionResult Edit(int id)
         {
-            if(id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Cliente cliente = db.Clientes.Single(C => C.ClienteID == id);
-
-            return View(cliente);
+            return View();
         }
 
-        // POST: Cliente/Edit/5
+        // POST: Productos/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -79,13 +66,13 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             }
         }
 
-        // GET: Cliente/Delete/5
+        // GET: Productos/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Cliente/Delete/5
+        // POST: Productos/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

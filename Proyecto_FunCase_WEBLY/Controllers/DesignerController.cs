@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proyecto_FunCase_WEBLY.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,16 +9,18 @@ namespace Proyecto_FunCase_WEBLY.Controllers
 {
     public class DesignerController : Controller
     {
+        FunCaseModelContext db = new FunCaseModelContext();
         // GET: Designer
         public ActionResult Index()
         {
-            return View();
+            return View(db.Designers.ToList());
         }
 
         // GET: Designer/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Designer designer = db.Designers.Single(d => d.DesignerID == id);
+            return View(designer);
         }
 
         // GET: Designer/Create
@@ -45,7 +48,8 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // GET: Designer/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Designer designer = db.Designers.Single(d => d.DesignerID == id);
+            return View(designer);
         }
 
         // POST: Designer/Edit/5

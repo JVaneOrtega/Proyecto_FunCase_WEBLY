@@ -14,7 +14,7 @@ namespace Proyecto_FunCase_WEBLY.Views.Home
     //[Authorize(Roles = "Admin")]
     public class MarcasController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private FunCaseModelContext db = new FunCaseModelContext();
 
         // GET: Marcas
         public ActionResult Index()

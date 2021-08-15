@@ -13,7 +13,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
 {
     public class ModeloesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private FunCaseModelContext db = new FunCaseModelContext();
 
         // GET: Modeloes
         public ActionResult Index()

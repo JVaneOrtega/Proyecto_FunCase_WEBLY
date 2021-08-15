@@ -1,0 +1,48 @@
+﻿@model Proyecto_FunCase_WEBLY.Models.Designer
+
+<div>
+    <h4>Designer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Apellido1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Apellido1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Apellido2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Apellido2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombrePresentacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombrePresentacion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DesignerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -18,8 +18,8 @@
         <div class="col-md-10">
             @foreach (var tipo in TipoUsuario)
             {
-                @Html.RadioButtonFor(model => model.Tipo, tipo, new { @class = "form-check-input" })
-                <label class="form-check-label">
+                @Html.RadioButtonFor(model => model.Tipo, tipo, new { @class = "radio-inline" })
+                <label class="control-label">
                     @tipo
                 </label>
             }
@@ -52,7 +52,7 @@
         </div>
     </div>
     <hr />
-    <h4>Datos de cuenta</h4>
+    <h4>Datos de usuario</h4>
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
