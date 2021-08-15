@@ -19,6 +19,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         }
 
         // GET: Cliente/Details/5
+        [Authorize(Roles = "Empleado,Admin")]
         public ActionResult Details(int? id)
         {
             if(id == null)
@@ -31,6 +32,17 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                 return HttpNotFound();
             }
             return View(cliente);
+        }
+
+        [Authorize(Roles = "Cliente")]
+        public ActionResult Profile(int id)
+        {
+            Cliente cliente = db.Clientes.Find(id);
+            if (cliente == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("_Profile", cliente);
         }
 
         // GET: Cliente/Create
@@ -57,6 +69,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         }*/
 
         // GET: Cliente/Edit/5
+        [Authorize(Roles = "Admin,Empleado")]
         public ActionResult Edit(int? id)
         {
             if(id == null)
@@ -64,9 +77,22 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Cliente cliente = db.Clientes.Single(C => C.ClienteID == id);
+            Cliente cliente = db.Clientes.Find(id);
 
             return View(cliente);
+        }
+
+        [Authorize(Roles = "Cliente")]
+        public ActionResult EditProfile(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Cliente cliente = db.Clientes.Find(id);
+
+            return PartialView("_EditProfile", cliente);
         }
 
         // POST: Cliente/Edit/5
@@ -117,6 +143,15 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             {
                 return View();
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

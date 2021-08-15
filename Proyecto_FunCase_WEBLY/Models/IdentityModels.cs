@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Proyecto_FunCase_WEBLY.Models;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
@@ -14,7 +15,9 @@ namespace IdentitySample.Models
     public class ApplicationUser : IdentityUser
     {
         public string Nombre { get; set; }
+        [Display(Name = "Primer Apellido")]
         public string Apellido1 { get; set; }
+        [Display(Name = "Segundo Apellido")]
         public string Apellido2 { get; set; }
         public string Telefono { get; set; }
 

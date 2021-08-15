@@ -20,7 +20,6 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Display(Name = "Estatus del Cliente")]
         public bool Estatus;
         [Required]
-        [Display(Name = "Datos de Usuario")]
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }

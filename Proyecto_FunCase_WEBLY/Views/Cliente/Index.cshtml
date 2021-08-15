@@ -11,12 +11,45 @@
         <script>window.location.href = "@Url.Action("Contact", "Contact", "Home")"</script>
     }
 
-    <div class="list-group">
-        @Html.ActionLink("Ver mi perfil", "Details", new { id = Cliente.ClienteID }, htmlAttributes: new { @class = "list-group-item" })"
-        @Html.ActionLink("Cambiar mi perfil", "Edit", new { id = Cliente.ClienteID }, htmlAttributes: new { @class = "list-group-item" })"
+    <h2>Clientes</h2>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-4 col-sm-4" id="opciones">
+            <div class="list-group">
+                <a data-url="@Url.Content(string.Format("~/Cliente/Profile/{0}", Cliente.ClienteID))" class="list-group-item">
+                    Ver mi perfil
+                </a>
+                <a data-url="@Url.Content(string.Format("~/Cliente/EditProfile/{0}", Cliente.ClienteID))" class="list-group-item">
+                    Cambiar mi perfil
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-8 col-sm-8" id="contenido"></div>
     </div>
+
+    @section scripts
+    {
+        <script>
+            $('#opciones').on('click', 'a[data-url]', function () {
+                var dataUrl = $(this).data('url');
+                $.ajax({
+                    url: dataUrl
+                }).done(function (data) {
+                    $('#contenido').html(data);
+                }).fail(function (err) {
+                    console.log(err);
+                    alert("error");
+                });
+
+                $('#opciones a').removeClass('active');
+                $(this).addClass('active');
+            });
+        </script>
+    }
+
+
 }
-else if (User.IsInRole("Empleado") || User.IsInRole("Admin") )
+else if (User.IsInRole("Empleado") || User.IsInRole("Admin"))
 {
     <p>
         @Html.ActionLink("Crear Nuevo Registro", "Create")
@@ -51,55 +84,23 @@ else if (User.IsInRole("Empleado") || User.IsInRole("Admin") )
                     @Html.DisplayFor(modelItem => item.User.Nombre)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ClienteID)
+                    @Html.DisplayFor(modelItem => item.User.Apellido1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Apellido2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Email)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaNacimiento)
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.ClienteID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ClienteID })
-                </td>
-            </tr>
-        }
-
-    </table>
-}
-else
-{
-    <p>
-        @Html.ActionLink("Crear Nuevo Registro", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.User.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClienteID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaNacimiento)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClienteID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaNacimiento)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ClienteID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ClienteID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ClienteID })
+                    @Html.ActionLink("Detalles", "Details", new { id = item.ClienteID }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.ClienteID })
                 </td>
             </tr>
         }
