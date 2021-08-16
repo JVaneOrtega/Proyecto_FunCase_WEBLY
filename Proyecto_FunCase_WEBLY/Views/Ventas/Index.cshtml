@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Proyecto_FunCase_WEBLY.Models.Venta>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado de ventas</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaVenta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subtotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Iva)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaVenta)
+                </td>
+                <td>
+                    @String.Format("{0:C}", item.Subtotal)
+                </td>
+                <td>
+                    @String.Format("{0:C}", item.Iva)
+                </td>
+                <td>
+                    @String.Format("{0:C}", item.Total)
+                </td>
+                <td>
+                    @Html.ActionLink("Detalles", "DetalleVenta", "Ventas", new { id = item.Id }, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    @Html.ActionLink("Regresar", "Index", "Home", null, null)
+</p>
+

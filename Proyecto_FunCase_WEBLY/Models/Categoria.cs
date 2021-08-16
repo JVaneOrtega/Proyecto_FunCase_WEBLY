@@ -12,23 +12,18 @@ namespace Proyecto_FunCase_WEBLY.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Producto
+    public partial class Categoria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Producto()
+        public Categoria()
         {
-            this.ListaVenta = new HashSet<ListaVenta>();
+            this.Producto = new HashSet<Producto>();
         }
     
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public Nullable<double> Precio { get; set; }
-        public Nullable<System.DateTime> FechaCreacion { get; set; }
-        public string Foto { get; set; }
-        public Nullable<int> CategoriaId { get; set; }
     
-        public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ListaVenta> ListaVenta { get; set; }
+        public virtual ICollection<Producto> Producto { get; set; }
     }
 }
