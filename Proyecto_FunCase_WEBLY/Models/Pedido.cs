@@ -16,9 +16,15 @@ namespace Proyecto_FunCase_WEBLY.Models
         public char EstatusPago { get; set; }
         public string Referencia { get; set; }
         public double Descuento { get; set; }
-        public int MetodoPagoID { get; set; }
+        public int MetodosPagoID { get; set; }
         public virtual MetodosPago MetodoPago { get; set; }
         public int ClienteID { get; set; }
         public virtual Cliente Cliente { get; set; }
+
+        public Pedido ()
+        {
+            this.DetallesPedidos = new HashSet<DetallesPedido>();
+        }
+        public virtual ICollection<DetallesPedido> DetallesPedidos { get; set; }
     }
 }

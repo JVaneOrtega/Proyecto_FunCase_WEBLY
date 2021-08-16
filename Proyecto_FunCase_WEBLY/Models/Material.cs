@@ -16,5 +16,12 @@ namespace Proyecto_FunCase_WEBLY.Models
         public string Color { get; set; } 
         public double Precio { get; set; }
 
+        public Material()
+        {
+            this.Productos = new HashSet<Producto>();
+        }
+
+        public virtual ICollection<Producto> Productos { get; set; }
+
     }
 }

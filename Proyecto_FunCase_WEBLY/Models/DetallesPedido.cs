@@ -18,5 +18,12 @@ namespace Proyecto_FunCase_WEBLY.Models
         public virtual Producto Producto { get; set; }
         public int PedidoID { get; set; }
         public virtual Pedido Pedido { get; set; }
+
+        public DetallesPedido()
+        {
+            this.Funda_Disenos = new HashSet<Funda_Diseno>();
+        }
+
+        public virtual ICollection<Funda_Diseno> Funda_Disenos { get; set; }
     }
 }

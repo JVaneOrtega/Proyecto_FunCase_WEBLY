@@ -24,5 +24,12 @@ namespace Proyecto_FunCase_WEBLY.Models
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
+
+        public Designer()
+        {
+            this.Imagenes = new HashSet<Imagen>();
+        }
+
+        public virtual ICollection<Imagen> Imagenes { get; set; }
     }
 }

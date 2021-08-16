@@ -24,7 +24,15 @@ namespace Proyecto_FunCase_WEBLY.Models
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
 
+        public Cliente ()
+        {
+            this.Direcciones = new HashSet<Direccion>();
+            this.Pedidos = new HashSet<Pedido>();
+        }
+
         public virtual ICollection<Direccion> Direcciones { get; set; }
+
+        public virtual ICollection<Pedido> Pedidos { get; set; }
     }
 
 }

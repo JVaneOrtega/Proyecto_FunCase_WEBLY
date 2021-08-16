@@ -16,5 +16,11 @@ namespace Proyecto_FunCase_WEBLY.Models
         public string Ruta { get; set; }
         public int DesignerID { get; set; }
         public virtual Designer Designer { get; set; }
+
+        public Imagen ()
+        {
+            this.Imagen_Disenos = new HashSet<Imagen_Diseno>();
+        }
+        public virtual ICollection<Imagen_Diseno> Imagen_Disenos { get; set; }
     }
 }

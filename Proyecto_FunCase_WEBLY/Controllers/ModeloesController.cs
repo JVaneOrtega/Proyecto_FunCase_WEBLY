@@ -18,7 +18,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // GET: Modeloes
         public ActionResult Index()
         {
-            return View(db.Modelos.ToList());
+            return View(db.Modelos.Include(m => m.Marca).ToList());
         }
 
         // GET: Modeloes/Details/5
@@ -40,7 +40,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // GET: Modeloes/Create
         public ActionResult Create()
         {
-
+            ViewBag.MarcaID = new SelectList(db.Marcas, "MarcaID", "Nombre");
             return View();
         }
 

@@ -11,5 +11,12 @@ namespace Proyecto_FunCase_WEBLY.Models
         public int EstadoID { get; set; }
         [Required]
         public string Nombre { get; set; }
+
+        public Estado()
+        {
+            this.Direcciones = new HashSet<Direccion>();
+        }
+
+        public virtual ICollection<Direccion> Direcciones { get; set; }
     }
 }

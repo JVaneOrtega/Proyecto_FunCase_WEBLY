@@ -10,6 +10,11 @@ namespace Proyecto_FunCase_WEBLY.Models
         public int MarcaID { get; set; }
         public string Nombre { get; set; }
 
+        public Marca()
+        {
+            this.Modelos = new HashSet<Modelo>();
+        }
+
         public virtual ICollection<Modelo> Modelos { get; set; }
 
     }

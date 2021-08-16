@@ -29,33 +29,119 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                         NumeroInt = c.String(nullable: false),
                         Colonia = c.String(),
                         CodigoPostal = c.String(nullable: false),
-                        Cliente_ClienteID = c.Int(),
-                        Estado_EstadoID = c.Int(),
+                        ClienteID = c.Int(nullable: false),
+                        EstadoID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.DireccionID)
-                .ForeignKey("dbo.Clientes", t => t.Cliente_ClienteID)
-                .ForeignKey("dbo.Estadoes", t => t.Estado_EstadoID)
-                .Index(t => t.Cliente_ClienteID)
-                .Index(t => t.Estado_EstadoID);
+                .ForeignKey("dbo.Clientes", t => t.ClienteID, cascadeDelete: true)
+                .ForeignKey("dbo.Estadoes", t => t.EstadoID, cascadeDelete: true)
+                .Index(t => t.ClienteID)
+                .Index(t => t.EstadoID);
             
             CreateTable(
                 "dbo.Estadoes",
                 c => new
                     {
                         EstadoID = c.Int(nullable: false, identity: true),
-                        Nombre = c.String(),
+                        Nombre = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.EstadoID);
+            
+            CreateTable(
+                "dbo.Pedidoes",
+                c => new
+                    {
+                        PedidoID = c.Int(nullable: false, identity: true),
+                        Total = c.Double(nullable: false),
+                        Referencia = c.String(),
+                        Descuento = c.Double(nullable: false),
+                        MetodosPagoID = c.Int(nullable: false),
+                        ClienteID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.PedidoID)
+                .ForeignKey("dbo.Clientes", t => t.ClienteID, cascadeDelete: true)
+                .ForeignKey("dbo.MetodosPagoes", t => t.MetodosPagoID, cascadeDelete: true)
+                .Index(t => t.MetodosPagoID)
+                .Index(t => t.ClienteID);
+            
+            CreateTable(
+                "dbo.DetallesPedidoes",
+                c => new
+                    {
+                        DetallesPedidoID = c.Int(nullable: false, identity: true),
+                        Cantidad = c.Int(nullable: false),
+                        PrecioUnitario = c.Double(nullable: false),
+                        ProductoID = c.Int(nullable: false),
+                        PedidoID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.DetallesPedidoID)
+                .ForeignKey("dbo.Pedidoes", t => t.PedidoID, cascadeDelete: true)
+                .ForeignKey("dbo.Productoes", t => t.ProductoID, cascadeDelete: true)
+                .Index(t => t.ProductoID)
+                .Index(t => t.PedidoID);
+            
+            CreateTable(
+                "dbo.Funda_Diseno",
+                c => new
+                    {
+                        Funda_DisenoID = c.Int(nullable: false, identity: true),
+                        Imagen = c.String(nullable: false),
+                        ValorNeto = c.Double(nullable: false),
+                        DetallePedidosID = c.Int(nullable: false),
+                        DetallesPedidos_DetallesPedidoID = c.Int(),
+                    })
+                .PrimaryKey(t => t.Funda_DisenoID)
+                .ForeignKey("dbo.DetallesPedidoes", t => t.DetallesPedidos_DetallesPedidoID)
+                .Index(t => t.DetallesPedidos_DetallesPedidoID);
+            
+            CreateTable(
+                "dbo.Imagen_Diseno",
+                c => new
+                    {
+                        Imagen_DisenoID = c.Int(nullable: false, identity: true),
+                        Funda_DisenoID = c.Int(nullable: false),
+                        ImagenID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Imagen_DisenoID)
+                .ForeignKey("dbo.Funda_Diseno", t => t.Funda_DisenoID, cascadeDelete: true)
+                .ForeignKey("dbo.Imagens", t => t.ImagenID, cascadeDelete: true)
+                .Index(t => t.Funda_DisenoID)
+                .Index(t => t.ImagenID);
+            
+            CreateTable(
+                "dbo.Imagens",
+                c => new
+                    {
+                        ImagenID = c.Int(nullable: false, identity: true),
+                        NombreImagen = c.String(nullable: false),
+                        Ruta = c.String(nullable: false),
+                        DesignerID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ImagenID)
+                .ForeignKey("dbo.Designers", t => t.DesignerID, cascadeDelete: true)
+                .Index(t => t.DesignerID);
+            
+            CreateTable(
+                "dbo.Designers",
+                c => new
+                    {
+                        DesignerID = c.Int(nullable: false, identity: true),
+                        NombrePresentacion = c.String(),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.DesignerID)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.AspNetUsers",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Nombre = c.String(),
-                        Apellido1 = c.String(),
+                        Nombre = c.String(nullable: false),
+                        Apellido1 = c.String(nullable: false),
                         Apellido2 = c.String(),
-                        Telefono = c.String(),
+                        Telefono = c.String(nullable: false),
                         Email = c.String(),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -83,18 +169,6 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
                 .Index(t => t.ApplicationUser_Id);
-            
-            CreateTable(
-                "dbo.Designers",
-                c => new
-                    {
-                        DesignerID = c.Int(nullable: false, identity: true),
-                        NombrePresentacion = c.String(),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => t.DesignerID)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.AspNetUserLogIns",
@@ -125,63 +199,22 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                 .Index(t => t.IdentityRole_Id);
             
             CreateTable(
-                "dbo.DetallesPedidoes",
-                c => new
-                    {
-                        DetallesPedidoID = c.Int(nullable: false, identity: true),
-                        Cantidad = c.Int(nullable: false),
-                        Cliente_ClienteID = c.Int(),
-                        Pedido_PedidoID = c.Int(),
-                        Producto_ProductoID = c.Int(),
-                    })
-                .PrimaryKey(t => t.DetallesPedidoID)
-                .ForeignKey("dbo.Clientes", t => t.Cliente_ClienteID)
-                .ForeignKey("dbo.Pedidoes", t => t.Pedido_PedidoID)
-                .ForeignKey("dbo.Productoes", t => t.Producto_ProductoID)
-                .Index(t => t.Cliente_ClienteID)
-                .Index(t => t.Pedido_PedidoID)
-                .Index(t => t.Producto_ProductoID);
-            
-            CreateTable(
-                "dbo.Pedidoes",
-                c => new
-                    {
-                        PedidoID = c.Int(nullable: false, identity: true),
-                        Total = c.Double(nullable: false),
-                        Referencia = c.String(),
-                        Descuento = c.Double(nullable: false),
-                        MetodoPago_MetodosPagoID = c.Int(),
-                    })
-                .PrimaryKey(t => t.PedidoID)
-                .ForeignKey("dbo.MetodosPagoes", t => t.MetodoPago_MetodosPagoID)
-                .Index(t => t.MetodoPago_MetodosPagoID);
-            
-            CreateTable(
-                "dbo.MetodosPagoes",
-                c => new
-                    {
-                        MetodosPagoID = c.Int(nullable: false, identity: true),
-                        Nombre = c.String(),
-                    })
-                .PrimaryKey(t => t.MetodosPagoID);
-            
-            CreateTable(
                 "dbo.Productoes",
                 c => new
                     {
                         ProductoID = c.Int(nullable: false, identity: true),
                         ImagenFinal = c.String(nullable: false),
-                        Nombre = c.String(),
+                        Nombre = c.String(nullable: false),
                         Total = c.Double(nullable: false),
                         Stock = c.Int(nullable: false),
-                        Material_MaterialID = c.Int(),
-                        Modelo_ModeloID = c.Int(),
+                        MaterialID = c.Int(nullable: false),
+                        ModeloID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ProductoID)
-                .ForeignKey("dbo.Materials", t => t.Material_MaterialID)
-                .ForeignKey("dbo.Modeloes", t => t.Modelo_ModeloID)
-                .Index(t => t.Material_MaterialID)
-                .Index(t => t.Modelo_ModeloID);
+                .ForeignKey("dbo.Materials", t => t.MaterialID, cascadeDelete: true)
+                .ForeignKey("dbo.Modeloes", t => t.ModeloID, cascadeDelete: true)
+                .Index(t => t.MaterialID)
+                .Index(t => t.ModeloID);
             
             CreateTable(
                 "dbo.Materials",
@@ -204,11 +237,11 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                         Alto = c.Double(nullable: false),
                         Grosor = c.Double(nullable: false),
                         ImagenReferencia = c.String(),
-                        Marca_MarcaID = c.Int(),
+                        MarcaID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ModeloID)
-                .ForeignKey("dbo.Marcas", t => t.Marca_MarcaID)
-                .Index(t => t.Marca_MarcaID);
+                .ForeignKey("dbo.Marcas", t => t.MarcaID, cascadeDelete: true)
+                .Index(t => t.MarcaID);
             
             CreateTable(
                 "dbo.Marcas",
@@ -220,47 +253,13 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                 .PrimaryKey(t => t.MarcaID);
             
             CreateTable(
-                "dbo.Funda_Diseno",
+                "dbo.MetodosPagoes",
                 c => new
                     {
-                        Funda_DisenoID = c.Int(nullable: false, identity: true),
-                        Imagen = c.String(),
-                        ValorNeto = c.Double(nullable: false),
-                        Cliente_ClienteID = c.Int(),
-                        Producto_ProductoID = c.Int(),
+                        MetodosPagoID = c.Int(nullable: false, identity: true),
+                        Nombre = c.String(),
                     })
-                .PrimaryKey(t => t.Funda_DisenoID)
-                .ForeignKey("dbo.Clientes", t => t.Cliente_ClienteID)
-                .ForeignKey("dbo.Productoes", t => t.Producto_ProductoID)
-                .Index(t => t.Cliente_ClienteID)
-                .Index(t => t.Producto_ProductoID);
-            
-            CreateTable(
-                "dbo.Imagen_Diseno",
-                c => new
-                    {
-                        Imagen_DisenoID = c.Int(nullable: false, identity: true),
-                        FundaDiseno_Funda_DisenoID = c.Int(),
-                        Imagen_ImagenID = c.Int(),
-                    })
-                .PrimaryKey(t => t.Imagen_DisenoID)
-                .ForeignKey("dbo.Funda_Diseno", t => t.FundaDiseno_Funda_DisenoID)
-                .ForeignKey("dbo.Imagens", t => t.Imagen_ImagenID)
-                .Index(t => t.FundaDiseno_Funda_DisenoID)
-                .Index(t => t.Imagen_ImagenID);
-            
-            CreateTable(
-                "dbo.Imagens",
-                c => new
-                    {
-                        ImagenID = c.Int(nullable: false, identity: true),
-                        NombreImagen = c.String(nullable: false),
-                        Ruta = c.String(),
-                        Designer_DesignerID = c.Int(),
-                    })
-                .PrimaryKey(t => t.ImagenID)
-                .ForeignKey("dbo.Designers", t => t.Designer_DesignerID)
-                .Index(t => t.Designer_DesignerID);
+                .PrimaryKey(t => t.MetodosPagoID);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -276,61 +275,59 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "IdentityRole_Id", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Imagen_Diseno", "Imagen_ImagenID", "dbo.Imagens");
-            DropForeignKey("dbo.Imagens", "Designer_DesignerID", "dbo.Designers");
-            DropForeignKey("dbo.Imagen_Diseno", "FundaDiseno_Funda_DisenoID", "dbo.Funda_Diseno");
-            DropForeignKey("dbo.Funda_Diseno", "Producto_ProductoID", "dbo.Productoes");
-            DropForeignKey("dbo.Funda_Diseno", "Cliente_ClienteID", "dbo.Clientes");
-            DropForeignKey("dbo.DetallesPedidoes", "Producto_ProductoID", "dbo.Productoes");
-            DropForeignKey("dbo.Productoes", "Modelo_ModeloID", "dbo.Modeloes");
-            DropForeignKey("dbo.Modeloes", "Marca_MarcaID", "dbo.Marcas");
-            DropForeignKey("dbo.Productoes", "Material_MaterialID", "dbo.Materials");
-            DropForeignKey("dbo.DetallesPedidoes", "Pedido_PedidoID", "dbo.Pedidoes");
-            DropForeignKey("dbo.Pedidoes", "MetodoPago_MetodosPagoID", "dbo.MetodosPagoes");
-            DropForeignKey("dbo.DetallesPedidoes", "Cliente_ClienteID", "dbo.Clientes");
+            DropForeignKey("dbo.Pedidoes", "MetodosPagoID", "dbo.MetodosPagoes");
+            DropForeignKey("dbo.Productoes", "ModeloID", "dbo.Modeloes");
+            DropForeignKey("dbo.Modeloes", "MarcaID", "dbo.Marcas");
+            DropForeignKey("dbo.Productoes", "MaterialID", "dbo.Materials");
+            DropForeignKey("dbo.DetallesPedidoes", "ProductoID", "dbo.Productoes");
+            DropForeignKey("dbo.DetallesPedidoes", "PedidoID", "dbo.Pedidoes");
+            DropForeignKey("dbo.Imagen_Diseno", "ImagenID", "dbo.Imagens");
             DropForeignKey("dbo.AspNetUserRoles", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogIns", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Designers", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Clientes", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "ApplicationUser_Id", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Direccions", "Estado_EstadoID", "dbo.Estadoes");
-            DropForeignKey("dbo.Direccions", "Cliente_ClienteID", "dbo.Clientes");
-            DropIndex("dbo.Imagens", new[] { "Designer_DesignerID" });
-            DropIndex("dbo.Imagen_Diseno", new[] { "Imagen_ImagenID" });
-            DropIndex("dbo.Imagen_Diseno", new[] { "FundaDiseno_Funda_DisenoID" });
-            DropIndex("dbo.Funda_Diseno", new[] { "Producto_ProductoID" });
-            DropIndex("dbo.Funda_Diseno", new[] { "Cliente_ClienteID" });
-            DropIndex("dbo.Modeloes", new[] { "Marca_MarcaID" });
-            DropIndex("dbo.Productoes", new[] { "Modelo_ModeloID" });
-            DropIndex("dbo.Productoes", new[] { "Material_MaterialID" });
-            DropIndex("dbo.Pedidoes", new[] { "MetodoPago_MetodosPagoID" });
-            DropIndex("dbo.DetallesPedidoes", new[] { "Producto_ProductoID" });
-            DropIndex("dbo.DetallesPedidoes", new[] { "Pedido_PedidoID" });
-            DropIndex("dbo.DetallesPedidoes", new[] { "Cliente_ClienteID" });
+            DropForeignKey("dbo.Imagens", "DesignerID", "dbo.Designers");
+            DropForeignKey("dbo.Imagen_Diseno", "Funda_DisenoID", "dbo.Funda_Diseno");
+            DropForeignKey("dbo.Funda_Diseno", "DetallesPedidos_DetallesPedidoID", "dbo.DetallesPedidoes");
+            DropForeignKey("dbo.Pedidoes", "ClienteID", "dbo.Clientes");
+            DropForeignKey("dbo.Direccions", "EstadoID", "dbo.Estadoes");
+            DropForeignKey("dbo.Direccions", "ClienteID", "dbo.Clientes");
+            DropIndex("dbo.Modeloes", new[] { "MarcaID" });
+            DropIndex("dbo.Productoes", new[] { "ModeloID" });
+            DropIndex("dbo.Productoes", new[] { "MaterialID" });
             DropIndex("dbo.AspNetUserRoles", new[] { "IdentityRole_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.AspNetUserLogIns", new[] { "ApplicationUser_Id" });
-            DropIndex("dbo.Designers", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "ApplicationUser_Id" });
-            DropIndex("dbo.Direccions", new[] { "Estado_EstadoID" });
-            DropIndex("dbo.Direccions", new[] { "Cliente_ClienteID" });
+            DropIndex("dbo.Designers", new[] { "UserId" });
+            DropIndex("dbo.Imagens", new[] { "DesignerID" });
+            DropIndex("dbo.Imagen_Diseno", new[] { "ImagenID" });
+            DropIndex("dbo.Imagen_Diseno", new[] { "Funda_DisenoID" });
+            DropIndex("dbo.Funda_Diseno", new[] { "DetallesPedidos_DetallesPedidoID" });
+            DropIndex("dbo.DetallesPedidoes", new[] { "PedidoID" });
+            DropIndex("dbo.DetallesPedidoes", new[] { "ProductoID" });
+            DropIndex("dbo.Pedidoes", new[] { "ClienteID" });
+            DropIndex("dbo.Pedidoes", new[] { "MetodosPagoID" });
+            DropIndex("dbo.Direccions", new[] { "EstadoID" });
+            DropIndex("dbo.Direccions", new[] { "ClienteID" });
             DropIndex("dbo.Clientes", new[] { "UserId" });
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Imagens");
-            DropTable("dbo.Imagen_Diseno");
-            DropTable("dbo.Funda_Diseno");
+            DropTable("dbo.MetodosPagoes");
             DropTable("dbo.Marcas");
             DropTable("dbo.Modeloes");
             DropTable("dbo.Materials");
             DropTable("dbo.Productoes");
-            DropTable("dbo.MetodosPagoes");
-            DropTable("dbo.Pedidoes");
-            DropTable("dbo.DetallesPedidoes");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogIns");
-            DropTable("dbo.Designers");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.Designers");
+            DropTable("dbo.Imagens");
+            DropTable("dbo.Imagen_Diseno");
+            DropTable("dbo.Funda_Diseno");
+            DropTable("dbo.DetallesPedidoes");
+            DropTable("dbo.Pedidoes");
             DropTable("dbo.Estadoes");
             DropTable("dbo.Direccions");
             DropTable("dbo.Clientes");

@@ -22,5 +22,11 @@ namespace Proyecto_FunCase_WEBLY.Models
         public virtual Material Material { get; set; }
         public int ModeloID { get; set; }
         public virtual Modelo Modelo { get; set; }
+
+        public Producto ()
+        {
+            this.DetallesPedidos = new HashSet<DetallesPedido>();
+        }
+        public virtual ICollection<DetallesPedido> DetallesPedidos { get; set; }
     }
 }
