@@ -2,6 +2,8 @@
 
 @if (User.IsInRole("Cliente") || User.IsInRole("Diseñador"))
 {
+    ViewBag.Title = "Catálogo";
+    <h2>Catálogo.</h2>
     <div class="row">
         @foreach (var item in Model)
         {
@@ -29,11 +31,16 @@
 }
 else if (User.IsInRole("Admin") || User.IsInRole("Empleado"))
 {
+    ViewBag.Title = "Index";
+    <h2>Productos.</h2>
     <p>
-        @Html.ActionLink("CREAR NUEVO REGISTRO", "Create")
+        @Html.ActionLink("Crear Nuevo Registro", "Create", new { @class = "btn btn-primary" })
     </p>
     <table class="table">
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.ImagenFinal)
             </th>
@@ -50,6 +57,9 @@ else if (User.IsInRole("Admin") || User.IsInRole("Empleado"))
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
                     <img class="img-responsive" src="@item.ImagenFinal" alt="Imagen del Producto" style="height: 100px;" />
                 </td>
                 <td>
@@ -59,9 +69,9 @@ else if (User.IsInRole("Admin") || User.IsInRole("Empleado"))
                     @Html.DisplayFor(modelItem => item.Stock)
                 </td>
                 <td>
-                    @Html.ActionLink("EDITAR", "Edit", new { id = item.ProductoID }) |
-                    @Html.ActionLink("DETALLES", "Details", new { id = item.ProductoID }) |
-                    @Html.ActionLink("ELIMINAR", "Delete", new { id = item.ProductoID })
+                    @Html.ActionLink("Editar", "Edit", new { id = item.ProductoID }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.ProductoID }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.ProductoID })
                 </td>
             </tr>
         }

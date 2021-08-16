@@ -343,14 +343,11 @@
     <Content Include="Views\RolesAdmin\Delete.cshtml" />
     <Content Include="Views\RolesAdmin\Create.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\Designer\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Cliente\Details.cshtml" />
     <Content Include="Views\Designer\Details.cshtml" />
-    <Content Include="Views\Productos\Create.cshtml" />
-    <Content Include="Views\Designer\Edit.cshtml" />
     <Content Include="Views\Materiales\Create.cshtml" />
     <Content Include="Views\Materiales\Delete.cshtml" />
     <Content Include="Views\Materiales\Details.cshtml" />

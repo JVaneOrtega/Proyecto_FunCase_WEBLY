@@ -14,51 +14,51 @@
 
     @Html.HiddenFor(m => m.Tipo)
     <h4>Datos personales</h4>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Nombre, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+    <div class="mb-3 row">
+        @Html.LabelFor(m => m.Nombre, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+        <div class="col-lg-7 col-md-8 col-sm-8">
             @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Apellido1, new { @class = "col-md-2 control-label" })
+    <div class="mb-3 row">
+        @Html.LabelFor(m => m.Apellido1, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Apellido1, new { @class = "form-control" })
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Apellido2, new { @class = "col-md-2 control-label" })
+    <div class="mb-3 row">
+        @Html.LabelFor(m => m.Apellido2, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Apellido2, new { @class = "form-control" })
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Telefono, new { @class = "col-md-2 control-label" })
+    <div class="mb-3 row">
+        @Html.LabelFor(m => m.Telefono, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control" })
         </div>
     </div>
     <hr />
     <h4>Datos de usuario</h4>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+    <div class="mb-3 row">
+        @Html.LabelFor(m => m.Email, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+    <div class="mb-3 row">
+        @Html.LabelFor(m => m.Password, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+    <div class="mb-3 row">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
-    <div class="form-group">
+    <div class="mb-3 row">
         <label class="col-md-2 control-label">
             Select User Role
         </label>
@@ -66,15 +66,13 @@
             @foreach (var item in (SelectList)ViewBag.RoleId)
             {
                 <input type="radio" name="SelectedRoles" value="@item.Value" class="radio-inline" />
-                @Html.Label(item.Value, new { @class = "control-label" })
+                @Html.Label(item.Value, new { @class = "form-label" })
             }
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Create" />
-        </div>
-    </div>
+    
+    <button type="submit" class="btn btn-info">Crear</button>
+
 }
 
 @section Scripts {

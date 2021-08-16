@@ -25,9 +25,17 @@
                 @Html.DisplayNameFor(model => model.User.Apellido2)
             </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.User.Apellido2)
-            </dd>
+            @if (Model.User.Apellido2 == "" || Model.User.Apellido2 == null)
+            {
+                <dd>N/A</dd>
+            }
+            else
+            {
+                <dd>
+                    @Html.DisplayFor(model => model.User.Apellido2)
+                </dd>
+
+            }
             <dt>
                 @Html.DisplayNameFor(model => model.User.Email)
             </dt>
@@ -48,7 +56,7 @@
 
     <p>
         @Html.ActionLink("Editar", "Edit", new { id = Model.ClienteID }) |
-        @Html.ActionLink("Regresar a la Lista", "Index")
+        @Html.ActionLink("Regresar al Listado", "Index")
     </p>
 
 

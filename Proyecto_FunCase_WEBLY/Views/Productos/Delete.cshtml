@@ -1,7 +1,7 @@
 ﻿@model Proyecto_FunCase_WEBLY.Models.Producto
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar";
 }
 
 <h2>ELIMINAR</h2>
@@ -49,8 +49,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="ELIMINAR" class="btn btn-default" style="background-color: palevioletred"/> |
-            @Html.ActionLink("VOLVER A INICIO", "Index")
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            @Html.ActionLink("Regresar al listado", "Index")
         </div>
     }
 </div>

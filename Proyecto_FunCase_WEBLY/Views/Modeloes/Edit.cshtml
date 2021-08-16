@@ -1,10 +1,10 @@
 ﻿@model Proyecto_FunCase_WEBLY.Models.Modelo
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar";
 }
 
-<h2>EDITAR</h2>
+<h2>Editar.</h2>
 
 
 @using (Html.BeginForm())
@@ -17,56 +17,53 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ModeloID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <div class="mb-3 row">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+            <div class="col-lg-7 col-md-8 col-sm-8">
                 @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "form-text text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ancho, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <div class="mb-3 row">
+            @Html.LabelFor(model => model.Ancho, htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+            <div class="col-lg-7 col-md-8 col-sm-8">
                 @Html.EditorFor(model => model.Ancho, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ancho, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Ancho, "", new { @class = "form-text text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Alto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <div class="mb-3 row">
+            @Html.LabelFor(model => model.Alto, htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+            <div class="col-lg-7 col-md-8 col-sm-8">
                 @Html.EditorFor(model => model.Alto, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Alto, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Alto, "", new { @class = "form-text text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Grosor, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <div class="mb-3 row">
+            @Html.LabelFor(model => model.Grosor, htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+            <div class="col-lg-7 col-md-8 col-sm-8">
                 @Html.EditorFor(model => model.Grosor, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Grosor, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Grosor, "", new { @class = "form-text text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ImagenReferencia, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <div class="mb-3 row">
+            @Html.LabelFor(model => model.ImagenReferencia, htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+            <div class="col-lg-7 col-md-8 col-sm-8">
                 @Html.EditorFor(model => model.ImagenReferencia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ImagenReferencia, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.ImagenReferencia, "", new { @class = "form-text text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="GUARDAR" class="btn btn-default" style="background-color: skyblue" />
-            </div>
-        </div>
+        <button type="submit" class="btn btn-info">Guardar</button>
+
     </div>
 }
 
 <div>
-    @Html.ActionLink("VOLVER A INICIO", "Index")
+    @Html.ActionLink("Volver al Lsitado", "Index")
 </div>
 
 @section Scripts {

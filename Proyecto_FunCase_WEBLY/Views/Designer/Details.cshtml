@@ -1,7 +1,12 @@
 ﻿@model Proyecto_FunCase_WEBLY.Models.Designer
 
+@{ 
+    ViewBag.Title = "Detalles";
+}
+<h4>Detalles.</h4>
+
 <div>
-    <h4>Designer</h4>
+    <h4>Diseñador</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -22,9 +27,17 @@
             @Html.DisplayNameFor(model => model.User.Apellido2)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.User.Apellido2)
-        </dd>
+        @if (Model.User.Apellido2 == "" || Model.User.Apellido2 == null)
+        {
+            <dd>N/A</dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.User.Apellido2)
+            </dd>
+
+        }
         <dt>
             @Html.DisplayNameFor(model => model.User.Email)
         </dt>
@@ -43,6 +56,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.DesignerID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.DesignerID }) |
+    @Html.ActionLink("Volver al Listado", "Index")
 </p>

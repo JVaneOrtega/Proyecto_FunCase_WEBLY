@@ -1,15 +1,15 @@
 ﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar";
 }
 
-<h2>Delete.</h2>
+<h2>Eliminar.</h2>
 
-<h3>Are you sure you want to delete this Role? </h3>
-<p>Deleting this Role will remove all users from this role. It will not delete the users.</p>
+<h3>¿Esta seguro de querer eliminar este Rol? </h3>
+<p>Eliminar este rol removerá todos los usuarios para este rol. No eliminar a todos los usuarios de este rol.</p>
 <div>
-    <h4>Role.</h4>
+    <h4>Rol.</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -24,9 +24,8 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+        
+            <button type="submit" class="btn btn-primary">Eliminar</button> |
+            @Html.ActionLink("Regresar al listado", "Index")
     }
 </div>

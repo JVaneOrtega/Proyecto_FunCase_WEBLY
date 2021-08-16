@@ -8,20 +8,16 @@
 @using (Html.BeginForm("AddPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Add a phone number.</h4>
+    <h4>Agregar número de teléfono.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Number, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+    <div class="mb-3 row">
+        @Html.LabelFor(m => m.Number, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+        <div class="col-lg-7 col-md-8 col-sm-8">
             @Html.TextBoxFor(m => m.Number, new { @class = "form-control" })
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Send verification code" />
-        </div>
-    </div>
+        <button type="submit" class="btn btn-primary">Enviar código de verificación</button>
 }
 
 @section Scripts {

@@ -7,7 +7,7 @@
 {
     var Cliente = Model.ToList().Where(c => c.User.UserName == User.Identity.Name).FirstOrDefault();
 
-    <h2>Mis datos</h2>
+    <h2>Mis datos.</h2>
 
     <div class="row">
         <div class="col-lg-6 col-md-4 col-sm-4" id="opciones">
@@ -64,6 +64,7 @@
 }
 else if (User.IsInRole("Empleado") || User.IsInRole("Admin"))
 {
+    <h2>Clientes.</h2>
     <p>
         @Html.ActionLink("Crear Nuevo Registro", "Create")
     </p>
