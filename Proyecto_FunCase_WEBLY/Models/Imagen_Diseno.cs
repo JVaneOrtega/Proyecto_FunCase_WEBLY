@@ -8,7 +8,9 @@ namespace Proyecto_FunCase_WEBLY.Models
     public class Imagen_Diseno
     {
         public int Imagen_DisenoID { get; set; }
+        public int Funda_DisenoID { get; set; }
         public virtual Funda_Diseno FundaDiseno { get; set; }
+        public int ImagenID { get; set; }
         public virtual Imagen Imagen { get; set; }
     }
 }

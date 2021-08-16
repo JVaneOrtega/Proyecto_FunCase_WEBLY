@@ -15,6 +15,8 @@ namespace Proyecto_FunCase_WEBLY.Models
         public double Grosor { get; set; }
         [Display(Name = "Imagen de Referencia")]
         public string ImagenReferencia { get; set; }
+
+        public int MarcaID { get; set; }
         public virtual Marca Marca { get; set; }
 
     }

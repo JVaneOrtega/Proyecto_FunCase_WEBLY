@@ -10,5 +10,7 @@ namespace Proyecto_FunCase_WEBLY.Models
         public int MarcaID { get; set; }
         public string Nombre { get; set; }
 
+        public virtual ICollection<Modelo> Modelos { get; set; }
+
     }
 }

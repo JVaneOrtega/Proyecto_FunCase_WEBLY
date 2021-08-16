@@ -21,7 +21,10 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Required]
         [Display(Name = "Código Postal")]
         public string CodigoPostal { get; set; }
+
+        public int ClienteID { get; set; }
         public virtual Cliente Cliente { get; set; }
+        public int EstadoID { get; set; }
         public virtual Estado Estado { get; set; }
     }
 }

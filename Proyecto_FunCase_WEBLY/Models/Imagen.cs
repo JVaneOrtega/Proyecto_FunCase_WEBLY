@@ -12,7 +12,9 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Required]
         [Display(Name = "Nombre")]
         public string NombreImagen { get; set; }
+        [Required]
         public string Ruta { get; set; }
+        public int DesignerID { get; set; }
         public virtual Designer Designer { get; set; }
     }
 }

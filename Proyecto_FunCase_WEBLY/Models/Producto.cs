@@ -12,10 +12,15 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Required]
         [Display(Name = "Imagen")]
         public string ImagenFinal { get; set; }
+        [Required]
         public string Nombre { get; set; }
+        [Required]
         public double Total { get; set; }
+        [Required]
         public int Stock { get; set; }
+        public int MaterialID { get; set; }
         public virtual Material Material { get; set; }
+        public int ModeloID { get; set; }
         public virtual Modelo Modelo { get; set; }
     }
 }
