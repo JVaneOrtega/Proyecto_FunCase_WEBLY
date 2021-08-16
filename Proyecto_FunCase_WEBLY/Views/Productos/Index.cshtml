@@ -30,7 +30,7 @@
 else if (User.IsInRole("Admin") || User.IsInRole("Empleado"))
 {
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("CREAR NUEVO REGISTRO", "Create")
     </p>
     <table class="table">
         <tr>
@@ -59,9 +59,9 @@ else if (User.IsInRole("Admin") || User.IsInRole("Empleado"))
                     @Html.DisplayFor(modelItem => item.Stock)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductoID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ProductoID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductoID })
+                    @Html.ActionLink("EDITAR", "Edit", new { id = item.ProductoID }) |
+                    @Html.ActionLink("DETALLES", "Details", new { id = item.ProductoID }) |
+                    @Html.ActionLink("ELIMINAR", "Delete", new { id = item.ProductoID })
                 </td>
             </tr>
         }

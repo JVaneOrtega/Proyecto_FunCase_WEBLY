@@ -1,15 +1,19 @@
-﻿using Proyecto_FunCase_WEBLY.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Proyecto_FunCase_WEBLY.Models;
 
 namespace Proyecto_FunCase_WEBLY.Controllers
 {
     public class ProductosController : Controller
     {
-        FunCaseModelContext db = new FunCaseModelContext();
+        private FunCaseModelContext db = new FunCaseModelContext();
+
         // GET: Productos
         public ActionResult Index()
         {
@@ -17,9 +21,18 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         }
 
         // GET: Productos/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Producto producto = db.Productos.Find(id);
+            if (producto == null)
+            {
+                return HttpNotFound();
+            }
+            return View(producto);
         }
 
         [Authorize(Roles = "Empleado,Admin")]
@@ -30,65 +43,88 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         }
 
         // POST: Productos/Create
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ProductoID,ImagenFinal,Nombre,Total,Stock")] Producto producto)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                db.Productos.Add(producto);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(producto);
         }
 
         [Authorize(Roles = "Empleado,Admin")]
         // GET: Productos/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Producto producto = db.Productos.Find(id);
+            if (producto == null)
+            {
+                return HttpNotFound();
+            }
+            return View(producto);
         }
 
         // POST: Productos/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ProductoID,ImagenFinal,Nombre,Total,Stock")] Producto producto)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(producto).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(producto);
         }
 
         [Authorize(Roles = "Empleado,Admin")]
         // GET: Productos/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Producto producto = db.Productos.Find(id);
+            if (producto == null)
+            {
+                return HttpNotFound();
+            }
+            return View(producto);
         }
 
         // POST: Productos/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            Producto producto = db.Productos.Find(id);
+            db.Productos.Remove(producto);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                return View();
+                db.Dispose();
             }
+            base.Dispose(disposing);
         }
     }
 }
