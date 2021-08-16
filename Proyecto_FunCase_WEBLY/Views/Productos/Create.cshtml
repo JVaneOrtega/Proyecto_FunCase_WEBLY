@@ -1,6 +1,6 @@
 ﻿@model Proyecto_FunCase_WEBLY.Models.Producto
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Productos", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -27,7 +27,7 @@
     <div class="mb-3 row">
         @Html.LabelFor(model => model.ImagenFinal, htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
         <div class="col-lg-7 col-md-8 col-sm-8">
-            @Html.EditorFor(model => model.ImagenFinal, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.TextBoxFor(model => model.ImagenFinal, new { type = "file", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.ImagenFinal, "", new { @class = "text-danger" })
         </div>
     </div>
