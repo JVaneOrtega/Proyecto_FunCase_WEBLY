@@ -12,9 +12,11 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Required]
         public string Nombre { get; set; }
         [Display(Name = "Tiene Relieve")]
-        public char TieneRelieve { get; set; }
+        public bool TieneRelieve { get; set; }
         public string Color { get; set; } 
         public double Precio { get; set; }
+        [Display(Name = "Estatus del Material")]
+        public bool Estatus { get; set; }
 
         public Material()
         {

@@ -6,53 +6,51 @@
 
 <h2>Detalles.</h2>
 
-<div>
-    <h4>Modelo</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-4" style="text-align: center;">
+        <img class="img-responsive" src="@Model.ImagenReferencia" alt="Imagen del Modelo" style="height: 250px;" />
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-8">
+        <h4>Modelo</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ancho)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Ancho)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ancho)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Ancho)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Alto)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Alto)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Alto)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Alto)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Grosor)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Grosor)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Grosor)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Grosor)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagenReferencia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImagenReferencia)
-        </dd>
-
-    </dl>
+        </dl>
+        <p>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.ModeloID }) |
+            @Html.ActionLink("Volver al Listado", "Index")
+        </p>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("EDITAR", "Edit", new { id = Model.ModeloID }) |
-    @Html.ActionLink("VOLVER A INICIO", "Index")
-</p>
+

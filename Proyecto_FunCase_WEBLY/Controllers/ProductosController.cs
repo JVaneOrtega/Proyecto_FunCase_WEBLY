@@ -17,7 +17,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // GET: Productos
         public ActionResult Index()
         {
-            return View(db.Productos.ToList());
+            return View(db.Productos.Include(p => p.Material).Include(p => p.Modelo).ToList());
         }
 
         // GET: Productos/Details/5
@@ -39,6 +39,8 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // GET: Productos/Create
         public ActionResult Create()
         {
+            ViewBag.MaterialID = new SelectList(db.Materiales, "MaterialID", "Nombre");
+            ViewBag.ModeloID = new SelectList(db.Modelos, "ModeloID", "Nombre");
             return View();
         }
 

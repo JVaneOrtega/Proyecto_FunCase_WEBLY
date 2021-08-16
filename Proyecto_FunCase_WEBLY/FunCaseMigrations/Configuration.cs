@@ -3,6 +3,7 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
     using IdentitySample.Models;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using Proyecto_FunCase_WEBLY.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -55,6 +56,40 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                     userAdmin = context.Users.Add(new ApplicationUser { Nombre = "Admin", Apellido1 = "A", Apellido2 = "D", Telefono = "4771234567", UserName = name, Email = name, EmailConfirmed = true, PasswordHash = hasher.HashPassword(password), SecurityStamp = Guid.NewGuid().ToString() });
                     context.UserRoles.Add(new IdentityUserRole { UserId = userAdmin.Id, RoleId = roleAdmin.Id });
                 }
+
+                context.Estados.Add(new Estado { Nombre = "Aguascalientes" });
+                context.Estados.Add(new Estado { Nombre = "Baja California" });
+                context.Estados.Add(new Estado { Nombre = "Baja California Sur" });
+                context.Estados.Add(new Estado { Nombre = "Campeche" });
+                context.Estados.Add(new Estado { Nombre = "Chiapas" });
+                context.Estados.Add(new Estado { Nombre = "Chihuahua" });
+                context.Estados.Add(new Estado { Nombre = "Ciudad de México" });
+                context.Estados.Add(new Estado { Nombre = "Coahuila" });
+                context.Estados.Add(new Estado { Nombre = "Colima" });
+                context.Estados.Add(new Estado { Nombre = "Durango" });
+                context.Estados.Add(new Estado { Nombre = "Estado de México" });
+                context.Estados.Add(new Estado { Nombre = "Guanajuato" });
+                context.Estados.Add(new Estado { Nombre = "Guerrero" });
+                context.Estados.Add(new Estado { Nombre = "Hidalgo" });
+                context.Estados.Add(new Estado { Nombre = "Jalisco" });
+                context.Estados.Add(new Estado { Nombre = "Michoacán" });
+                context.Estados.Add(new Estado { Nombre = "Morelos" });
+                context.Estados.Add(new Estado { Nombre = "Nayarit" });
+                context.Estados.Add(new Estado { Nombre = "Nuevo León" });
+                context.Estados.Add(new Estado { Nombre = "Oaxaca" });
+                context.Estados.Add(new Estado { Nombre = "Puebla" });
+                context.Estados.Add(new Estado { Nombre = "Querétaro" });
+                context.Estados.Add(new Estado { Nombre = "Quintana Roo" });
+                context.Estados.Add(new Estado { Nombre = "San Luis Potosí" });
+                context.Estados.Add(new Estado { Nombre = "Sinaloa" });
+                context.Estados.Add(new Estado { Nombre = "Sonora" });
+                context.Estados.Add(new Estado { Nombre = "Tabasco" });
+                context.Estados.Add(new Estado { Nombre = "Tamaulipas" });
+                context.Estados.Add(new Estado { Nombre = "Tlaxcala" });
+                context.Estados.Add(new Estado { Nombre = "Veracruz" });
+                context.Estados.Add(new Estado { Nombre = "Yucatán" });
+                context.Estados.Add(new Estado { Nombre = "Zacatecas" });
+
                 context.SaveChanges();
             }
             catch (DbEntityValidationException ex)

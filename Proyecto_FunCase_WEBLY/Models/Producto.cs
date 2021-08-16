@@ -17,7 +17,7 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Required]
         public double Total { get; set; }
         [Display(Name = "Estatus del Producto")]
-        public char Estatus { get; set; }
+        public bool Estatus { get; set; }
         [Required]
         public int Stock { get; set; }
         public int MaterialID { get; set; }

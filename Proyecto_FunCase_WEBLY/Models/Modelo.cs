@@ -9,12 +9,18 @@ namespace Proyecto_FunCase_WEBLY.Models
     public class Modelo
     {
         public int ModeloID { get; set; }
+        [Required]
         public string Nombre { get; set; }
+        [Required]
         public double Ancho { get; set; }
+        [Required]
         public double Alto { get; set; }
+        [Required]
         public double Grosor { get; set; }
         [Display(Name = "Imagen de Referencia")]
         public string ImagenReferencia { get; set; }
+        [Display(Name = "Estatus del Modelo")]
+        public bool Estatus { get; set; }
         [Display(Name = "Marca")]
         public int MarcaID { get; set; }
         public virtual Marca Marca { get; set; }

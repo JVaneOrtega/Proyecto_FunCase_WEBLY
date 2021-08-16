@@ -15,7 +15,7 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Required]
         public string Ruta { get; set; }
         [Display(Name = "Estatus de la Imagen")]
-        public char Estatus { get; set; }
+        public bool Estatus { get; set; }
         public int DesignerID { get; set; }
         public virtual Designer Designer { get; set; }
 

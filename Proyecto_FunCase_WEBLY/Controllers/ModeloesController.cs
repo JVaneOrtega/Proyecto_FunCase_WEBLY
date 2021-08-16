@@ -12,6 +12,7 @@ using Proyecto_FunCase_WEBLY.Models;
 
 namespace Proyecto_FunCase_WEBLY.Controllers
 {
+    [Authorize(Roles = "Empleado")]
     public class ModeloesController : Controller
     {
         private FunCaseModelContext db = new FunCaseModelContext();
@@ -149,7 +150,8 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Modelo modelo = db.Modelos.Find(id);
-            db.Modelos.Remove(modelo);
+            modelo.Estatus = false;
+            db.Entry(modelo).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

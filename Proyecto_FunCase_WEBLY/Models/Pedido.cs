@@ -11,9 +11,9 @@ namespace Proyecto_FunCase_WEBLY.Models
         public int PedidoID { get; set; }
         public double Total { get; set; }
         [Display(Name = "Estatus del Pedido")]
-        public char EstatusPedido { get; set; }
+        public string EstatusPedido { get; set; }
         [Display(Name = "Estatus del Pago")]
-        public char EstatusPago { get; set; }
+        public string EstatusPago { get; set; }
         public string Referencia { get; set; }
         public double Descuento { get; set; }
         public int MetodosPagoID { get; set; }

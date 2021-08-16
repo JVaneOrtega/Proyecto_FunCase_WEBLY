@@ -170,10 +170,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\DesignerController.cs" />
+    <Compile Include="Controllers\DireccionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImagenesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MaterialesController.cs" />
     <Compile Include="Controllers\ModeloesController.cs" />
+    <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
@@ -184,6 +187,18 @@
     <Compile Include="FunCaseMigrations\202108161903045_FunCaseAdjustment.cs" />
     <Compile Include="FunCaseMigrations\202108161903045_FunCaseAdjustment.Designer.cs">
       <DependentUpon>202108161903045_FunCaseAdjustment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunCaseMigrations\202108162156220_FunCaseAdjustment1.cs" />
+    <Compile Include="FunCaseMigrations\202108162156220_FunCaseAdjustment1.Designer.cs">
+      <DependentUpon>202108162156220_FunCaseAdjustment1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunCaseMigrations\202108162210070_FunCaseAdjustment2.cs" />
+    <Compile Include="FunCaseMigrations\202108162210070_FunCaseAdjustment2.Designer.cs">
+      <DependentUpon>202108162210070_FunCaseAdjustment2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunCaseMigrations\202108162317307_FunCaseAdjustment3.cs" />
+    <Compile Include="FunCaseMigrations\202108162317307_FunCaseAdjustment3.Designer.cs">
+      <DependentUpon>202108162317307_FunCaseAdjustment3.cs</DependentUpon>
     </Compile>
     <Compile Include="FunCaseMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -350,7 +365,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Direccion\" />
     <Folder Include="Views\Ejemplo\" />
+    <Folder Include="Views\Imagenes\" />
+    <Folder Include="Views\Pedidos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -363,6 +381,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FunCaseMigrations\202108161903045_FunCaseAdjustment.resx">
       <DependentUpon>202108161903045_FunCaseAdjustment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunCaseMigrations\202108162156220_FunCaseAdjustment1.resx">
+      <DependentUpon>202108162156220_FunCaseAdjustment1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunCaseMigrations\202108162210070_FunCaseAdjustment2.resx">
+      <DependentUpon>202108162210070_FunCaseAdjustment2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunCaseMigrations\202108162317307_FunCaseAdjustment3.resx">
+      <DependentUpon>202108162317307_FunCaseAdjustment3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

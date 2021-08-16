@@ -22,7 +22,7 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Display(Name = "Código Postal")]
         public string CodigoPostal { get; set; }
         [Display(Name = "Estatus de la Dirección")]
-        public char Estatus { get; set; }
+        public bool Estatus { get; set; }
 
         public int ClienteID { get; set; }
         public virtual Cliente Cliente { get; set; }
