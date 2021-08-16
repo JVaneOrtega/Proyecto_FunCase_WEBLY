@@ -14,7 +14,7 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Required]
         [Display(Name = "Valor Neto")]
         public double ValorNeto { get; set; }
-        public int DetallePedidosID { get; set; }
+        public int DetallesPedidoID { get; set; }
         public virtual DetallesPedido DetallesPedidos { get; set; }
 
         public Funda_Diseno()

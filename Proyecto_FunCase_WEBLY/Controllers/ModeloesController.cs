@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -49,10 +50,26 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ModeloID,Nombre,Ancho,Alto,Grosor,ImagenReferencia")] Modelo modelo)
+        public ActionResult Create(Modelo modelo)
         {
             if (ModelState.IsValid)
             {
+                string ruta = Path.Combine(Server.MapPath("~/Images/"+modelo.MarcaID));
+                if (!Directory.Exists(ruta))
+                {
+                    Directory.CreateDirectory(ruta);
+                }
+
+                foreach (string file in Request.Files)
+                {
+                    HttpPostedFileBase hpf = Request.Files[file] as HttpPostedFileBase;
+                    if (hpf.ContentLength == 0)
+                        continue;
+                    string savedFileName = Path.Combine(ruta, Path.GetFileName(hpf.FileName));
+                    hpf.SaveAs(savedFileName);
+                    modelo.ImagenReferencia = String.Concat("/Images/", modelo.MarcaID.ToString(),"/", hpf.FileName);
+                }
+
                 db.Modelos.Add(modelo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -74,6 +91,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.MarcaID = new SelectList(db.Marcas, "MarcaID", "Nombre");
             return View(modelo);
         }
 
@@ -82,10 +100,26 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ModeloID,Nombre,Ancho,Alto,Grosor,ImagenReferencia")] Modelo modelo)
+        public ActionResult Edit(Modelo modelo)
         {
             if (ModelState.IsValid)
             {
+                string ruta = Path.Combine(Server.MapPath("~/Images/" + modelo.MarcaID));
+                if (!Directory.Exists(ruta))
+                {
+                    Directory.CreateDirectory(ruta);
+                }
+
+                foreach (string file in Request.Files)
+                {
+                    HttpPostedFileBase hpf = Request.Files[file] as HttpPostedFileBase;
+                    if (hpf.ContentLength == 0)
+                        break;
+                    string savedFileName = Path.Combine(ruta, Path.GetFileName(hpf.FileName));
+                    hpf.SaveAs(savedFileName);
+                    modelo.ImagenReferencia = String.Concat("/Images/", modelo.MarcaID.ToString(), "/", hpf.FileName);
+                }
+
                 db.Entry(modelo).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
