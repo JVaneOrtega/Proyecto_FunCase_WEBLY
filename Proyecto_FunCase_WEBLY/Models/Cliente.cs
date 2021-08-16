@@ -15,7 +15,7 @@ namespace Proyecto_FunCase_WEBLY.Models
 
         [DataType(DataType.Date)]
         [Display(Name ="Fecha de Nacimiento")]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaNacimiento { get; set; }
         [Display(Name = "Estatus del Cliente")]
         public bool Estatus;
@@ -26,4 +26,5 @@ namespace Proyecto_FunCase_WEBLY.Models
 
         public virtual ICollection<Direccion> Direcciones { get; set; }
     }
+
 }

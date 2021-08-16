@@ -34,13 +34,13 @@
                         if (User.IsInRole("Diseñador"))
                         {
                             <li class="nav-item">@Html.ActionLink("Catalogo", "Index", "Productos", null, htmlAttributes: new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("Mi sección", "Index", "Designer", null, htmlAttributes: new { @class = "nav-link" })</li>
+                            <li class="nav-item">@Html.ActionLink("Mis datos", "Index", "Designer", null, htmlAttributes: new { @class = "nav-link" })</li>
                             <li class="nav-item">@Html.ActionLink("Mis imágenes", "Index", "Designer", null, htmlAttributes: new { @class = "nav-link" })</li>
                         }
                         else if (User.IsInRole("Cliente"))
                         {
                             <li class="nav-item">@Html.ActionLink("Catalogo", "Index", "Productos", null, htmlAttributes: new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("Mi sección", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
+                            <li class="nav-item">@Html.ActionLink("Mis datos", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
                             <li class="nav-item">@Html.ActionLink("Mis compras", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
                         }
                         else if (User.IsInRole("Admin"))

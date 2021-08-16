@@ -21,8 +21,6 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Required]
         [Display(Name = "Código Postal")]
         public string CodigoPostal { get; set; }
-        [Display(Name = "Dirección de Envío")]
-        public char esDireccionEnvio { get; set; }
         public virtual Cliente Cliente { get; set; }
         public virtual Estado Estado { get; set; }
     }

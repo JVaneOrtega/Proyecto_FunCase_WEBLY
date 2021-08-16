@@ -6,16 +6,59 @@
 
 @if (User.IsInRole("Diseñador"))
 {
-    var Designer = Model.ToList().Where(c => c.User.UserName == User.Identity.Name).FirstOrDefault();
-    if (Designer == null)
-    {
-        <script>window.location.href = "@Url.Action("Contact", "Contact", "Home")"</script>
-    }
+    <h2>Mis datos</h2>
 
-    <div class="list-group">
-        @Html.ActionLink("Ver perfil", "Details", new { id = Designer.DesignerID }, htmlAttributes: new { @class = "list-group-item" })
-        @Html.ActionLink("Cambiar mi perfil", "Edit", new { id = Designer.DesignerID }, htmlAttributes: new { @class = "list-group-item" })"
+    <div class="row">
+        <div class="col-lg-6 col-md-4 col-sm-4" id="opciones">
+            <div class="list-group">
+                <a onclick="MostrarPerfil()" class="list-group-item" id="buttonMostrar">
+                    Ver mi perfil
+                </a>
+                <a onclick="EditarPerfil()" class="list-group-item" id="buttonEditar">
+                    Cambiar mi perfil
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-8 col-sm-8" id="contenido">
+            <div id="edit" style="display:none">
+                @Html.Partial("_EditProfile", (Proyecto_FunCase_WEBLY.Models.Designer)Model.First())
+            </div>
+            <div id="show" style="display:block">
+                @Html.Partial("_Profile", (Proyecto_FunCase_WEBLY.Models.Designer)Model.First())
+            </div>
+        </div>
     </div>
+
+    <input type="hidden" value="@ViewBag.Initial" id="initial" />
+
+
+    @section scripts
+    {
+        <script>
+            const MostrarPerfil = () => {
+                document.getElementById("show").style.display = "block";
+                document.getElementById("edit").style.display = "none";
+                document.getElementById("buttonMostrar").classList.add("active");
+                document.getElementById("buttonEditar").classList.remove("active");
+            }
+
+            const EditarPerfil = () => {
+                document.getElementById("show").style.display = "none";
+                document.getElementById("edit").style.display = "block";
+                document.getElementById("buttonEditar").classList.add("active");
+                document.getElementById("buttonMostrar").classList.remove("active");
+            }
+
+            window.onload = () => {
+                var initial = document.getElementById("initial").value;
+                if (initial == 0) {
+                    MostrarPerfil();
+                } else {
+                    EditarPerfil();
+                }
+            }
+        </script>
+    }
 }
 else if (User.IsInRole("Admin") || User.IsInRole("Empleado"))
 {

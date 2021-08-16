@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -15,6 +16,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // GET: Cliente
         public ActionResult Index()
         {
+            ViewBag.Initial = 0;
             return View(db.Clientes.ToList()); ;
         }
 
@@ -66,7 +68,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             {
                 return View();
             }
-        }*/
+        }
 
         // GET: Cliente/Edit/5
         [Authorize(Roles = "Admin,Empleado")]
@@ -80,7 +82,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             Cliente cliente = db.Clientes.Find(id);
 
             return View(cliente);
-        }
+        }*/
 
         [Authorize(Roles = "Cliente")]
         public ActionResult EditProfile(int? id)
@@ -97,11 +99,64 @@ namespace Proyecto_FunCase_WEBLY.Controllers
 
         // POST: Cliente/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(Cliente cliente)
         {
             try
             {
-                // TODO: Add update logic here
+                Cliente objCliente = db.Clientes.Find(cliente.ClienteID);
+                ApplicationUser userCliente = db.Users.Find(cliente.UserId);
+
+                userCliente.Nombre = cliente.User.Nombre;
+                userCliente.Apellido1 = cliente.User.Apellido1;
+                userCliente.Apellido2 = cliente.User.Apellido2;
+                userCliente.Telefono = cliente.User.Telefono;
+                userCliente.Email = cliente.User.Email;
+
+                db.Entry(userCliente).State = EntityState.Modified;
+                db.SaveChanges();
+
+                objCliente.FechaNacimiento = cliente.FechaNacimiento;
+                objCliente.User = userCliente;
+
+                db.Entry(objCliente).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return View("Index", db.Clientes.ToList());
+            }
+            catch
+            {
+                var clientes = new List<Cliente>();
+                clientes.Add(cliente);
+                ViewBag.Initial = 1;
+                return View("Index" , clientes);
+            }
+        }
+
+        // POST: Cliente/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ClienteID,UserId,Nombre,Apellido1,Apellido2,Telefono,Email,FechaNacimiento")] Cliente cliente)
+        {
+            try
+            {
+                Cliente objCliente = db.Clientes.Find(cliente.ClienteID);
+                ApplicationUser userCliente = db.Users.Find(cliente.UserId);
+
+                userCliente.Nombre = cliente.User.Nombre;
+                userCliente.Apellido1 = cliente.User.Apellido1;
+                userCliente.Apellido2 = cliente.User.Apellido2;
+                userCliente.Telefono = cliente.User.Telefono;
+                userCliente.Email = cliente.User.Email;
+
+                db.Entry(userCliente).State = EntityState.Modified;
+                db.SaveChanges();
+                
+                objCliente.FechaNacimiento = cliente.FechaNacimiento;
+                objCliente.User = userCliente;
+
+                db.Entry(objCliente).State = EntityState.Modified;
+                db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
