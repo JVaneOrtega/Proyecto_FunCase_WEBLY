@@ -48,7 +48,7 @@
                 const string name = "admin@example.com";
                 const string password = "Admin@123456";
                 var hasher = new PasswordHasher();
-                userAdmin = context.Users.Add(new ApplicationUser { Nombre = "Admin", Apellido1 = "", Apellido2 = "", UserName = name, Email = name, EmailConfirmed = true, PasswordHash = hasher.HashPassword(password), SecurityStamp = Guid.NewGuid().ToString() });
+                userAdmin = context.Users.Add(new ApplicationUser { Nombre = "Admin", Apellido1 = "", Apellido2 = "", Telefono = "", UserName = name, Email = name, EmailConfirmed = true, PasswordHash = hasher.HashPassword(password), SecurityStamp = Guid.NewGuid().ToString() });
                 context.UserRoles.Add(new IdentityUserRole { UserId = userAdmin.Id, RoleId = roleAdmin.Id });
             }
         }
