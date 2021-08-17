@@ -31,7 +31,7 @@ namespace Proyecto_FunCase_WEBLY.Models
         public virtual DbSet<ApplicationUser> Users { get; set; }
         public virtual DbSet<Cliente> Clientes { get; set; }
         public virtual DbSet<Designer> Designers { get; set; }
-        public virtual DbSet<DetallesPedido> DetallePedidos { get; set; }
+        //public virtual DbSet<DetallesPedido> DetallePedidos { get; set; }
         public virtual DbSet<Direccion> Direcciones { get; set; }
         public virtual DbSet<Estado> Estados { get; set; }
         public virtual DbSet<Funda_Diseno> Funda_Disenos { get; set; }
@@ -42,7 +42,7 @@ namespace Proyecto_FunCase_WEBLY.Models
         public virtual DbSet<MetodosPago> MetodosPagos { get; set; }
         public virtual DbSet<Modelo> Modelos { get; set; }
         public virtual DbSet<Pedido> Pedidos { get; set; }
-        public virtual DbSet<Producto> Productos { get; set; }
+        //public virtual DbSet<Producto> Productos { get; set; }
 
     }
 }
