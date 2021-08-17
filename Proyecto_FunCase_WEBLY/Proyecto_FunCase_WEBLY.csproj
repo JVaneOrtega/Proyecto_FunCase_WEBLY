@@ -279,6 +279,7 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -366,10 +367,13 @@
     <Content Include="Views\Cliente\_EditProfile.cshtml" />
     <Content Include="Views\Designer\_Profile.cshtml" />
     <Content Include="Views\Designer\_EditProfile.cshtml" />
+    <Content Include="Views\Direccion\Index.cshtml" />
+    <Content Include="Views\Direccion\Create.cshtml" />
+    <Content Include="Views\Direccion\Details.cshtml" />
+    <Content Include="Views\Direccion\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Direccion\" />
     <Folder Include="Views\Ejemplo\" />
     <Folder Include="Views\Imagenes\" />
     <Folder Include="Views\Pedidos\" />
