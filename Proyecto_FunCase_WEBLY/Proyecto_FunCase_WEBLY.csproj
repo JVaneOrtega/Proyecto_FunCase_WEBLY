@@ -367,11 +367,14 @@
     <Content Include="Views\Direccion\Create.cshtml" />
     <Content Include="Views\Direccion\Details.cshtml" />
     <Content Include="Views\Direccion\Edit.cshtml" />
+    <Content Include="Views\Imagenes\Index.cshtml" />
+    <Content Include="Views\Imagenes\Create.cshtml" />
+    <Content Include="Views\Imagenes\Edit.cshtml" />
+    <Content Include="Views\Imagenes\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Ejemplo\" />
-    <Folder Include="Views\Imagenes\" />
     <Folder Include="Views\Pedidos\" />
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Proyecto_FunCase_WEBLY.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -149,44 +150,54 @@ namespace IdentitySample.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, Apellido1 = model.Apellido1, Apellido2 = model.Apellido2, Telefono = model.Telefono };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (ModelState.IsValid)
                 {
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    ViewBag.Link = callbackUrl;
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, Apellido1 = model.Apellido1, Apellido2 = model.Apellido2, Telefono = model.Telefono };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                        ViewBag.Link = callbackUrl;
 
-                    if (model.Tipo == "Cliente")
-                    {
-                        var roleUser = UserManager.GetRoles(user.Id);
-                        if(!roleUser.Contains("Cliente"))
+                        if (model.Tipo == "Cliente")
                         {
-                            var rolCliente = UserManager.AddToRole(user.Id, "Cliente");
-                            db.Clientes.Add(new Cliente { FechaNacimiento = System.DateTime.Today, UserId = user.Id });
-                            db.SaveChanges();
+                            var roleUser = UserManager.GetRoles(user.Id);
+                            if (!roleUser.Contains("Cliente"))
+                            {
+                                var rolCliente = UserManager.AddToRole(user.Id, "Cliente");
+                                db.Clientes.Add(new Cliente { FechaNacimiento = System.DateTime.Today, UserId = user.Id });
+                                db.SaveChanges();
+                            }
                         }
-                    } else
-                    {
-                        var roleUser = UserManager.GetRoles(user.Id);
-                        if (!roleUser.Contains("Diseñador"))
+                        else
                         {
-                            var rolDesigner = UserManager.AddToRole(user.Id, "Diseñador");
-                            db.Designers.Add(new Designer { NombrePresentacion = "", UserId = user.Id });
-                            db.SaveChanges();
+                            var roleUser = UserManager.GetRoles(user.Id);
+                            if (!roleUser.Contains("Diseñador"))
+                            {
+                                var rolDesigner = UserManager.AddToRole(user.Id, "Diseñador");
+                                db.Designers.Add(new Designer { NombrePresentacion = "", UserId = user.Id });
+                                db.SaveChanges();
+                            }
                         }
+
+                        return View("DisplayEmail");
                     }
-                    
-                    return View("DisplayEmail");
+                    AddErrors(result);
                 }
-                AddErrors(result);
+                return View(model);
             }
+            catch(Exception e)
+            {
+                return View(model);
+            }
+           
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+          
         }
 
         //

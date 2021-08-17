@@ -1,0 +1,44 @@
+﻿@model Proyecto_FunCase_WEBLY.Models.Imagen
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Imagen</h4>
+    <hr />
+    <dl class="dl-horizontal">
+   
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreImagen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreImagen)
+        </dd>
+
+        <dt>
+            Ilustración
+        </dt>
+
+        <dd>
+            
+            <img src="@Model.Ruta" height="300" class="mt-2"/>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estatus)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ImagenID }) |
+    @Html.ActionLink("Volver", "Index")
+</p>
