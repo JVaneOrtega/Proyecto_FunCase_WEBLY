@@ -18,6 +18,14 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Display(Name = "Estatus del Material")]
         public bool Estatus { get; set; }
 
+        public string NombreMaterial
+        {
+            get
+            {
+                return String.Format("{0} - {1}", Nombre, Color);
+            }
+        }
+
         public Material()
         {
             this.Productos = new HashSet<Producto>();

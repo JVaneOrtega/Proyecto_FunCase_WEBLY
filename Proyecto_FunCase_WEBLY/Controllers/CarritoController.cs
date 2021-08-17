@@ -63,7 +63,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                 string currentUserId = User.Identity.GetUserId();
                 Cliente cliente = db.Clientes.Single(c => c.UserId == currentUserId);
 
-                ViewBag.DireccionID = new SelectList(db.Direcciones.Where(d => d.ClienteID == cliente.ClienteID), "DireccionID", "Calle,NumExt");
+                ViewBag.DireccionID = new SelectList(db.Direcciones.Where(d => d.ClienteID == cliente.ClienteID), "DireccionID", "NombreDireccion");
                 ViewBag.MetodosPagoID = new SelectList(db.MetodosPagos, "MetodosPagoID", "Nombre");
                 ViewBag.Producto = 1;
             } else
@@ -82,44 +82,64 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                 List<CarritoItem> compras = (List<CarritoItem>)Session["carrito"];
                 if(compras != null && compras.Count > 0)
                 {
-
-                    string currentUserId = User.Identity.GetUserId();
-                    double total = compras.Sum(x => x.Producto.Total * x.Cantidad);
-
-                    pedido.ClienteID = db.Clientes.Where(c => c.UserId == currentUserId).FirstOrDefault().ClienteID;
-                    pedido.EstatusPedido = "Generado";
-                    pedido.EstatusPago = "Generado";
-                    pedido.Total = total;
-
-                    db.Pedidos.Add(pedido);
-                    db.SaveChanges();
-
-                    List<DetallesPedido> detalles = new List<DetallesPedido>();
-                    foreach(var compra in compras)
+                    try
                     {
-                        DetallesPedido dp = new DetallesPedido { ProductoID = compra.Producto.ProductoID,
-                                                                 PrecioUnitario = compra.Producto.Total,
-                                                                 Cantidad = compra.Cantidad,
-                                                                 PedidoID = pedido.PedidoID };
-                        db.DetallePedidos.Add(dp);
+                        string currentUserId = User.Identity.GetUserId();
+                        double total = compras.Sum(x => x.Producto.Total * x.Cantidad);
+
+                        pedido.ClienteID = db.Clientes.Where(c => c.UserId == currentUserId).FirstOrDefault().ClienteID;
+                        pedido.EstatusPedido = "Generado";
+                        pedido.EstatusPago = "Generado";
+                        pedido.Total = total;
+
+                        db.Pedidos.Add(pedido);
                         db.SaveChanges();
 
-                        Producto producto = db.Productos.Single(p => p.ProductoID == compra.Producto.ProductoID);
-                        producto.Stock -= compra.Cantidad;
-                        db.Entry(producto).State = System.Data.Entity.EntityState.Modified;
-                        db.SaveChanges();
+                        List<DetallesPedido> detalles = new List<DetallesPedido>();
+                        foreach (var compra in compras)
+                        {
+                            DetallesPedido dp = new DetallesPedido
+                            {
+                                ProductoID = compra.Producto.ProductoID,
+                                PrecioUnitario = compra.Producto.Total,
+                                Cantidad = compra.Cantidad,
+                                PedidoID = pedido.PedidoID
+                            };
+                            db.DetallePedidos.Add(dp);
+                            db.SaveChanges();
 
-                        Funda_Diseno fd = new Funda_Diseno { Imagen = compra.Imagen.Ruta,
-                                                             ValorNeto = compra.Producto.Total,
-                                                             DetallesPedidoID = dp.DetallesPedidoID };
-                        db.Funda_Disenos.Add(fd);
-                        db.SaveChanges();
+                            Producto producto = db.Productos.Single(p => p.ProductoID == compra.Producto.ProductoID);
+                            producto.Stock -= compra.Cantidad;
+                            db.Entry(producto).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
 
-                        Imagen_Diseno id = new Imagen_Diseno { ImagenID = compra.Imagen.ImagenID,
-                                                               Funda_DisenoID = fd.Funda_DisenoID };
+                            Funda_Diseno fd = new Funda_Diseno
+                            {
+                                Imagen = compra.Imagen.Ruta,
+                                ValorNeto = compra.Producto.Total,
+                                DetallesPedidoID = dp.DetallesPedidoID
+                            };
+                            db.Funda_Disenos.Add(fd);
+                            db.SaveChanges();
 
-                        db.Imagen_Disenos.Add(id);
-                        db.SaveChanges();
+                            Imagen_Diseno id = new Imagen_Diseno
+                            {
+                                ImagenID = compra.Imagen.ImagenID,
+                                Funda_DisenoID = fd.Funda_DisenoID
+                            };
+
+                            db.Imagen_Disenos.Add(id);
+                            db.SaveChanges();
+                        }
+                    } catch
+                    {
+                        string currentUserId = User.Identity.GetUserId();
+                        Cliente cliente = db.Clientes.Where(c => c.UserId == currentUserId).FirstOrDefault();
+                        ViewBag.DireccionID = new SelectList(db.Direcciones.Where(d => d.ClienteID == cliente.ClienteID), "DireccionID", "Calle,NumExt");
+                        ViewBag.MetodosPagoID = new SelectList(db.MetodosPagos, "MetodosPagoID", "Nombre");
+                        ViewBag.Producto = 1;
+                        ModelState.AddModelError("", "Debe tener una direcicón y un método de pago seleccionado");
+                        return View("ConfirmarPedido");
                     }
                     
                 }

@@ -1,5 +1,9 @@
 ﻿@model Proyecto_FunCase_WEBLY.Models.Producto
 
+@{ 
+    ViewBag.Title = "Crear";
+}
+
 @using (Html.BeginForm("Create", "Productos", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()

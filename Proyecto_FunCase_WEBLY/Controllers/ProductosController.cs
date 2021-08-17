@@ -42,7 +42,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // GET: Productos/Create
         public ActionResult Create()
         {
-            ViewBag.MaterialID = new SelectList(db.Materiales, "MaterialID", "Nombre");
+            ViewBag.MaterialID = new SelectList(db.Materiales, "MaterialID", "NombreMaterial");
             ViewBag.ModeloID = new SelectList(db.Modelos, "ModeloID", "Nombre");
             return View();
         }

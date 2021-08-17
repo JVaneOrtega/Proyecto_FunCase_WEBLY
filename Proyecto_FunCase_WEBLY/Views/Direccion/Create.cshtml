@@ -57,6 +57,14 @@
     </div>
 
     <div class="mb-3 row">
+        @Html.LabelFor(model => model.Ciudad, htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+        <div class="col-lg-7 col-md-8 col-sm-8">
+            @Html.EditorFor(model => model.Ciudad, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Ciudad, "", new { @class = "form-text text-danger" })
+        </div>
+    </div>
+
+    <div class="mb-3 row">
         @Html.LabelFor(model => model.EstadoID, "Estado", htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
         <div class="col-lg-7 col-md-8 col-sm-8">
             @Html.DropDownList("EstadoID", null, htmlAttributes: new { @class = "form-control" })

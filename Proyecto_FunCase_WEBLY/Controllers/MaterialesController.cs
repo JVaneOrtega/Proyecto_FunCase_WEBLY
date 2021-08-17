@@ -78,7 +78,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaterialID,Nombre,Color,Precio")] Material material)
+        public ActionResult Edit(Material material)
         {
             if (ModelState.IsValid)
             {

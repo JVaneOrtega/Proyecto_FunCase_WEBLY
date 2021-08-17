@@ -93,6 +93,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                 dir.Estatus = direccion.Estatus;
                 dir.NumeroExt = direccion.NumeroExt;
                 dir.NumeroInt = direccion.NumeroInt;
+                dir.Ciudad = direccion.Ciudad;
                 db.SaveChanges();
                 
 
