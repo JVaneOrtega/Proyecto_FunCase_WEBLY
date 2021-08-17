@@ -151,38 +151,47 @@ namespace IdentitySample.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, Apellido1 = model.Apellido1, Apellido2 = model.Apellido2, Telefono = model.Telefono };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                try
                 {
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    ViewBag.Link = callbackUrl;
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, Apellido1 = model.Apellido1, Apellido2 = model.Apellido2, Telefono = model.Telefono };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                        ViewBag.Link = callbackUrl;
 
-                    if (model.Tipo == "Cliente")
-                    {
-                        var roleUser = UserManager.GetRoles(user.Id);
-                        if(!roleUser.Contains("Cliente"))
+                        if (model.Tipo == "Cliente")
                         {
-                            var rolCliente = UserManager.AddToRole(user.Id, "Cliente");
-                            db.Clientes.Add(new Cliente { FechaNacimiento = System.DateTime.Today, UserId = user.Id });
-                            db.SaveChanges();
+                            var roleUser = UserManager.GetRoles(user.Id);
+                            if (!roleUser.Contains("Cliente"))
+                            {
+                                var rolCliente = UserManager.AddToRole(user.Id, "Cliente");
+                                db.Clientes.Add(new Cliente { FechaNacimiento = System.DateTime.Today, UserId = user.Id });
+                                db.SaveChanges();
+                            }
                         }
-                    } else
-                    {
-                        var roleUser = UserManager.GetRoles(user.Id);
-                        if (!roleUser.Contains("Diseñador"))
+                        else
                         {
-                            var rolDesigner = UserManager.AddToRole(user.Id, "Diseñador");
-                            db.Designers.Add(new Designer { NombrePresentacion = "", UserId = user.Id });
-                            db.SaveChanges();
+                            var roleUser = UserManager.GetRoles(user.Id);
+                            if (!roleUser.Contains("Diseñador"))
+                            {
+                                var rolDesigner = UserManager.AddToRole(user.Id, "Diseñador");
+                                db.Designers.Add(new Designer { NombrePresentacion = "", UserId = user.Id });
+                                db.SaveChanges();
+                            }
                         }
+
+                        return View("DisplayEmail");
                     }
-                    
-                    return View("DisplayEmail");
+                    AddErrors(result);
+                } catch
+                {
+                    ModelState.AddModelError("", "El campo Teléfono debe tener 10 carácteres");
+                    return View(model);
                 }
-                AddErrors(result);
+                
             }
 
             // If we got this far, something failed, redisplay form

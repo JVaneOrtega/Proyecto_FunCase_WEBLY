@@ -55,7 +55,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         {
             if (ModelState.IsValid)
             {
-                string ruta = Path.Combine(Server.MapPath("~/Images/"+modelo.MarcaID));
+                string ruta = Path.Combine(Server.MapPath("~/Images/Modelos/"+modelo.MarcaID));
                 if (!Directory.Exists(ruta))
                 {
                     Directory.CreateDirectory(ruta);
@@ -68,7 +68,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                         continue;
                     string savedFileName = Path.Combine(ruta, Path.GetFileName(hpf.FileName));
                     hpf.SaveAs(savedFileName);
-                    modelo.ImagenReferencia = String.Concat("/Images/", modelo.MarcaID.ToString(),"/", hpf.FileName);
+                    modelo.ImagenReferencia = String.Concat("/Images/Modelos/", modelo.MarcaID.ToString(),"/", hpf.FileName);
                 }
 
                 db.Modelos.Add(modelo);
@@ -105,7 +105,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         {
             if (ModelState.IsValid)
             {
-                string ruta = Path.Combine(Server.MapPath("~/Images/" + modelo.MarcaID));
+                string ruta = Path.Combine(Server.MapPath("~/Images/Modelos/" + modelo.MarcaID));
                 if (!Directory.Exists(ruta))
                 {
                     Directory.CreateDirectory(ruta);
@@ -118,7 +118,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                         break;
                     string savedFileName = Path.Combine(ruta, Path.GetFileName(hpf.FileName));
                     hpf.SaveAs(savedFileName);
-                    modelo.ImagenReferencia = String.Concat("/Images/", modelo.MarcaID.ToString(), "/", hpf.FileName);
+                    modelo.ImagenReferencia = String.Concat("/Images/Modelos/", modelo.MarcaID.ToString(), "/", hpf.FileName);
                 }
 
                 db.Entry(modelo).State = EntityState.Modified;

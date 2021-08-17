@@ -22,7 +22,8 @@ namespace IdentitySample.Models
         [Display(Name = "Segundo Apellido")]
         public string Apellido2 { get; set; }
         [Required]
-        [MinLength(10)]
+        [Display(Name = "Teléfono")]
+        [MinLength(10),MaxLength(10)]
         public string Telefono { get; set; }
 
         public virtual ICollection<Cliente> Clientes { get; set; }

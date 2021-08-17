@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -49,8 +50,24 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductoID,ImagenFinal,Nombre,Total,Stock")] Producto producto)
+        public ActionResult Create(Producto producto)
         {
+            string ruta = Path.Combine(Server.MapPath("~/Images/Productos/" + producto.ProductoID));
+            if (!Directory.Exists(ruta))
+            {
+                Directory.CreateDirectory(ruta);
+            }
+
+            foreach (string file in Request.Files)
+            {
+                HttpPostedFileBase hpf = Request.Files[file] as HttpPostedFileBase;
+                if (hpf.ContentLength == 0)
+                    continue;
+                string savedFileName = Path.Combine(ruta, Path.GetFileName(hpf.FileName));
+                hpf.SaveAs(savedFileName);
+                producto.ImagenFinal = String.Concat("/Images/Productos/", producto.ProductoID.ToString(), "/", hpf.FileName);
+            }
+
             if (ModelState.IsValid)
             {
                 db.Productos.Add(producto);
@@ -82,8 +99,24 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductoID,ImagenFinal,Nombre,Total,Stock")] Producto producto)
+        public ActionResult Edit(Producto producto)
         {
+            string ruta = Path.Combine(Server.MapPath("~/Images/Productos/" + producto.ProductoID));
+            if (!Directory.Exists(ruta))
+            {
+                Directory.CreateDirectory(ruta);
+            }
+
+            foreach (string file in Request.Files)
+            {
+                HttpPostedFileBase hpf = Request.Files[file] as HttpPostedFileBase;
+                if (hpf.ContentLength == 0)
+                    break;
+                string savedFileName = Path.Combine(ruta, Path.GetFileName(hpf.FileName));
+                hpf.SaveAs(savedFileName);
+                producto.ImagenFinal = String.Concat("/Images/Productos/", producto.ProductoID.ToString(), "/", hpf.FileName);
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(producto).State = EntityState.Modified;

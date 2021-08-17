@@ -8,7 +8,7 @@ using Proyecto_FunCase_WEBLY.Models;
 
 namespace Proyecto_FunCase_WEBLY.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Cliente")]
     public class DireccionController : Controller
     {
         // GET: Direccion

@@ -46,6 +46,14 @@
                 @Html.DisplayFor(model => model.Grosor)
             </dd>
 
+            <dt>
+                Marca
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Marca.Nombre)
+            </dd>
+
         </dl>
         <p>
             @Html.ActionLink("Editar", "Edit", new { id = Model.ModeloID }) |

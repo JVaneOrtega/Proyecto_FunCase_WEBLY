@@ -204,6 +204,10 @@
     <Compile Include="FunCaseMigrations\202108170139572_FunCaseAdjustment4.Designer.cs">
       <DependentUpon>202108170139572_FunCaseAdjustment4.cs</DependentUpon>
     </Compile>
+    <Compile Include="FunCaseMigrations\202108170310389_FunCaseAdjustment5.cs" />
+    <Compile Include="FunCaseMigrations\202108170310389_FunCaseAdjustment5.Designer.cs">
+      <DependentUpon>202108170310389_FunCaseAdjustment5.cs</DependentUpon>
+    </Compile>
     <Compile Include="FunCaseMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -371,6 +375,7 @@
     <Content Include="Views\Direccion\Create.cshtml" />
     <Content Include="Views\Direccion\Details.cshtml" />
     <Content Include="Views\Direccion\Edit.cshtml" />
+    <Content Include="Views\Direccion\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -401,6 +406,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FunCaseMigrations\202108170139572_FunCaseAdjustment4.resx">
       <DependentUpon>202108170139572_FunCaseAdjustment4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunCaseMigrations\202108170310389_FunCaseAdjustment5.resx">
+      <DependentUpon>202108170310389_FunCaseAdjustment5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
