@@ -25,7 +25,7 @@
                 total += item.calcularTotal();
                 <tr>
                     <td>@item.Producto.Nombre</td>
-                    <td><img class="img-responsive" src="@Model.Imagen.Ruta" alt="Imagen" style="height: 150px;" /></td>
+                    <td><img class="img-responsive" src="@item.Imagen.Ruta" alt="Imagen" style="height: 150px;" /></td>
                     <td>@String.Format("{0:C}", item.Producto.Total)</td>
                     <td>@item.Cantidad</td>
                     <td>@String.Format("{0:C}", item.calcularTotal())</td>
@@ -41,5 +41,5 @@
         </tr>
     </tfoot>
 </table>
-@Html.ActionLink("Seguir Comprando", "IndexClientes", "Productos", null, null) |
+@Html.ActionLink("Seguir Comprando", "Index", "Productos", null, null) |
 @Html.ActionLink("Terminar Compra", "FinalizarPedido", "Carrito", null, null)
