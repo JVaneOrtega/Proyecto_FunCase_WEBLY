@@ -13,56 +13,99 @@ else
     <h2>Detalle del Pedido: @Model.PedidoID</h2>
 }
 
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <h3>Datos del pedido</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Pedido Realizado por</th>
+                    <th>@Model.Cliente.User.Nombre @Model.Cliente.User.Apellido1 @Model.Cliente.User.Apellido2</th>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <th>@Model.Total</th>
+                </tr>
+                <tr>
+                    <th>Estatus del Pedido</th>
+                    <th>@Model.EstatusPedido</th>
+                </tr>
+                <tr>
+                    <th>Metodo de pago</th>
+                    <th>@Model.MetodoPago.Nombre</th>
+                </tr>
+                <tr>
+                    <th>Estatus del Pago</th>
+                    <th>@Model.EstatusPago</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <h3>
+            Domicilio
+        </h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Calle:</th>
+                    <th>@Model.Direccion.Calle</th>
+                    <th>Num. Ext.:</th>
+                    <th>@Model.Direccion.NumeroExt</th>
+                </tr>
+                <tr>
+                    <th>Num. Int.:</th>
+                    <th>@Model.Direccion.Calle</th>
+                    <th>Colonia</th>
+                    <th>@Model.Direccion.Colonia</th>
+                </tr>
+                <tr>
+                    <th>Código Postal</th>
+                    <th>@Model.Direccion.CodigoPostal</th>
+                    <th>Ciudad</th>
+                    <th>@Model.Direccion.Ciudad</th>
+                <tr>
+                    <th>Estado</th>
+                    <th>@Model.Direccion.Estado.Nombre</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Pedido Realizado por</th>
-            <th>@Model.Cliente.User.Nombre @Model.Cliente.User.Apellido1 @Model.Cliente.User.Apellido2</th>
-        </tr>
-        <tr>
-            <th>Total</th>
-            <th>@Model.Total</th>
-        </tr>
-        <tr>
-            <th>Estatus del Pedido</th>
-            <th>@Model.EstatusPedido</th>
-        </tr>
-        <tr>
-            <th>Estatus del Pago</th>
-            <th>@Model.EstatusPago</th>
-        </tr>
-    </thead>
-</table>
 <h3>
     Detalles
 </h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Producto</th>
-            <th>Imagen</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.DetallesPedidos != null)
-        {
-            foreach (var detalle in Model.DetallesPedidos)
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Imagen</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.DetallesPedidos != null)
             {
-                <tr>
-                    <td>@detalle.Producto.Nombre</td>
-                    <td><img class="img-responsive" src="@detalle.Funda_Disenos.FirstOrDefault().Imagen" alt="Imagen del Producto" style="height: 250px" /></td>
-                    <td>@detalle.PrecioUnitario</td>
-                    <td>@detalle.Cantidad</td>
-                    <td>@(detalle.PrecioUnitario * detalle.Cantidad)</td>
-                </tr>
+                foreach (var detalle in Model.DetallesPedidos)
+                {
+                    <tr>
+                        <td>@detalle.Producto.Nombre</td>
+                        <td><img class="img-responsive" src="@detalle.Funda_Disenos.FirstOrDefault().Imagen" alt="Imagen del Producto" style="height: 250px" /></td>
+                        <td>@detalle.PrecioUnitario</td>
+                        <td>@detalle.Cantidad</td>
+                        <td>@(detalle.PrecioUnitario * detalle.Cantidad)</td>
+                    </tr>
+                }
             }
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
 
 <p>
     @Html.ActionLink("Volver al Listado", "Index")
