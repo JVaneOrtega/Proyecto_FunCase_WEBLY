@@ -14,7 +14,6 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Required]
         [Display(Name = "Num. Ext.")]
         public string NumeroExt { get; set; }
-        [Required]
         [Display(Name = "Num. Int.")]
         public string NumeroInt { get; set; }
         public string Colonia { get; set; }

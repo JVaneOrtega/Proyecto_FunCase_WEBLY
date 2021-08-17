@@ -22,10 +22,10 @@
         </div>
         <div class="col-lg-6 col-md-8 col-sm-8" id="contenido">
             <div id="edit" style="display:none">
-                @Html.Partial("_EditProfile", (Proyecto_FunCase_WEBLY.Models.Cliente)Model.First())
+                @Html.Partial("_EditProfile", (Proyecto_FunCase_WEBLY.Models.Cliente)Cliente)
             </div>
             <div id="show" style="display:block">
-                @Html.Partial("_Profile", (Proyecto_FunCase_WEBLY.Models.Cliente)Model.First())
+                @Html.Partial("_Profile", (Proyecto_FunCase_WEBLY.Models.Cliente)Cliente)
             </div>
         </div>
     </div>            

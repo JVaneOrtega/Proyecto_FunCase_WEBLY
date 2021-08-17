@@ -41,7 +41,7 @@
                         {
                             <li class="nav-item">@Html.ActionLink("Catalogo", "Index", "Productos", null, htmlAttributes: new { @class = "nav-link" })</li>
                             <li class="nav-item">@Html.ActionLink("Mis datos", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("Mis compras", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
+                            <li class="nav-item">@Html.ActionLink("Mis pedidos", "Index", "Pedido", null, htmlAttributes: new { @class = "nav-link" })</li>
                             <li class="nav-item">@Html.ActionLink("Mis direcciones", "Index", "Direccion", null, htmlAttributes: new { @class = "nav-link" })</li>
                         }
                         else if (User.IsInRole("Admin"))
