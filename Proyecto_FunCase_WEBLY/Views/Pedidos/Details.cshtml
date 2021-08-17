@@ -1,0 +1,125 @@
+﻿@model Proyecto_FunCase_WEBLY.Models.Pedido
+
+@{ 
+    ViewBag.Title = "Detalle de Pedido";
+}
+
+<h2>Detalle del Pedido: @Model.PedidoID</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Pedido Realizado por</th>
+            <th>@Model.Cliente.User.Nombre @Model.Cliente.User.Apellido1 @Model.Cliente.User.Apellido2</th>
+        </tr>
+        <tr>
+            <th>Total</th>
+            <th>@Model.Total</th>
+        </tr>
+        <tr>
+            <th>Estatus del Pedido</th>
+            <th>@Model.EstatusPedido</th>
+        </tr>
+        <tr>
+            <th>Estatus del Pago</th>
+            <th>@Model.EstatusPago</th>
+        </tr>
+    </thead>
+    </table>
+    <h3>
+        Detalles
+    </h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Imagen</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.DetallesPedidos != null) 
+        {
+            foreach (var detalle in Model.DetallesPedidos)
+            {
+                <tr>
+                    <td>@detalle.Producto.Nombre</td>
+                    <td><img class="img-responsive" src=@detalle.Funda_Disenos.Where(f => f.DetallesPedidoID == detalle.DetallesPedidoID).FirstOrDefault().Imagen 
+                             alt="Imagen del Producto" style="height: 250px"/></td>
+                    <td>@detalle.PrecioUnitario</td>
+                    <td>@detalle.Cantidad</td>
+                    <td>@(detalle.PrecioUnitario * detalle.Cantidad)</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div>
+    <h4>Pedido</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetodoPago.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetodoPago.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstatusPedido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstatusPedido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstatusPago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstatusPago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Referencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Referencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descuento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descuento)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PedidoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

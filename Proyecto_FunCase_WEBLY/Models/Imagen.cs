@@ -24,5 +24,7 @@ namespace Proyecto_FunCase_WEBLY.Models
             this.Imagen_Disenos = new HashSet<Imagen_Diseno>();
         }
         public virtual ICollection<Imagen_Diseno> Imagen_Disenos { get; set; }
+    
+        
     }
 }

@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\DesignerController.cs" />
     <Compile Include="Controllers\DireccionController.cs" />
@@ -214,6 +215,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\CarritoItem.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Designer.cs" />
     <Compile Include="Models\DetallesPedido.cs" />
@@ -380,12 +382,13 @@
     <Content Include="Views\Imagenes\Create.cshtml" />
     <Content Include="Views\Imagenes\Edit.cshtml" />
     <Content Include="Views\Imagenes\Details.cshtml" />
+    <Content Include="Views\Pedidos\Index.cshtml" />
+    <Content Include="Views\Pedidos\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Carrito\" />
     <Folder Include="Views\Ejemplo\" />
-	<Folder Include="Views\Imagenes\" />
-    <Folder Include="Views\Pedidos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

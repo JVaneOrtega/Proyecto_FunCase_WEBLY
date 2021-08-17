@@ -90,6 +90,8 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                 context.Estados.Add(new Estado { Nombre = "Yucatán" });
                 context.Estados.Add(new Estado { Nombre = "Zacatecas" });
 
+                context.MetodosPagos.Add(new MetodosPago { Nombre = "Stripe" });
+
                 context.SaveChanges();
             }
             catch (DbEntityValidationException ex)

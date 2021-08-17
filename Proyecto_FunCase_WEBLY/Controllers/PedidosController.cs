@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proyecto_FunCase_WEBLY.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,60 +9,17 @@ namespace Proyecto_FunCase_WEBLY.Controllers
 {
     public class PedidosController : Controller
     {
+        FunCaseModelContext db = new FunCaseModelContext();
         // GET: Pedidos
         public ActionResult Index()
         {
-            return View();
+            return View(db.Pedidos.ToList());
         }
 
         // GET: Pedidos/Details/5
         public ActionResult Details(int id)
         {
-            return View();
-        }
-
-        // GET: Pedidos/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Pedidos/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Pedidos/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Pedidos/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return View(db.Pedidos.Find(id));
         }
 
         // GET: Pedidos/Delete/5

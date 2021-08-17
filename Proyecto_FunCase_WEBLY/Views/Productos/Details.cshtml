@@ -1,50 +1,114 @@
-﻿@model Proyecto_FunCase_WEBLY.Models.Producto
+﻿@model Proyecto_FunCase_WEBLY.Models.ProductoDetalle
 
 @{
     ViewBag.Title = "Detalles";
 }
 
-<h2>DETALLES</h2>
+@if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Empleado")))
+{
+    <h2>Detalles.</h2>
 
-<div>
-    <h4>Producto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagenFinal)
-        </dt>
+    <div>
+        <h4>Producto</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Producto.ImagenFinal)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ImagenFinal)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Producto.ImagenFinal)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Producto.Nombre)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Producto.Nombre)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Total)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Producto.Total)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Total)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Producto.Total)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Stock)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Producto.Stock)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Stock)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Producto.Stock)
+            </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.ProductoID }) |
-    @Html.ActionLink("Regresar al Listado", "Index")
-</p>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Producto.ProductoID }) |
+        @Html.ActionLink("Volver al Listado", "Index")
+    </p> 
+ }
+else
+{
+
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <h2>@Model.Producto.Nombre</h2>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-4">
+                <img class="img-responsive" src="@Model.Producto.ImagenFinal" alt="Imagen del Producto" />
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-8">
+                <h3>Datos del Producto</h3>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <p><b>Nombre:</b> @Model.Producto.Nombre</p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <p><b>Modelo:</b> @Model.Producto.Modelo.Nombre</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <p><b>Material:</b> @Model.Producto.Material.Nombre</p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <p><b>Color:</b> @Model.Producto.Material.Color</p>
+                    </div>
+                </div>
+                <hr />
+                <h4>Imagen</h4>
+                <div class="mb-3 row">
+                    <label class="form-label col-lg-5 col-md-4 col-sm-4 col-form-label">Selecciona una imagen</label>
+                    <div class="col-lg-7 col-md-8 col-sm-8">
+                        <select id="Imagen" name="Imagen" class="form-control">
+                            @foreach (var imagen in Model.Imagenes)
+                            {
+                                <option value="@imagen.ImagenID">@imagen.NombreImagen</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <img class="img-responsive" src="@Model.Imagenes.FirstOrDefault().Ruta" alt="Imagen" style="height: 150px;" />
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <input type="hidden" id="idProducto" value="@Model.Producto.ProductoID" />
+                    <label class="form-label col-lg-3 col-md-3 col-sm-3 col-form-label">Cantidad:</label>
+                    <div class="col-lg-4 col-md-4 col-sm-4" id="cantidad">
+                        <input type="number" class="form-control numbers" min="0" step="1" value="1" />
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-3">
+                        <button class="agregar btn btn-primary">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

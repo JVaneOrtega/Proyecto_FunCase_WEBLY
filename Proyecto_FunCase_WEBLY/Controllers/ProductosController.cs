@@ -33,7 +33,9 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             {
                 return HttpNotFound();
             }
-            return View(producto);
+            List<Imagen> imagenes = db.Imagenes.ToList();
+            ProductoDetalle detalle = new ProductoDetalle(producto, imagenes);
+            return View(detalle);
         }
 
         [Authorize(Roles = "Empleado,Admin")]

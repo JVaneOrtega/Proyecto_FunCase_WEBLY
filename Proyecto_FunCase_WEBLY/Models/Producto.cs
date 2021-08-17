@@ -31,4 +31,16 @@ namespace Proyecto_FunCase_WEBLY.Models
         }
         public virtual ICollection<DetallesPedido> DetallesPedidos { get; set; }
     }
+
+    public class ProductoDetalle
+    {
+        public Producto Producto { get; set; }
+        public List<Imagen> Imagenes { get; set; }
+
+        public ProductoDetalle(Producto Producto, List<Imagen> Imagenes)
+        {
+            this.Producto = Producto;
+            this.Imagenes = Imagenes;
+        }
+    }
 }

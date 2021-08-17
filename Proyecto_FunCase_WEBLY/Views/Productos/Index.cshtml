@@ -1,35 +1,6 @@
 ﻿@model IEnumerable<Proyecto_FunCase_WEBLY.Models.Producto>
 
-@if (User.IsInRole("Cliente") || User.IsInRole("Diseñador"))
-{
-    ViewBag.Title = "Catálogo";
-    <h2>Catálogo.</h2>
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card">
-                    <img class="card-img-top img-responsive" src="@item.ImagenFinal" alt="Imagen del Producto" style="height: 250px;" />
-                    <div class="card-body">
-                        <h5 class="card-title">@item.Nombre</h5>
-                        <hr />
-                        <p class="card-text">@String.Format("{0:C}", item.Total)</p>
-                        <div class="row">
-                            <input type="hidden" id="idProducto" value="@item.ProductoID" />
-                            <div class="col-lg-5 col-md-5 col-sm-5" id="cantidad">
-                                <input type="number" class="form-control numbers" min="0" step="1" value="1" />
-                            </div>
-                            <div class="col-lg-5 col-md-5 col-sm-5">
-                                <button class="agregar btn btn-primary">Agregar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-}
-else if (User.IsInRole("Admin") || User.IsInRole("Empleado"))
+@if (User.IsInRole("Admin") || User.IsInRole("Empleado"))
 {
     ViewBag.Title = "Index";
     <h2>Productos.</h2>
@@ -78,4 +49,29 @@ else if (User.IsInRole("Admin") || User.IsInRole("Empleado"))
 
     </table>
 
+}
+else
+{
+    ViewBag.Title = "Catálogo";
+    <h2>Catálogo.</h2>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card">
+                    <img class="card-img-top img-responsive" src="@item.ImagenFinal" alt="Imagen del Producto" style="height: 250px;" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Nombre</h5>
+                        <hr />
+                        <p class="card-text">@String.Format("{0:C}", item.Total)</p>
+                        <div class="row">
+                            <div class="col-lg-5 col-md-5 col-sm-5">
+                                @Html.ActionLink("Agregar", "Details", new { id = item.ProductoID }, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 }
