@@ -238,6 +238,23 @@
     <Compile Include="Controllers\MarcasController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assetsPlantilla\css\main.css" />
+    <Content Include="Content\assetsPlantilla\css\tiny-slider.css" />
+    <Content Include="Content\assetsPlantilla\css\glightbox.min.css" />
+    <Content Include="Content\assetsPlantilla\css\animate.css" />
+    <Content Include="Content\assetsPlantilla\css\LineIcons.2.0.css" />
+    <Content Include="Content\assetsPlantilla\css\bootstrap.min.css" />
+    <Content Include="Content\assetsPlantilla\images\hero\app-overview.png" />
+    <Content Include="Content\assetsPlantilla\images\hero\img-wave.png" />
+    <Content Include="Content\assetsPlantilla\images\Logo.jpg" />
+    <Content Include="Content\assetsPlantilla\js\count-up.min.js" />
+    <Content Include="Content\assetsPlantilla\js\wow.min.js" />
+    <Content Include="Content\assetsPlantilla\js\tiny-slider.js" />
+    <Content Include="Content\assetsPlantilla\js\glightbox.min.js" />
+    <Content Include="Content\assetsPlantilla\js\imagesloaded.min.js" />
+    <Content Include="Content\assetsPlantilla\js\isotope.min.js" />
+    <Content Include="Content\assetsPlantilla\js\main.js" />
+    <Content Include="Content\assetsPlantilla\js\bootstrap.min.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -386,6 +403,8 @@
     <Content Include="Views\Pedidos\Details.cshtml" />
     <Content Include="Views\Carrito\AgregaCarrito.cshtml" />
     <Content Include="Views\Carrito\FinalizarPedido.cshtml" />
+    <Content Include="Views\Shared\_LayoutLanding.cshtml" />
+    <Content Include="Views\Home\Landing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
