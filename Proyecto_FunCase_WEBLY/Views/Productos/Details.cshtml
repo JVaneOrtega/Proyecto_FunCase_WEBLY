@@ -49,8 +49,8 @@
     <p>
         @Html.ActionLink("Editar", "Edit", new { id = Model.Producto.ProductoID }) |
         @Html.ActionLink("Volver al Listado", "Index")
-    </p> 
- }
+    </p>
+}
 else
 {
 
@@ -86,29 +86,74 @@ else
                         <select id="Imagen" name="Imagen" class="form-control">
                             @foreach (var imagen in Model.Imagenes)
                             {
-                                <option value="@imagen.ImagenID">@imagen.NombreImagen</option>
+                                <option value="@imagen.Ruta;@imagen.ImagenID">@imagen.NombreImagen</option>
                             }
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <img class="img-responsive" src="@Model.Imagenes.FirstOrDefault().Ruta" alt="Imagen" style="height: 150px;" />
+                        <img id="PreviewImagen" class="img-responsive" src="@Model.Imagenes.FirstOrDefault().Ruta" alt="Imagen" style="height: 150px;" />
                     </div>
                 </div>
                 <hr />
                 <div class="row">
                     <input type="hidden" id="idProducto" value="@Model.Producto.ProductoID" />
                     <label class="form-label col-lg-3 col-md-3 col-sm-3 col-form-label">Cantidad:</label>
-                    <div class="col-lg-4 col-md-4 col-sm-4" id="cantidad">
-                        <input type="number" class="form-control numbers" min="0" step="1" value="1" />
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <input type="number" class="form-control numbers" id="cantidad" min="0" step="1" value="1" />
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-3">
-                        <button class="agregar btn btn-primary">Agregar</button>
+                        <button class="agregar btn btn-primary" id="btnAgregar">Agregar</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    @section Scripts
+    {
+        <script>
+            $("#Imagen").on("change", function () {
+                let data = this.value.split(";");
+                let ruta = data[0];
+                $("#PreviewImagen").attr("src", ruta)
+            });
+
+            $("#btnAgregar").on("click", function (evemt) {
+                event.preventDefault();
+                var ProductoId = $("#idProducto").val();
+                var cantidad = $("#cantidad").val();
+                var ImagenId = $("#Imagen").val().split(";")[1];
+
+                $.ajax(
+                {
+                    url: "@Url.Action("AgregaCarrito", "Carrito")",
+                    data: { idProducto: ProductoId, idImagen: ImagenId, cantidad: cantidad },
+                    type: "POST",
+                    success: function (response) {
+                        window.location.href = "@Url.Action("AgregaCarrito", "Carrito")";
+                    },
+                        error: function (err, error) {
+                            alert(err.responseText);
+                    }
+                });
+            });
+
+            //Método de validación para el campo de cantidad
+            $(".numbers").keydown(function (e) {
+                //alert(e.keyCode);
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 40]) !== -1 ||
+                    (e.keyCode == 65 && e.ctrlkey === true) ||
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    return;
+                }
+
+                if ((e.shiftkey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 165)) {
+                    e.preventDefault();
+                }
+            });
+        </script>
+    }
 }
 

@@ -384,10 +384,11 @@
     <Content Include="Views\Imagenes\Details.cshtml" />
     <Content Include="Views\Pedidos\Index.cshtml" />
     <Content Include="Views\Pedidos\Details.cshtml" />
+    <Content Include="Views\Carrito\AgregaCarrito.cshtml" />
+    <Content Include="Views\Carrito\FinalizarPedido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Carrito\" />
     <Folder Include="Views\Ejemplo\" />
   </ItemGroup>
   <ItemGroup>

@@ -10,11 +10,12 @@ using Proyecto_FunCase_WEBLY.Models;
 
 namespace Proyecto_FunCase_WEBLY.Controllers
 {
+    [Authorize(Roles = "Diseñador")]
     public class ImagenesController : Controller
     {
         // GET: Imagenes
         private FunCaseModelContext db = new FunCaseModelContext();
-        [Authorize(Roles = "Diseñador")]
+        
         public ActionResult Index()
         {
 
