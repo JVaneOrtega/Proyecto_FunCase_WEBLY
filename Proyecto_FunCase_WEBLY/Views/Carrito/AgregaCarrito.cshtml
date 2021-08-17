@@ -29,7 +29,7 @@
                     <td>@String.Format("{0:C}", item.Producto.Total)</td>
                     <td>@item.Cantidad</td>
                     <td>@String.Format("{0:C}", item.calcularTotal())</td>
-                    <td>@Html.ActionLink("Eliminar", "Delete", "Carrito", new { id = item.Producto.ProductoID }, null)</td>
+                    <td>@Html.ActionLink("Eliminar", "Delete", "Carrito", new { idProducto = item.Producto.ProductoID, idImagen = item.Imagen.ImagenID }, null)</td>
                 </tr>
             }
         }
