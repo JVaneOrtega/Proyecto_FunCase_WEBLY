@@ -93,5 +93,11 @@ namespace Proyecto_FunCase_WEBLY.Controllers
 
             return -1;
         }
+
+        // GET: ProductoCarrito
+        public ActionResult IndexProducto()
+        {
+            return View(ce.Producto.ToList().OrderBy(x => x.Nombre));
+        }
     }
 }

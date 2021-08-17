@@ -22,7 +22,7 @@
         }
         @if (Session["carrito"] != null)
         {
-            foreach (var item in (List<Proyecto_FunCase_WEBLY.Models.CarritoItem>)Session["carrito"])
+            foreach (var item in Session["carrito"] as List<Proyecto_FunCase_WEBLY.Models.CarritoItem>)
             {
                 total += item.calcularTotal();
                 <tr>
@@ -43,6 +43,6 @@
         </tr>
     </tfoot>
 </table>
-@Html.ActionLink("Seguir Comprando", "Index", "Productos", null, null) |
-@Html.ActionLink("Terminar Compra", "FinalizarCompra", "Carrito", null, null)
+@Html.ActionLink("Seguir Comprando", "AgregaCarrito", "Carrito", null, null) |
+@Html.ActionLink("Terminar Compra", "FinalizarCompra", "Ventas", null, null)
 

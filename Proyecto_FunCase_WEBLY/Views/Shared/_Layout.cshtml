@@ -38,7 +38,7 @@
                     }
                     @if (Request.IsAuthenticated && User.IsInRole("Cliente"))
                     {
-                        <li>@Html.ActionLink("Comprar", "IndexClientes", "Productos")</li>
+                        <li>@Html.ActionLink("Comprar", "Index", "Productos")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

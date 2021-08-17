@@ -177,7 +177,6 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MaterialesController.cs" />
     <Compile Include="Controllers\ModeloesController.cs" />
-    <Compile Include="Controllers\ProductoCarritoController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
@@ -359,9 +358,11 @@
     <Content Include="Views\Productos\Details.cshtml" />
     <Content Include="Views\Productos\Edit.cshtml" />
     <Content Include="Views\Productos\Index.cshtml" />
-    <Content Include="Views\ProductoCarrito\Index.cshtml" />
     <Content Include="Views\Ventas\Index.cshtml" />
     <Content Include="Views\Carrito\AgregaCarrito.cshtml" />
+    <Content Include="Views\Ventas\DetalleVenta.cshtml" />
+    <Content Include="Views\Ventas\FinalizarCompra.cshtml" />
+    <Content Include="Views\Carrito\IndexProducto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
