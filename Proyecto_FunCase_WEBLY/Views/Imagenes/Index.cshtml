@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Proyecto_FunCase_WEBLY.Models.Imagen>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Crear Nueva", "Create")
+</p>
+<table class="table">
+    <tr>        
+        <th>
+            @Html.DisplayNameFor(model => model.NombreImagen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ruta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreImagen)
+        </td>
+        <td>            
+            <img class="img-responsive" src="@item.Ruta" height="300"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estatus)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ImagenID }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.ImagenID }) |
+         
+        </td>
+    </tr>
+}
+
+</table>
