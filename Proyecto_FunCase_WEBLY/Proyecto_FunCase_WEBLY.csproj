@@ -181,33 +181,13 @@
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
-    <Compile Include="FunCaseMigrations\202108161852173_FunCaseInitial.cs" />
-    <Compile Include="FunCaseMigrations\202108161852173_FunCaseInitial.Designer.cs">
-      <DependentUpon>202108161852173_FunCaseInitial.cs</DependentUpon>
+    <Compile Include="FunCaseMigrations\202108171948314_FunCaseInitial.cs" />
+    <Compile Include="FunCaseMigrations\202108171948314_FunCaseInitial.Designer.cs">
+      <DependentUpon>202108171948314_FunCaseInitial.cs</DependentUpon>
     </Compile>
-    <Compile Include="FunCaseMigrations\202108161903045_FunCaseAdjustment.cs" />
-    <Compile Include="FunCaseMigrations\202108161903045_FunCaseAdjustment.Designer.cs">
-      <DependentUpon>202108161903045_FunCaseAdjustment.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FunCaseMigrations\202108162156220_FunCaseAdjustment1.cs" />
-    <Compile Include="FunCaseMigrations\202108162156220_FunCaseAdjustment1.Designer.cs">
-      <DependentUpon>202108162156220_FunCaseAdjustment1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FunCaseMigrations\202108162210070_FunCaseAdjustment2.cs" />
-    <Compile Include="FunCaseMigrations\202108162210070_FunCaseAdjustment2.Designer.cs">
-      <DependentUpon>202108162210070_FunCaseAdjustment2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FunCaseMigrations\202108162317307_FunCaseAdjustment3.cs" />
-    <Compile Include="FunCaseMigrations\202108162317307_FunCaseAdjustment3.Designer.cs">
-      <DependentUpon>202108162317307_FunCaseAdjustment3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FunCaseMigrations\202108170139572_FunCaseAdjustment4.cs" />
-    <Compile Include="FunCaseMigrations\202108170139572_FunCaseAdjustment4.Designer.cs">
-      <DependentUpon>202108170139572_FunCaseAdjustment4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FunCaseMigrations\202108170310389_FunCaseAdjustment5.cs" />
-    <Compile Include="FunCaseMigrations\202108170310389_FunCaseAdjustment5.Designer.cs">
-      <DependentUpon>202108170310389_FunCaseAdjustment5.cs</DependentUpon>
+    <Compile Include="FunCaseMigrations\202108172020144_FunCaseAdjustment.cs" />
+    <Compile Include="FunCaseMigrations\202108172020144_FunCaseAdjustment.Designer.cs">
+      <DependentUpon>202108172020144_FunCaseAdjustment.cs</DependentUpon>
     </Compile>
     <Compile Include="FunCaseMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -244,9 +224,6 @@
     <Content Include="Content\assetsPlantilla\css\animate.css" />
     <Content Include="Content\assetsPlantilla\css\LineIcons.2.0.css" />
     <Content Include="Content\assetsPlantilla\css\bootstrap.min.css" />
-    <Content Include="Content\assetsPlantilla\images\hero\app-overview.png" />
-    <Content Include="Content\assetsPlantilla\images\hero\img-wave.png" />
-    <Content Include="Content\assetsPlantilla\images\Logo.jpg" />
     <Content Include="Content\assetsPlantilla\js\count-up.min.js" />
     <Content Include="Content\assetsPlantilla\js\wow.min.js" />
     <Content Include="Content\assetsPlantilla\js\tiny-slider.js" />
@@ -405,6 +382,7 @@
     <Content Include="Views\Carrito\FinalizarPedido.cshtml" />
     <Content Include="Views\Shared\_LayoutLanding.cshtml" />
     <Content Include="Views\Home\Landing.cshtml" />
+    <Content Include="Views\Carrito\ConfirmarPedido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -415,26 +393,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FunCaseMigrations\202108161852173_FunCaseInitial.resx">
-      <DependentUpon>202108161852173_FunCaseInitial.cs</DependentUpon>
+    <EmbeddedResource Include="FunCaseMigrations\202108171948314_FunCaseInitial.resx">
+      <DependentUpon>202108171948314_FunCaseInitial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108161903045_FunCaseAdjustment.resx">
-      <DependentUpon>202108161903045_FunCaseAdjustment.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108162156220_FunCaseAdjustment1.resx">
-      <DependentUpon>202108162156220_FunCaseAdjustment1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108162210070_FunCaseAdjustment2.resx">
-      <DependentUpon>202108162210070_FunCaseAdjustment2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108162317307_FunCaseAdjustment3.resx">
-      <DependentUpon>202108162317307_FunCaseAdjustment3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108170139572_FunCaseAdjustment4.resx">
-      <DependentUpon>202108170139572_FunCaseAdjustment4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108170310389_FunCaseAdjustment5.resx">
-      <DependentUpon>202108170310389_FunCaseAdjustment5.cs</DependentUpon>
+    <EmbeddedResource Include="FunCaseMigrations\202108172020144_FunCaseAdjustment.resx">
+      <DependentUpon>202108172020144_FunCaseAdjustment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

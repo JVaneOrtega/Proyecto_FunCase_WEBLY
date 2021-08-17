@@ -57,6 +57,16 @@
         </div>
     </div>
 
+    <div class="mb-3 row">
+        @Html.LabelFor(model => model.Estatus, htmlAttributes: new { @class = "form-label col-lg-3 col-md-4 col-sm-4 col-form-label" })
+        <div class="col-lg-3 col-md-2 col-sm-2">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Estatus)
+                @Html.ValidationMessageFor(model => model.Estatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
     <p class="form-text">Eliga un archivo solo si desea cambiar la imagen</p>
     <div class="mb-3 row">
         @Html.LabelFor(model => model.ImagenReferencia, htmlAttributes: new { @class = "form-label col-lg-4 col-md-4 col-sm-4 col-form-label" })

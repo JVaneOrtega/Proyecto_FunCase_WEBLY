@@ -18,18 +18,21 @@
         @Html.LabelFor(m => m.Nombre, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
         <div class="col-lg-7 col-md-8 col-sm-8">
             @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "form-text text-danger" })
         </div>
     </div>
     <div class="mb-3 row">
         @Html.LabelFor(m => m.Apellido1, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
         <div class="col-lg-7 col-md-8 col-sm-8">
             @Html.TextBoxFor(m => m.Apellido1, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Apellido1, "", new { @class = "form-text text-danger" })
         </div>
     </div>
     <div class="mb-3 row">
         @Html.LabelFor(m => m.Apellido2, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
         <div class="col-lg-7 col-md-8 col-sm-8">
             @Html.TextBoxFor(m => m.Apellido2, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Apellido2, "", new { @class = "form-text text-danger" })
         </div>
     </div>
     <div class="mb-3 row">
@@ -44,6 +47,7 @@
         @Html.LabelFor(m => m.Email, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
         <div class="col-lg-7 col-md-8 col-sm-8">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "form-text text-danger" })
         </div>
     </div>
     <div class="mb-3 row">
@@ -62,11 +66,11 @@
         <label class="col-md-2 control-label">
             Selecciona Rol del Usuario
         </label>
-        <div class="col-md-10">
+        <div class="col-lg-7 col-md-8 col-sm-8">
             @foreach (var item in (SelectList)ViewBag.RoleId)
             {
-                <input type="radio" name="SelectedRoles" value="@item.Value" class="radio-inline" />
-                @Html.Label(item.Value, new { @class = "form-label" })
+                <input type="radio" name="SelectedRoles" value="@item.Value" class="form-check-input" />
+                @Html.Label(item.Value, new { @class = "form-check-label" })
             }
         </div>
     </div>

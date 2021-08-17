@@ -54,8 +54,10 @@ namespace IdentitySample.Controllers
         public async Task<ActionResult> Index()
         {
             var roleCliente = RoleManager.Roles.Single(r => r.Name == "Cliente");
+            var roleD = RoleManager.Roles.Single(r => r.Name == "Diseñador");
             var users = UserManager.Users.Where(u => u.Roles.Contains(u.Roles.Where(r => r.RoleId == roleCliente.Id).FirstOrDefault()));
-            return View(await UserManager.Users.Except(users).ToListAsync());
+            var usersD = UserManager.Users.Where(u => u.Roles.Contains(u.Roles.Where(r => r.RoleId == roleD.Id).FirstOrDefault()));
+            return View(await UserManager.Users.Except(users).Except(usersD).ToListAsync());
         }
 
         //
@@ -118,7 +120,7 @@ namespace IdentitySample.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewBag.RoleId = new SelectList(RoleManager.Roles, "Name", "Name");
+            ViewBag.RoleId = new SelectList(await RoleManager.Roles.Where(r => r.Name == "Admin" || r.Name == "Empleado").ToListAsync(), "Name", "Name");
             return View();
         }
 
@@ -139,6 +141,7 @@ namespace IdentitySample.Controllers
 
             var userRoles = await UserManager.GetRolesAsync(user.Id);
 
+            ViewBag.RoleId = new SelectList(await RoleManager.Roles.Where(r => r.Name == "Admin" || r.Name == "Empleado").ToListAsync(), "Name", "Name");
             return View(new EditUserViewModel()
             {
                 Id = user.Id,

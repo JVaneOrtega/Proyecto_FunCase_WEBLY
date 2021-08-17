@@ -150,7 +150,8 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Producto producto = db.Productos.Find(id);
-            db.Productos.Remove(producto);
+            producto.Estatus = false;
+            db.Entry(producto).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

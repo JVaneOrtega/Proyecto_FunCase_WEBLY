@@ -26,9 +26,10 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                         DireccionID = c.Int(nullable: false, identity: true),
                         Calle = c.String(nullable: false),
                         NumeroExt = c.String(nullable: false),
-                        NumeroInt = c.String(nullable: false),
+                        NumeroInt = c.String(),
                         Colonia = c.String(),
                         CodigoPostal = c.String(nullable: false),
+                        Estatus = c.Boolean(nullable: false),
                         ClienteID = c.Int(nullable: false),
                         EstadoID = c.Int(nullable: false),
                     })
@@ -53,16 +54,21 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                     {
                         PedidoID = c.Int(nullable: false, identity: true),
                         Total = c.Double(nullable: false),
+                        EstatusPedido = c.String(),
+                        EstatusPago = c.String(),
                         Referencia = c.String(),
                         Descuento = c.Double(nullable: false),
                         MetodosPagoID = c.Int(nullable: false),
                         ClienteID = c.Int(nullable: false),
+                        DireccionID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.PedidoID)
                 .ForeignKey("dbo.Clientes", t => t.ClienteID, cascadeDelete: true)
+                .ForeignKey("dbo.Direccions", t => t.DireccionID, cascadeDelete: false)
                 .ForeignKey("dbo.MetodosPagoes", t => t.MetodosPagoID, cascadeDelete: true)
                 .Index(t => t.MetodosPagoID)
-                .Index(t => t.ClienteID);
+                .Index(t => t.ClienteID)
+                .Index(t => t.DireccionID);
             
             CreateTable(
                 "dbo.DetallesPedidoes",
@@ -114,6 +120,7 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                         ImagenID = c.Int(nullable: false, identity: true),
                         NombreImagen = c.String(nullable: false),
                         Ruta = c.String(nullable: false),
+                        Estatus = c.Boolean(nullable: false),
                         DesignerID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ImagenID)
@@ -140,7 +147,7 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                         Nombre = c.String(nullable: false),
                         Apellido1 = c.String(nullable: false),
                         Apellido2 = c.String(),
-                        Telefono = c.String(nullable: false),
+                        Telefono = c.String(nullable: false, maxLength: 10),
                         Email = c.String(),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -205,6 +212,7 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                         ImagenFinal = c.String(nullable: false),
                         Nombre = c.String(nullable: false),
                         Total = c.Double(nullable: false),
+                        Estatus = c.Boolean(nullable: false),
                         Stock = c.Int(nullable: false),
                         MaterialID = c.Int(nullable: false),
                         ModeloID = c.Int(nullable: false),
@@ -221,8 +229,10 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                     {
                         MaterialID = c.Int(nullable: false, identity: true),
                         Nombre = c.String(nullable: false),
+                        TieneRelieve = c.Boolean(nullable: false),
                         Color = c.String(),
                         Precio = c.Double(nullable: false),
+                        Estatus = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.MaterialID);
             
@@ -231,11 +241,12 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                 c => new
                     {
                         ModeloID = c.Int(nullable: false, identity: true),
-                        Nombre = c.String(),
+                        Nombre = c.String(nullable: false),
                         Ancho = c.Double(nullable: false),
                         Alto = c.Double(nullable: false),
                         Grosor = c.Double(nullable: false),
                         ImagenReferencia = c.String(),
+                        Estatus = c.Boolean(nullable: false),
                         MarcaID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ModeloID)
@@ -247,7 +258,8 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                 c => new
                     {
                         MarcaID = c.Int(nullable: false, identity: true),
-                        Nombre = c.String(),
+                        Nombre = c.String(nullable: false),
+                        Estatus = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.MarcaID);
             
@@ -256,7 +268,8 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
                 c => new
                     {
                         MetodosPagoID = c.Int(nullable: false, identity: true),
-                        Nombre = c.String(),
+                        Nombre = c.String(nullable: false),
+                        Estatus = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.MetodosPagoID);
             
@@ -275,6 +288,7 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
         {
             DropForeignKey("dbo.AspNetUserRoles", "IdentityRole_Id", "dbo.AspNetRoles");
             DropForeignKey("dbo.Pedidoes", "MetodosPagoID", "dbo.MetodosPagoes");
+            DropForeignKey("dbo.Pedidoes", "DireccionID", "dbo.Direccions");
             DropForeignKey("dbo.Productoes", "ModeloID", "dbo.Modeloes");
             DropForeignKey("dbo.Modeloes", "MarcaID", "dbo.Marcas");
             DropForeignKey("dbo.Productoes", "MaterialID", "dbo.Materials");
@@ -306,6 +320,7 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
             DropIndex("dbo.Funda_Diseno", new[] { "DetallesPedidoID" });
             DropIndex("dbo.DetallesPedidoes", new[] { "PedidoID" });
             DropIndex("dbo.DetallesPedidoes", new[] { "ProductoID" });
+            DropIndex("dbo.Pedidoes", new[] { "DireccionID" });
             DropIndex("dbo.Pedidoes", new[] { "ClienteID" });
             DropIndex("dbo.Pedidoes", new[] { "MetodosPagoID" });
             DropIndex("dbo.Direccions", new[] { "EstadoID" });

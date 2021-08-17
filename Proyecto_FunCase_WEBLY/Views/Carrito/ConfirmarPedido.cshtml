@@ -1,0 +1,86 @@
+﻿@model Proyecto_FunCase_WEBLY.Models.Pedido
+@{
+    ViewBag.Title = "Confirmar Pedidio";
+}
+
+@if (ViewBag.Productos != 0)
+{
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <h2>Mi Carrito</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Imagen</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        double total = 0;
+                    }
+                    @if (Session["carrito"] != null)
+                    {
+                        foreach (var item in Session["carrito"] as List<Proyecto_FunCase_WEBLY.Models.CarritoItem>)
+                        {
+                            total += item.calcularTotal();
+                            <tr>
+                                <td>@item.Producto.Nombre</td>
+                                <td><img class="img-responsive" src="@item.Imagen.Ruta" alt="Imagen" style="height: 150px;" /></td>
+                                <td>@String.Format("{0:C}", item.Producto.Total)</td>
+                                <td>@item.Cantidad</td>
+                                <td>@String.Format("{0:C}", item.calcularTotal())</td>
+                                <td>@Html.ActionLink("Eliminar", "Delete", "Carrito", new { idProducto = item.Producto.ProductoID, idImagen = item.Imagen.ImagenID }, null)</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="4">Total</th>
+                        <th>@String.Format("{0:C}", total)</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            @using (Html.BeginForm("FinalizarPedido", "Carrito", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>Datos del Pedido</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="mb-3 row">
+                        @Html.LabelFor(model => model.MetodosPagoID, "Metodos de Pago", htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+                        <div class="col-lg-7 col-md-8 col-sm-8">
+                            @Html.DropDownList("MetodosPagoID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MetodosPagoID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        @Html.LabelFor(model => model.DireccionID, "Dirección de Envío", htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+                        <div class="col-lg-7 col-md-8 col-sm-8">
+                            @Html.DropDownList("DireccionID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DireccionID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Pedir</button>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <h2>Agregue productos para realizar la compra</h2>
+    <p>@Html.ActionLink("Comprar", "Index", "Productos", null, null)</p>
+
+}

@@ -2,21 +2,17 @@
 <html class="no-js" lang="zxx">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Página de Venta de Fundas" />
+    <meta name="author" content="WEBLY" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Massive - Multipurpose HTML Template.</title>
+    <title>@ViewBag.Title - WEBLY</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
 
-
     <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="~/Content/assetsPlantilla/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Content/assetsPlantilla/css/LineIcons.2.0.css" />
-    <link rel="stylesheet" href="~/Content/assetsPlantilla/css/animate.css" />
-    <link rel="stylesheet" href="~/Content/assetsPlantilla/css/tiny-slider.css" />
-    <link rel="stylesheet" href="~/Content/assetsPlantilla/css/glightbox.min.css" />
-    <link rel="stylesheet" href="~/Content/assetsPlantilla/css/main.css" />
+    @Styles.Render("~/Plantilla/css")
 </head>
 <body>
     <!--[if lte IE 9]>
@@ -44,8 +40,8 @@
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg">
                             <a class="navbar-brand logo" href="index.html">
-                                <img class="logo1" src="~/Content/assetsPlantilla/images/Logo.jpg" alt="Logo">
-                                <img class="logo2" src="~/Content/assetsPlantilla/images/Logo.jpg" alt="Logo">
+                                <img class="logo1" src="https://res.cloudinary.com/dj2f7ngpv/image/upload/v1629227087/vane/Logo_hc6hth.jpg" alt="Logo" style="width: 50px;">
+                                <img class="logo2" src="https://res.cloudinary.com/dj2f7ngpv/image/upload/v1629227087/vane/Logo_hc6hth.jpg" alt="Logo" style="width: 50px;">
 
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,19 +59,18 @@
                                     {
                                         if (User.IsInRole("Diseñador"))
                                         {
-                                            <li class="nav-item">@Html.ActionLink("Catalogo", "Index", "Productos", null, htmlAttributes: new { @class = "nav-link" })</li>
                                             <li class="nav-item">@Html.ActionLink("Mis datos", "Index", "Designer", null, htmlAttributes: new { @class = "nav-link" })</li>
                                             <li class="nav-item">@Html.ActionLink("Mis imágenes", "Index", "Imagenes", null, htmlAttributes: new { @class = "nav-link" })</li>
                                         }
                                         else if (User.IsInRole("Cliente"))
                                         {
-                                            <li class="nav-item">@Html.ActionLink("Catalogo", "Index", "Productos", null, htmlAttributes: new { @class = "nav-link" })</li>
                                             <li class="nav-item">@Html.ActionLink("Mis datos", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
-                                            <li class="nav-item">@Html.ActionLink("Mis compras", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                            <li class="nav-item">@Html.ActionLink("Mis pedidos", "Index", "Pedidos", null, htmlAttributes: new { @class = "nav-link" })</li>
                                             <li class="nav-item">@Html.ActionLink("Mis direcciones", "Index", "Direccion", null, htmlAttributes: new { @class = "nav-link" })</li>
                                         }
                                         else if (User.IsInRole("Admin"))
                                         {
+                                            <li class="nav-item">@Html.ActionLink("Diseñadores", "Index", "Designer", null, htmlAttributes: new { @class = "nav-link" })</li>
                                             <li class="nav-item">@Html.ActionLink("Clientes", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
                                             <li class="nav-item">@Html.ActionLink("Usuarios", "Index", "UsersAdmin", null, htmlAttributes: new { @class = "nav-link" })</li>
                                             <li class="nav-item">@Html.ActionLink("Roles", "Index", "RolesAdmin", null, htmlAttributes: new { @class = "nav-link" })</li>
@@ -85,11 +80,11 @@
                                             <li class="nav-item">@Html.ActionLink("Marcas", "Index", "Marcas", null, htmlAttributes: new { @class = "nav-link" })</li>
                                             <li class="nav-item">@Html.ActionLink("Modelos", "Index", "Modeloes", null, htmlAttributes: new { @class = "nav-link" })</li>
                                             <li class="nav-item">@Html.ActionLink("Materiales", "Index", "Materiales", null, htmlAttributes: new { @class = "nav-link" })</li>
-                                            <li class="nav-item">@Html.ActionLink("Productos", "Index", "Productos", null, htmlAttributes: new { @class = "nav-link" })</li>
                                             <li class="nav-item">@Html.ActionLink("Pedidos", "Index", "Pedidos", null, htmlAttributes: new { @class = "nav-link" })</li>
                                             <li class="nav-item">@Html.ActionLink("Clientes", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
                                         }
                                     }
+                                    <li class="nav-item"><a href="@Url.Action("AgregaCarrito", "Carrito")" class="nav-link"><img class="img-responsive" style="height: 20px;" src="https://res.cloudinary.com/dj2f7ngpv/image/upload/v1629227088/vane/carrito_csmivj.png" /></a></li>
                                     @Html.Partial("_LoginPartial")
                                 </ul>
                             </div>
@@ -106,7 +101,7 @@
 
 
     <section id="hero-area" class="hero-area index2">
-        <img class="shape" src="~/Content/assetsPlantilla/images/hero/img-wave.png" alt="#">
+        <img class="shape" src="https://res.cloudinary.com/dj2f7ngpv/image/upload/v1629227088/vane/img-wave_mypctx.png" alt="#">
 
         <div class="hero-inner">
             <div class="container">
@@ -115,21 +110,21 @@
                         <div class="home-slider">
                             <div class="hero-text">
                                 <h1 class="wow fadeInUp" data-wow-delay=".3s">
-                                   Personaliza tu Equipo con FunCase! :D
+                                    Personaliza tu Equipo con FunCase! :D
                                 </h1>
                                 <p class="wow fadeInUp" data-wow-delay=".5s">
-                                   Porque queremos que se vea chido <br> Personalizalo!
+                                    Porque queremos que se vea chido <br> Personalizalo!
                                     <br>Se verá increible
                                 </p>
                                 <div class="button wow fadeInUp" data-wow-delay=".7s">
-                                    <a href="about-us.html" class="btn">Ir a Comprar</a>
+                                    @Html.ActionLink("Ir a Comprar", "Index", "Productos", null, htmlAttributes: new { @class = "btn" })
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="mobile-screen">
-                            <img class="wow fadeInDown" data-wow-delay=".5s" src="~/Content/assetsPlantilla/images/hero/app-overview.png" alt="#">
+                            <img class="wow fadeInDown" data-wow-delay=".5s" src="https://res.cloudinary.com/dj2f7ngpv/image/upload/v1629227090/vane/app-overview_irpvk6.png" alt="#">
                         </div>
                     </div>
                 </div>
@@ -158,13 +153,13 @@
                         <div class="screenshort-slider">
 
                             @RenderBody()
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>    
+    </section>
 
 
     <section class="section testimonials">
@@ -418,7 +413,7 @@
                         <div class="content">
 
                             <h4 class="heading">
-                               Existen devoluciones?
+                                Existen devoluciones?
                             </h4>
 
                             <p class="text">
@@ -439,7 +434,7 @@
                             </h4>
 
                             <p class="text">
-                               Siempre buscamos tener la mayor variedad para ti guapo / guapa
+                                Siempre buscamos tener la mayor variedad para ti guapo / guapa
                             </p>
                         </div>
                     </div>
@@ -464,19 +459,19 @@
 
                         <div class="f-about single-footer">
                             <div class="logo">
-                                <a href="/"> <img class="logo1" src="~/Content/assetsPlantilla/images/Logo.jpg" alt="Logo"></a>
+                                <a href="/"> <img class="logo1" src="~/Content/Logo.jpg" alt="Logo"></a>
                             </div>
                             <p>Liberate de lo normal!</p>
-                           
+
                         </div>
 
                     </div>
                     <div class="col-lg-3 col-md-6 col-12">
 
-                        
+
 
                     </div>
-                   
+
                 </div>
             </div>
         </div>
@@ -502,15 +497,8 @@
     <a href="#" class="scroll-top btn-hover">
         <i class="lni lni-chevron-up"></i>
     </a>
-    
-    <script src="~/Content/assetsPlantilla/js/bootstrap.min.js"></script>
-    <script src="~/Content/assetsPlantilla/js/count-up.min.js"></script>
-    <script src="~/Content/assetsPlantilla/js/wow.min.js"></script>
-    <script src="~/Content/assetsPlantilla/js/tiny-slider.js"></script>
-    <script src="~/Content/assetsPlantilla/js/glightbox.min.js"></script>
-    <script src="~/Content/assetsPlantilla/js/imagesloaded.min.js"></script>
-    <script src="~/Content/assetsPlantilla/js/isotope.min.js"></script>
-    <script src="~/Content/assetsPlantilla/js/main.js"></script>
+
+    @Scripts.Render("~/bundles/plantilla")
     <script type="text/javascript">
         //========= testimonial
         tns({

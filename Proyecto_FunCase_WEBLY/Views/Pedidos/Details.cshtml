@@ -1,10 +1,18 @@
 ﻿@model Proyecto_FunCase_WEBLY.Models.Pedido
 
-@{ 
+@{
     ViewBag.Title = "Detalle de Pedido";
 }
 
-<h2>Detalle del Pedido: @Model.PedidoID</h2>
+@if (User.IsInRole("Cliente"))
+{
+    <h2>Detalle del Pedido</h2>
+}
+else
+{
+    <h2>Detalle del Pedido: @Model.PedidoID</h2>
+}
+
 
 <table class="table">
     <thead>
@@ -25,10 +33,10 @@
             <th>@Model.EstatusPago</th>
         </tr>
     </thead>
-    </table>
-    <h3>
-        Detalles
-    </h3>
+</table>
+<h3>
+    Detalles
+</h3>
 <table class="table">
     <thead>
         <tr>
@@ -40,14 +48,13 @@
         </tr>
     </thead>
     <tbody>
-        @if (Model.DetallesPedidos != null) 
+        @if (Model.DetallesPedidos != null)
         {
             foreach (var detalle in Model.DetallesPedidos)
             {
                 <tr>
                     <td>@detalle.Producto.Nombre</td>
-                    <td><img class="img-responsive" src=@detalle.Funda_Disenos.Where(f => f.DetallesPedidoID == detalle.DetallesPedidoID).FirstOrDefault().Imagen 
-                             alt="Imagen del Producto" style="height: 250px"/></td>
+                    <td><img class="img-responsive" src="@detalle.Funda_Disenos.FirstOrDefault().Imagen" alt="Imagen del Producto" style="height: 250px" /></td>
                     <td>@detalle.PrecioUnitario</td>
                     <td>@detalle.Cantidad</td>
                     <td>@(detalle.PrecioUnitario * detalle.Cantidad)</td>

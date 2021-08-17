@@ -14,6 +14,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         public FunCaseModelContext db = new FunCaseModelContext();
 
         // GET: Cliente
+        [Authorize(Roles = "Empleado,Admin,Cliente")]
         public ActionResult Index()
         {
             ViewBag.Initial = 0;

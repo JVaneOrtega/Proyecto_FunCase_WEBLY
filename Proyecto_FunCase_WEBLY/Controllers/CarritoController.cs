@@ -55,22 +55,41 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             return View("AgregaCarrito");
         }
 
-        [Authorize(Roles = "Cliente,Diseñador")]
-        public ActionResult FinalizarPedido()
+        [Authorize(Roles = "Cliente")]
+        [HttpGet]
+        public ActionResult ConfirmarPedido()
+        {
+            if(Session["carrito"] != null) {
+                string currentUserId = User.Identity.GetUserId();
+                Cliente cliente = db.Clientes.Single(c => c.UserId == currentUserId);
+
+                ViewBag.DireccionID = new SelectList(db.Direcciones.Where(d => d.ClienteID == cliente.ClienteID), "DireccionID", "Calle,NumExt");
+                ViewBag.MetodosPagoID = new SelectList(db.MetodosPagos, "MetodosPagoID", "Nombre");
+                ViewBag.Producto = 1;
+            } else
+            {
+                ViewBag.Productos = 0;
+            }
+
+            return View();
+        }
+        
+        [HttpPost]
+        public ActionResult FinalizarPedido(Pedido pedido)
         {
             if(Session["carrito"] != null)
             {
                 List<CarritoItem> compras = (List<CarritoItem>)Session["carrito"];
                 if(compras != null && compras.Count > 0)
                 {
-                    Pedido pedido = new Pedido();
 
                     string currentUserId = User.Identity.GetUserId();
+                    double total = compras.Sum(x => x.Producto.Total * x.Cantidad);
 
                     pedido.ClienteID = db.Clientes.Where(c => c.UserId == currentUserId).FirstOrDefault().ClienteID;
                     pedido.EstatusPedido = "Generado";
                     pedido.EstatusPago = "Generado";
-                    pedido.MetodosPagoID = db.MetodosPagos.Where(m => m.Nombre == "Stripe").FirstOrDefault().MetodosPagoID;
+                    pedido.Total = total;
 
                     db.Pedidos.Add(pedido);
                     db.SaveChanges();
@@ -83,6 +102,11 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                                                                  Cantidad = compra.Cantidad,
                                                                  PedidoID = pedido.PedidoID };
                         db.DetallePedidos.Add(dp);
+                        db.SaveChanges();
+
+                        Producto producto = db.Productos.Single(p => p.ProductoID == compra.Producto.ProductoID);
+                        producto.Stock -= compra.Cantidad;
+                        db.Entry(producto).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
 
                         Funda_Diseno fd = new Funda_Diseno { Imagen = compra.Imagen.Ruta,
@@ -99,6 +123,8 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                     }
                     
                 }
+
+                RedirectToAction("Index");
             }
 
             return View();

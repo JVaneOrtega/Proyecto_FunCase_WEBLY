@@ -66,16 +66,22 @@
 else if (User.IsInRole("Admin") || User.IsInRole("Empleado"))
 {
     <h2>Diseñadores.</h2>
-    <p>
-        @Html.ActionLink("Crear Nuevo Registro", "Create")
-    </p>
     <table class="table">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.User.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DesignerID)
+                @Html.DisplayNameFor(model => model.User.Apellido1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Apellido2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Email)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NombrePresentacion)
@@ -90,15 +96,23 @@ else if (User.IsInRole("Admin") || User.IsInRole("Empleado"))
                     @Html.DisplayFor(modelItem => item.User.Nombre)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DesignerID)
+                    @Html.DisplayFor(modelItem => item.User.Apellido1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Apellido2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Email)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NombrePresentacion)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+                    @Html.ActionLink("Detalles", "Details", new { id = item.UserId }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.UserId })
                 </td>
             </tr>
         }

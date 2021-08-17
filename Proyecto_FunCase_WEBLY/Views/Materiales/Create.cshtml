@@ -11,37 +11,49 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>Material</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="mb-3 row">
-            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "form-text text-danger" })
-            </div>
+<div class="form-horizontal">
+    <h4>Material</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="mb-3 row">
+        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "form-text text-danger" })
         </div>
-
-        <div class="mb-3 row">
-            @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Color, "", new { @class = "form-text text-danger" })
-            </div>
-        </div>
-
-        <div class="mb-3 row">
-            @Html.LabelFor(model => model.Precio, htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "form-text text-danger" })
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-info">Guardar</button>
-
     </div>
+
+    <div class="mb-3 row">
+        @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Color, "", new { @class = "form-text text-danger" })
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        @Html.LabelFor(model => model.TieneRelieve, htmlAttributes: new { @class = "form-label col-lg-3 col-md-4 col-sm-4 col-form-label" })
+        <div class="col-lg-3 col-md-2 col-sm-2">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.TieneRelieve)
+                @Html.ValidationMessageFor(model => model.TieneRelieve, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        @Html.LabelFor(model => model.Estatus, htmlAttributes: new { @class = "form-label col-lg-3 col-md-4 col-sm-4 col-form-label" })
+        <div class="col-lg-3 col-md-2 col-sm-2">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Estatus)
+                @Html.ValidationMessageFor(model => model.Estatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-info">Guardar</button>
+
+</div>
 }
 
 <div>

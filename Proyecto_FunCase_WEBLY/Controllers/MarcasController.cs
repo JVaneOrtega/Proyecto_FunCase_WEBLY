@@ -112,7 +112,8 @@ namespace Proyecto_FunCase_WEBLY.Views.Home
         public ActionResult DeleteConfirmed(int id)
         {
             Marca marca = db.Marcas.Find(id);
-            db.Marcas.Remove(marca);
+            marca.Estatus = false;
+            db.Entry(marca).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

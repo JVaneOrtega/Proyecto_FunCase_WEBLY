@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Proyecto_FunCase_WEBLY.Models.Pedido>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Cliente.UserId)
-        </th>
+        @if (User.IsInRole("Empleado"))
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente.User.Nombre)
+            </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.MetodoPago.Nombre)
         </th>
@@ -30,32 +30,35 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cliente.UserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MetodoPago.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Total)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EstatusPedido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EstatusPago)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Referencia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descuento)
-        </td>
-        <td>
-            @Html.ActionLink("Detalles", "Details", new { id=item.PedidoID })
-        </td>
-    </tr>
+<tr>
+    @if (User.IsInRole("Empleado"))
+    {
+    <td>
+        @item.Cliente.User.Nombre @item.Cliente.User.Apellido1 @item.Cliente.User.Apellido2
+    </td>
+    }
+    <td>
+        @Html.DisplayFor(modelItem => item.MetodoPago.Nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Total)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EstatusPedido)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EstatusPago)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Referencia)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Descuento)
+    </td>
+    <td>
+        @Html.ActionLink("Detalles", "Details", new { id = item.PedidoID })
+    </td>
+</tr>
 }
 
 </table>

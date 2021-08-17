@@ -110,7 +110,8 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Material material = db.Materiales.Find(id);
-            db.Materiales.Remove(material);
+            material.Estatus = false;
+            db.Entry(material).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

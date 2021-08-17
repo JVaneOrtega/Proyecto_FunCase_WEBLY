@@ -20,6 +20,8 @@ namespace Proyecto_FunCase_WEBLY.Models
         public virtual MetodosPago MetodoPago { get; set; }
         public int ClienteID { get; set; }
         public virtual Cliente Cliente { get; set; }
+        public int DireccionID { get; set; }
+        public virtual Direccion Direccion { get; set; }
 
         public Pedido ()
         {

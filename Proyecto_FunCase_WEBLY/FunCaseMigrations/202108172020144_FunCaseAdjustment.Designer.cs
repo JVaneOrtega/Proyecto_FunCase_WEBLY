@@ -7,13 +7,13 @@ namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class FunCaseAdjustment3 : IMigrationMetadata
+    public sealed partial class FunCaseAdjustment : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(FunCaseAdjustment3));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FunCaseAdjustment));
         
         string IMigrationMetadata.Id
         {
-            get { return "202108162317307_FunCaseAdjustment3"; }
+            get { return "202108172020144_FunCaseAdjustment"; }
         }
         
         string IMigrationMetadata.Source
