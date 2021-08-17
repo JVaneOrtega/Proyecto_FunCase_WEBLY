@@ -10,6 +10,7 @@ namespace Proyecto_FunCase_WEBLY.Models
     {
         public int EstadoID { get; set; }
         [Required]
+        [Display(Name = "Nombre Estado")]
         public string Nombre { get; set; }
 
         public Estado()
