@@ -9,11 +9,12 @@
 
 @foreach (var item in Model)
 {
-<div class="single-screen">
-    <a href="/">
-        <img src="@item.Ruta" alt="@item.NombreImagen">
-        <label>By: @item.Designer.NombrePresentacion</label>
+    <div class="single-screen">
+        <a href="/">
+            <img src="@item.Ruta" alt="@item.NombreImagen">
+            <label>By: @item.Designer.NombrePresentacion</label>
         </a>
-</div>
+        
+    </div>
 }
 

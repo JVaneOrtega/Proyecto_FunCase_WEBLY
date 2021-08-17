@@ -1,0 +1,583 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Massive - Multipurpose HTML Template.</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/Content/assetsPlantilla/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/assetsPlantilla/css/LineIcons.2.0.css" />
+    <link rel="stylesheet" href="~/Content/assetsPlantilla/css/animate.css" />
+    <link rel="stylesheet" href="~/Content/assetsPlantilla/css/tiny-slider.css" />
+    <link rel="stylesheet" href="~/Content/assetsPlantilla/css/glightbox.min.css" />
+    <link rel="stylesheet" href="~/Content/assetsPlantilla/css/main.css" />
+</head>
+<body>
+    <!--[if lte IE 9]>
+          <p class="browserupgrade">
+            You are using an <strong>outdated</strong> browser. Please
+            <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+            your experience and security.
+          </p>
+        <![endif]-->
+
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+
+    <header class="header index2">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand logo" href="index.html">
+                                <img class="logo1" src="~/Content/assetsPlantilla/images/Logo.jpg" alt="Logo">
+                                <img class="logo2" src="~/Content/assetsPlantilla/images/Logo.jpg" alt="Logo">
+
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+
+                                    <li class="nav-item">
+                                        @Html.ActionLink("Inicio", "Landing", "Home", null, htmlAttributes: new { @class = "nav-link" })
+                                    </li>
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        if (User.IsInRole("Diseñador"))
+                                        {
+                                            <li class="nav-item">@Html.ActionLink("Catalogo", "Index", "Productos", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                            <li class="nav-item">@Html.ActionLink("Mis datos", "Index", "Designer", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                            <li class="nav-item">@Html.ActionLink("Mis imágenes", "Index", "Imagenes", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                        }
+                                        else if (User.IsInRole("Cliente"))
+                                        {
+                                            <li class="nav-item">@Html.ActionLink("Catalogo", "Index", "Productos", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                            <li class="nav-item">@Html.ActionLink("Mis datos", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                            <li class="nav-item">@Html.ActionLink("Mis compras", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                            <li class="nav-item">@Html.ActionLink("Mis direcciones", "Index", "Direccion", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                        }
+                                        else if (User.IsInRole("Admin"))
+                                        {
+                                            <li class="nav-item">@Html.ActionLink("Clientes", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                            <li class="nav-item">@Html.ActionLink("Usuarios", "Index", "UsersAdmin", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                            <li class="nav-item">@Html.ActionLink("Roles", "Index", "RolesAdmin", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                        }
+                                        else if (User.IsInRole("Empleado"))
+                                        {
+                                            <li class="nav-item">@Html.ActionLink("Marcas", "Index", "Marcas", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                            <li class="nav-item">@Html.ActionLink("Modelos", "Index", "Modeloes", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                            <li class="nav-item">@Html.ActionLink("Materiales", "Index", "Materiales", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                            <li class="nav-item">@Html.ActionLink("Productos", "Index", "Productos", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                            <li class="nav-item">@Html.ActionLink("Pedidos", "Index", "Pedidos", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                            <li class="nav-item">@Html.ActionLink("Clientes", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
+                                        }
+                                    }
+                                    @Html.Partial("_LoginPartial")
+                                </ul>
+                            </div>
+                        </nav>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <section id="hero-area" class="hero-area index2">
+        <img class="shape" src="~/Content/assetsPlantilla/images/hero/img-wave.png" alt="#">
+
+        <div class="hero-inner">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-lg-6 co-12">
+                        <div class="home-slider">
+                            <div class="hero-text">
+                                <h1 class="wow fadeInUp" data-wow-delay=".3s">
+                                   Personaliza tu Equipo con FunCase! :D
+                                </h1>
+                                <p class="wow fadeInUp" data-wow-delay=".5s">
+                                   Porque queremos que se vea chido <br> Personalizalo!
+                                    <br>Se verá increible
+                                </p>
+                                <div class="button wow fadeInUp" data-wow-delay=".7s">
+                                    <a href="about-us.html" class="btn">Ir a Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="mobile-screen">
+                            <img class="wow fadeInDown" data-wow-delay=".5s" src="~/Content/assetsPlantilla/images/hero/app-overview.png" alt="#">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section class="screenshort section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <span class="wow fadeInDown" data-wow-delay=".2s">Una Probadita de nuestros diseños!</span>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Ilustraciones bárbaras</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">
+                            Diferentes estilos, diferentes personas
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="screen-head">
+                        <div class="screenshort-slider">
+
+                            @RenderBody()
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
+
+
+    <section class="section testimonials">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title align-center">
+                        <span class="wow fadeInDown" data-wow-delay=".2s">What saye's Our Clients</span>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Our Testimonials</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">
+                            There are many variations of passages of Lorem
+                            Ipsum available, but the majority have suffered alteration in some form.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class=" testimonial-inner wow fadeInUp" data-wow-delay=".3s">
+                        <div class="testimonial-slider">
+
+                            <div class="single-testimonial">
+                                <ul class="review">
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star"></i></li>
+                                </ul>
+                                <div class="quote">
+                                    <i class="lni lni-quotation"></i>
+                                </div>
+                                <p>
+                                    " I just brought it and i love it. Lorem Ipsum is simply dummy text of the and
+                                    typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+                                    since the 1500s."
+                                </p>
+                                <div class="bottom">
+                                    <div class="clien-image">
+                                        <img src="assets/images/testimonial/testi1.jpg" alt="#">
+                                    </div>
+                                    <h4 class="name">Musharof Chowdhury <span>CEO - Graygrids</span></h4>
+                                </div>
+                            </div>
+
+
+                            <div class="single-testimonial">
+                                <ul class="review">
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star"></i></li>
+                                </ul>
+                                <div class="quote">
+                                    <i class="lni lni-quotation"></i>
+                                </div>
+                                <p>
+                                    " I just brought it and i love it. Lorem Ipsum is simply dummy text of the and
+                                    typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+                                    since the 1500s."
+                                </p>
+                                <div class="bottom">
+                                    <div class="clien-image">
+                                        <img src="assets/images/testimonial/testi2.jpg" alt="#">
+                                    </div>
+                                    <h4 class="name">Naimur Rahman <span>CEO - Wpthemes Grid</span></h4>
+                                </div>
+                            </div>
+
+
+                            <div class="single-testimonial">
+                                <ul class="review">
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star"></i></li>
+                                </ul>
+                                <div class="quote">
+                                    <i class="lni lni-quotation"></i>
+                                </div>
+                                <p>
+                                    " I just brought it and i love it. Lorem Ipsum is simply dummy text of the and
+                                    typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+                                    since the 1500s."
+                                </p>
+                                <div class="bottom">
+                                    <div class="clien-image">
+                                        <img src="assets/images/testimonial/testi3.jpg" alt="#">
+                                    </div>
+                                    <h4 class="name">Karmo kerin<span>CEO - Tredex</span></h4>
+                                </div>
+                            </div>
+
+
+                            <div class="single-testimonial">
+                                <ul class="review">
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star"></i></li>
+                                </ul>
+                                <div class="quote">
+                                    <i class="lni lni-quotation"></i>
+                                </div>
+                                <p>
+                                    " I just brought it and i love it. Lorem Ipsum is simply dummy text of the and
+                                    typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+                                    since the 1500s."
+                                </p>
+                                <div class="bottom">
+                                    <div class="clien-image">
+                                        <img src="assets/images/testimonial/testi4.jpg" alt="#">
+                                    </div>
+                                    <h4 class="name">Goro Chala <span>CEO - Dream App</span></h4>
+                                </div>
+                            </div>
+
+
+                            <div class="single-testimonial">
+                                <ul class="review">
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star"></i></li>
+                                </ul>
+                                <div class="quote">
+                                    <i class="lni lni-quotation"></i>
+                                </div>
+                                <p>
+                                    " I just brought it and i love it. Lorem Ipsum is simply dummy text of the and
+                                    typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+                                    since the 1500s."
+                                </p>
+                                <div class="bottom">
+                                    <div class="clien-image">
+                                        <img src="assets/images/testimonial/testi5.jpg" alt="#">
+                                    </div>
+                                    <h4 class="name">Zara Parker <span>CEO - Pixel Lab</span></h4>
+                                </div>
+                            </div>
+
+
+                            <div class="single-testimonial">
+                                <ul class="review">
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star"></i></li>
+                                </ul>
+                                <div class="quote">
+                                    <i class="lni lni-quotation"></i>
+                                </div>
+                                <p>
+                                    " I just brought it and i love it. Lorem Ipsum is simply dummy text of the and
+                                    typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+                                    since the 1500s."
+                                </p>
+                                <div class="bottom">
+                                    <div class="clien-image">
+                                        <img src="assets/images/testimonial/testi1.jpg" alt="#">
+                                    </div>
+                                    <h4 class="name">Musharof Chowdhury <span>CEO - Graygrids</span></h4>
+                                </div>
+                            </div>
+
+
+                            <div class="single-testimonial">
+                                <ul class="review">
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star"></i></li>
+                                </ul>
+                                <div class="quote">
+                                    <i class="lni lni-quotation"></i>
+                                </div>
+                                <p>
+                                    " I just brought it and i love it. Lorem Ipsum is simply dummy text of the and
+                                    typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+                                    since the 1500s."
+                                </p>
+                                <div class="bottom">
+                                    <div class="clien-image">
+                                        <img src="assets/images/testimonial/testi2.jpg" alt="#">
+                                    </div>
+                                    <h4 class="name">Naimur Rahman <span>CEO - Wpthemes Grid</span></h4>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="faq-area index2">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6">
+
+                    <div class="d-flex single-faq wow fadeInUp" data-wow-delay=".2s">
+
+                        <div class="cercle">
+                            <span>?</span>
+                        </div>
+                        <div class="content">
+
+                            <h4 class="heading">
+                                Puedo Elegir entre diferentes opciones
+                            </h4>
+
+                            <p class="text">
+                                Claro que si, :p siempre y cuando no vallas con la competencia
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex single-faq wow fadeInUp" data-wow-delay=".4s">
+
+                        <div class="cercle">
+                            <span>?</span>
+                        </div>
+                        <div class="content">
+
+                            <h4 class="heading">
+                                El servicio es seguro
+                            </h4>
+
+                            <p class="text">
+                                Claro que sí, confía en nosotros
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+
+                    <div class="d-flex single-faq wow fadeInUp" data-wow-delay=".2s">
+
+                        <div class="cercle">
+                            <span>?</span>
+                        </div>
+                        <div class="content">
+
+                            <h4 class="heading">
+                               Existen devoluciones?
+                            </h4>
+
+                            <p class="text">
+                                Sip, en caso de que la funda no quede en tu celular :p
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex single-faq wow fadeInUp" data-wow-delay=".4s">
+
+                        <div class="cercle">
+                            <span>?</span>
+                        </div>
+                        <div class="content">
+
+                            <h4 class="heading">
+                                Hay para modelos raros de teléfonos
+                            </h4>
+
+                            <p class="text">
+                               Siempre buscamos tener la mayor variedad para ti guapo / guapa
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+    <footer class="footer">
+
+        <div class="footer-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-12">
+
+                        <div class="f-about single-footer">
+                            <div class="logo">
+                                <a href="/"> <img class="logo1" src="~/Content/assetsPlantilla/images/Logo.jpg" alt="Logo"></a>
+                            </div>
+                            <p>Liberate de lo normal!</p>
+                           
+                        </div>
+
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+
+                        
+
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="inner">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="left">
+                                <p>Designed and Developed by<a href="#" rel="nofollow" target="_blank">Fun Case software</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+
+    <a href="#" class="scroll-top btn-hover">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+    
+    <script src="~/Content/assetsPlantilla/js/bootstrap.min.js"></script>
+    <script src="~/Content/assetsPlantilla/js/count-up.min.js"></script>
+    <script src="~/Content/assetsPlantilla/js/wow.min.js"></script>
+    <script src="~/Content/assetsPlantilla/js/tiny-slider.js"></script>
+    <script src="~/Content/assetsPlantilla/js/glightbox.min.js"></script>
+    <script src="~/Content/assetsPlantilla/js/imagesloaded.min.js"></script>
+    <script src="~/Content/assetsPlantilla/js/isotope.min.js"></script>
+    <script src="~/Content/assetsPlantilla/js/main.js"></script>
+    <script type="text/javascript">
+        //========= testimonial
+        tns({
+            container: '.testimonial-slider',
+            items: 1,
+            slideBy: 'page',
+            autoplay: false,
+            mouseDrag: true,
+            gutter: 0,
+            nav: true,
+            controls: false,
+            controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                540: {
+                    items: 1,
+                },
+                768: {
+                    items: 1,
+                },
+                992: {
+                    items: 2,
+                },
+                1170: {
+                    items: 2,
+                }
+            }
+        });
+        //========= Screenshort Slider
+        tns({
+            container: '.screenshort-slider',
+            items: 1,
+            slideBy: 'page',
+            autoplay: false,
+            mouseDrag: true,
+            gutter: 0,
+            nav: true,
+            controls: false,
+            controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                540: {
+                    items: 1,
+                },
+                768: {
+                    items: 3,
+                },
+                992: {
+                    items: 3,
+                },
+                1170: {
+                    items: 4,
+                }
+            }
+        });
+        //========= glightbox
+        GLightbox({
+            'href': 'https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM',
+            'type': 'video',
+            'source': 'youtube', //vimeo, youtube or local
+            'width': 900,
+            'autoplayVideos': true,
+        });
+    </script>
+</body>
+</html>

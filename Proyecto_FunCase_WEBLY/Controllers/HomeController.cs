@@ -1,5 +1,6 @@
 ﻿using Proyecto_FunCase_WEBLY.Models;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace IdentitySample.Controllers
 {
@@ -9,7 +10,7 @@ namespace IdentitySample.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return View(db.Imagenes.ToList().Take(10));
         }
 
         [HttpGet]
@@ -26,6 +27,13 @@ namespace IdentitySample.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Landing()
+        {
+            var imagens = db.Imagenes.ToList().Take(10);
+            
+            return View(imagens);
         }
 
     }
