@@ -54,16 +54,16 @@ namespace Proyecto_FunCase_WEBLY.Controllers
 
         [HttpPost]
 
-        public JsonResult UpdatePayment(Payment payment)
+        public JsonResult UpdatePayment(int idPedido, bool status, string paymentIntentId)
         {
             try
             {
-                var pedido = db.Pedidos.Single(x => x.PedidoID == payment.idPedido);
+                var pedido = db.Pedidos.Single(x => x.PedidoID == idPedido);
 
-                if (payment.status)
+                if (status)
                 {
                     pedido.EstatusPago = "Pagado";
-                    pedido.Referencia = payment.paymentIntentId;
+                    pedido.Referencia = paymentIntentId;
                 }
                 else
                 {                    
@@ -72,11 +72,11 @@ namespace Proyecto_FunCase_WEBLY.Controllers
 
                 db.SaveChanges();
 
-                return Json(new { message = "Correcto", status = true });
+                return Json(new { message = "Correcto", status = true }, JsonRequestBehavior.AllowGet);
             }
             catch(Exception e)
             {
-                return Json(new { message = "Server Error", error = e.Message, trace = e.StackTrace, status = false, paymentR = payment });
+                return Json(new { message = "Server Error", error = e.Message, trace = e.StackTrace, status = false});
             }
         }
     }
