@@ -30,6 +30,7 @@ namespace Proyecto_FunCase_WEBLY.Models
         public virtual DbSet<IdentityUserClaim> UserClaims { get; set; }
         public virtual DbSet<ApplicationUser> Users { get; set; }
         public virtual DbSet<Cliente> Clientes { get; set; }
+        public virtual DbSet<Compras> Compras { get; set; }
         public virtual DbSet<Designer> Designers { get; set; }
         public virtual DbSet<DetallesPedido> DetallePedidos { get; set; }
         public virtual DbSet<Direccion> Direcciones { get; set; }
@@ -43,6 +44,7 @@ namespace Proyecto_FunCase_WEBLY.Models
         public virtual DbSet<Modelo> Modelos { get; set; }
         public virtual DbSet<Pedido> Pedidos { get; set; }
         public virtual DbSet<Producto> Productos { get; set; }
+        public virtual DbSet<Proveedor> Proveedores { get; set; }
 
     }
 }

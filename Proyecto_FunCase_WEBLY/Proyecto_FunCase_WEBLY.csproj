@@ -193,6 +193,14 @@
     <Compile Include="FunCaseMigrations\202108172111079_FunCaseDireccion.Designer.cs">
       <DependentUpon>202108172111079_FunCaseDireccion.cs</DependentUpon>
     </Compile>
+    <Compile Include="FunCaseMigrations\202108172304559_FunCaseCompras.cs" />
+    <Compile Include="FunCaseMigrations\202108172304559_FunCaseCompras.Designer.cs">
+      <DependentUpon>202108172304559_FunCaseCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunCaseMigrations\202108172306475_FunCaseCompras1.cs" />
+    <Compile Include="FunCaseMigrations\202108172306475_FunCaseCompras1.Designer.cs">
+      <DependentUpon>202108172306475_FunCaseCompras1.cs</DependentUpon>
+    </Compile>
     <Compile Include="FunCaseMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -201,6 +209,7 @@
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\CarritoItem.cs" />
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Compras.cs" />
     <Compile Include="Models\Designer.cs" />
     <Compile Include="Models\DetallesPedido.cs" />
     <Compile Include="Models\Direccion.cs" />
@@ -217,6 +226,7 @@
     <Compile Include="Models\Modelo.cs" />
     <Compile Include="Models\Pedido.cs" />
     <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
@@ -405,6 +415,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FunCaseMigrations\202108172111079_FunCaseDireccion.resx">
       <DependentUpon>202108172111079_FunCaseDireccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunCaseMigrations\202108172304559_FunCaseCompras.resx">
+      <DependentUpon>202108172304559_FunCaseCompras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunCaseMigrations\202108172306475_FunCaseCompras1.resx">
+      <DependentUpon>202108172306475_FunCaseCompras1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
