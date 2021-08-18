@@ -51,5 +51,33 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                 return View();
             }
         }
+
+        [HttpPost]
+
+        public JsonResult UpdatePayment(Payment payment)
+        {
+            try
+            {
+                var pedido = db.Pedidos.Single(x => x.PedidoID == payment.idPedido);
+
+                if (payment.status)
+                {
+                    pedido.EstatusPago = "Pagado";
+                    pedido.Referencia = payment.paymentIntentId;
+                }
+                else
+                {                    
+                    pedido.EstatusPago = "Rechazado";
+                }
+
+                db.SaveChanges();
+
+                return Json(new { message = "Correcto", status = true });
+            }
+            catch(Exception e)
+            {
+                return Json(new { message = "Server Error", error = e.Message, trace = e.StackTrace, status = false, paymentR = payment });
+            }
+        }
     }
 }
