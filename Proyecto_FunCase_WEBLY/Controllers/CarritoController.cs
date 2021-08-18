@@ -62,10 +62,11 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             if(Session["carrito"] != null) {
                 string currentUserId = User.Identity.GetUserId();
                 Cliente cliente = db.Clientes.Single(c => c.UserId == currentUserId);
-
+              
                 ViewBag.DireccionID = new SelectList(db.Direcciones.Where(d => d.ClienteID == cliente.ClienteID), "DireccionID", "NombreDireccion");
                 ViewBag.MetodosPagoID = new SelectList(db.MetodosPagos, "MetodosPagoID", "Nombre");
                 ViewBag.Producto = 1;
+               
             } else
             {
                 ViewBag.Productos = 0;
@@ -160,6 +161,31 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             }
 
             return -1;
+        }
+
+
+        [HttpGet]
+        public JsonResult getStripeSecret(int idPedido)
+        {
+            try
+            {
+                PagosController pc = new PagosController();
+                var pedido = db.Pedidos.Single(x => x.PedidoID == idPedido);
+                double total = 0.0;
+                foreach (DetallesPedido item in pedido.DetallesPedidos)
+                {
+                    total += item.PrecioUnitario * item.Cantidad;
+                }                
+                               
+                var secret = pc.Create( (long)total );
+                return Json(new { secret = secret, status = true }, JsonRequestBehavior.AllowGet);
+                
+            }
+            catch (Exception ex)
+            {
+                return Json(new { secret = ex.Message, status = false, idPedido = idPedido }, JsonRequestBehavior.AllowGet);
+                
+            }
         }
     }
 
