@@ -106,7 +106,7 @@ else
         <h2>@Model.Producto.Nombre</h2>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-4">
-                <img class="img-responsive" src="@Model.Producto.ImagenFinal" alt="Imagen del Producto" />
+                <img class="img-responsive" src="@Model.Producto.ImagenFinal" alt="Imagen del Producto" id="imagenProducto" />
             </div>
             <div class="col-lg-6 col-md-6 col-sm-8">
                 <h3>Datos del Producto</h3>
@@ -145,6 +145,7 @@ else
                     </div>
                 </div>
                 <hr />
+
                 <div class="row">
                     <input type="hidden" id="idProducto" value="@Model.Producto.ProductoID" />
                     <label class="form-label col-lg-3 col-md-3 col-sm-3 col-form-label">Cantidad:</label>
@@ -155,6 +156,7 @@ else
                         <button class="agregar btn btn-primary" id="btnAgregar">Agregar</button>
                     </div>
                 </div>
+                <canvas style="margin-top: 10px" width="500" height="600" id="canvas"></canvas>
             </div>
         </div>
     </div>
@@ -201,6 +203,48 @@ else
                     e.preventDefault();
                 }
             });
+
+           
+
+            const changeCanvasImage = async(e) => {
+                console.log(e.target.value);
+                const newImg = document.getElementById("PreviewImagen").src;
+                //const canvas = document.getElementById('canvas');
+                const productImage = document.getElementById('imagenProducto').src;
+                loadCanvas(productImage, newImg)
+            }
+
+            const loadImage = url => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => resolve(img);
+                    img.onerror = () => reject(new Error(`load ${url} fail`));
+                    img.src = url;
+                });
+            };
+
+            const loadCanvas = async(productImage, imageUrl) => {
+
+                const canvas = document.getElementById('canvas');
+                              
+                const img1 = await loadImage(productImage);
+                const ctx1 = canvas.getContext('2d');
+                ctx1.drawImage(img1, 0, 0, 550, 500);
+                const img2 = await loadImage(imageUrl)
+                const ctx2 = canvas.getContext('2d');                                               
+                ctx2.drawImage(img2, 165, 50, 210, 400);
+               
+            }
+
+
+            document.getElementById("Imagen").addEventListener('change', changeCanvasImage);
+
+            window.onload = () => {
+                const firstImagen = document.getElementById('PreviewImagen').src;
+                const productImage = document.getElementById('imagenProducto').src;
+                console.log(productImage)
+                loadCanvas(productImage,  firstImagen.split(';')[0]);
+            }
         </script>
     }
 }
