@@ -7,53 +7,47 @@
 @if (User.IsInRole("Cliente"))
 {
     <h2>Detalle del Pedido</h2>
-}
-else
-{
-    <h2>Detalle del Pedido: @Model.PedidoID</h2>
-}
-<link href="/Content/stripe.css"/>
+    <link href="/Content/stripe.css" />
 
-<script defer src="https://js.stripe.com/v3/"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script defer src="https://js.stripe.com/v3/"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
 
-<div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-6">
-        <h3>Datos del pedido</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Pedido Realizado por</th>
-                    <th>@Model.Cliente.User.Nombre @Model.Cliente.User.Apellido1 @Model.Cliente.User.Apellido2</th>
-                </tr>
-                <tr>
-                    <th>Total</th>
-                    <th>@Model.Total</th>
-                </tr>
-                <tr>
-                    <th>Estatus del Pedido</th>
-                    <th>@Model.EstatusPedido</th>
-                </tr>
-                <tr>
-                    <th>Metodo de pago</th>
-                    <th>@Model.MetodoPago.Nombre</th>
-                </tr>
-                <tr>
-                    <th>Estatus del Pago</th>
-                    <th>@Model.EstatusPago</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
 
-    @if (User.IsInRole("Cliente"))
-    {
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <h3>Datos del pedido</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Pedido Realizado por</th>
+                        <th>@Model.Cliente.User.Nombre @Model.Cliente.User.Apellido1 @Model.Cliente.User.Apellido2</th>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <th>@Model.Total</th>
+                    </tr>
+                    <tr>
+                        <th>Estatus del Pedido</th>
+                        <th>@Model.EstatusPedido</th>
+                    </tr>
+                    <tr>
+                        <th>Metodo de pago</th>
+                        <th>@Model.MetodoPago.Nombre</th>
+                    </tr>
+                    <tr>
+                        <th>Estatus del Pago</th>
+                        <th>@Model.EstatusPago</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
         <div class="col-lg-6 col-md-6 col-sm-6" id="divPayment" style="display: none">
             <form id="payment-form">
 
                 <div id="card-element"><!--Stripe.js injects the Card Element--></div>
 
-                <button id="submit" class="button-stripe">
+                <button id="submit" class="btn btn-primary" style="margin-top: 15px;">
 
                     <div class="spinner hidden" id="spinner"></div>
 
@@ -63,91 +57,85 @@ else
 
                 <p id="card-error" role="alert"></p>
 
-                <p class="result-message hidden">
-
-                    Payment succeeded, see the result in your
-
-                    <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
-
-                </p>
+                <p class="result-message hidden"> </p>
 
             </form>
         </div>
-    }
-    <div class="col-lg-6 col-md-6 col-sm-6">
-        <h3>
-            Domicilio
-        </h3>
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <h3>
+                Domicilio
+            </h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Calle:</th>
+                        <th>@Model.Direccion.Calle</th>
+                        <th>Num. Ext.:</th>
+                        <th>@Model.Direccion.NumeroExt</th>
+                    </tr>
+                    <tr>
+                        <th>Num. Int.:</th>
+                        <th>@Model.Direccion.Calle</th>
+                        <th>Colonia</th>
+                        <th>@Model.Direccion.Colonia</th>
+                    </tr>
+                    <tr>
+                        <th>Código Postal</th>
+                        <th>@Model.Direccion.CodigoPostal</th>
+                        <th>Ciudad</th>
+                        <th>@Model.Direccion.Ciudad</th>
+                    <tr>
+                        <th>Estado</th>
+                        <th>@Model.Direccion.Estado.Nombre</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <h3>
+        Detalles
+    </h3>
+    <div class="row">
         <table class="table">
             <thead>
                 <tr>
-                    <th>Calle:</th>
-                    <th>@Model.Direccion.Calle</th>
-                    <th>Num. Ext.:</th>
-                    <th>@Model.Direccion.NumeroExt</th>
-                </tr>
-                <tr>
-                    <th>Num. Int.:</th>
-                    <th>@Model.Direccion.Calle</th>
-                    <th>Colonia</th>
-                    <th>@Model.Direccion.Colonia</th>
-                </tr>
-                <tr>
-                    <th>Código Postal</th>
-                    <th>@Model.Direccion.CodigoPostal</th>
-                    <th>Ciudad</th>
-                    <th>@Model.Direccion.Ciudad</th>
-                <tr>
-                    <th>Estado</th>
-                    <th>@Model.Direccion.Estado.Nombre</th>
-                    <th></th>
-                    <th></th>
+                    <th>Producto</th>
+                    <th>Imagen</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
                 </tr>
             </thead>
+            <tbody>
+                @if (Model.DetallesPedidos != null)
+                {
+                    foreach (var detalle in Model.DetallesPedidos)
+                    {
+                        <tr>
+                            <td>@detalle.Producto.Nombre</td>
+                            <td><img class="img-responsive" src="@detalle.Funda_Disenos.FirstOrDefault().Imagen" alt="Imagen del Producto" style="height: 250px" /></td>
+                            <td>@detalle.PrecioUnitario</td>
+                            <td>@detalle.Cantidad</td>
+                            <td>@(detalle.PrecioUnitario * detalle.Cantidad)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
         </table>
     </div>
-</div>
+    <input type="hidden" id="doPayment" value="@Model.EstatusPago" />
 
-<h3>
-    Detalles
-</h3>
-<div class="row">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Imagen</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.DetallesPedidos != null)
-            {
-                foreach (var detalle in Model.DetallesPedidos)
-                {
-                    <tr>
-                        <td>@detalle.Producto.Nombre</td>
-                        <td><img class="img-responsive" src="@detalle.Funda_Disenos.FirstOrDefault().Imagen" alt="Imagen del Producto" style="height: 250px" /></td>
-                        <td>@detalle.PrecioUnitario</td>
-                        <td>@detalle.Cantidad</td>
-                        <td>@(detalle.PrecioUnitario * detalle.Cantidad)</td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
-</div>
-<input type="hidden" id="doPayment" value="@Model.EstatusPago" />
+    @Html.HiddenFor(model => model.PedidoID)
 
-@Html.HiddenFor(model => model.PedidoID)
+    <p>
+        @Html.ActionLink("Volver al Listado", "Index")
+    </p>
 
-<p>
-    @Html.ActionLink("Volver al Listado", "Index")
-</p>
-
-<script>
+    <script>
 
     window.onload = () => {
         if (document.getElementById("doPayment").value === "Generado") {
@@ -236,6 +224,7 @@ else
 
             event.preventDefault();
 
+            document.getElementById("submit").disabled = true;
             // Complete payment when the submit button is clicked
 
             payWithCard(stripeKey, card, data.secret);
@@ -265,7 +254,8 @@ else
 
                     // Show error to your customer
                     showError(result.error.message);
-                    updatePayment(false)
+                    updatePayment(false);
+                    document.getElementById("submit").disabled = false;
                 } else {
 
                     // The payment succeeded!
@@ -281,7 +271,7 @@ else
         const idPedido = document.getElementById("PedidoID").value;
         const url = "@Url.Action("UpdatePayment", "Pedidos")";
         fetch(`${url}?status=${status}&paymentIntentId=${paymentIntentId}&idPedido=${idPedido}`, {
-            method: 'POST',          
+            method: 'POST',
             headers: {
                 'contentType': 'application/json; charset=utf-8'
             }
@@ -360,7 +350,160 @@ else
 
     };
 
+    </script>
+}
+else
+{
+
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    <link href="/Content/stripe.css" />
+
+    <script defer src="https://js.stripe.com/v3/"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>Detalles</h3>
+                    <p class="text-subtitle text-muted">Información sobre el pedido recibido.</p>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first">
+                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end float-md-end float-sm-end">
+                        <ol class="breadcrumb breadcrumb-right">
+                            <li class="breadcrumb-item"><a href="@Url.Action("IndexAdmin", "Home")">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Pedidos")">Pedidos</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-
-</script>
+    <div class="page-content">
+        <section class="section">
+            <div class="row match-height">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Detalle del Pedido: @Model.PedidoID</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Pedido Realizado por</th>
+                                            <th>@Model.Cliente.User.Nombre @Model.Cliente.User.Apellido1 @Model.Cliente.User.Apellido2</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Total</th>
+                                            <th>@Model.Total</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Estatus del Pedido</th>
+                                            <th>@Model.EstatusPedido</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Metodo de pago</th>
+                                            <th>@Model.MetodoPago.Nombre</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Estatus del Pago</th>
+                                            <th>@Model.EstatusPago</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Domicilio</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Calle:</th>
+                                            <th>@Model.Direccion.Calle</th>
+                                            <th>Num. Ext.:</th>
+                                            <th>@Model.Direccion.NumeroExt</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Num. Int.:</th>
+                                            <th>@Model.Direccion.Calle</th>
+                                            <th>Colonia</th>
+                                            <th>@Model.Direccion.Colonia</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Código Postal</th>
+                                            <th>@Model.Direccion.CodigoPostal</th>
+                                            <th>Ciudad</th>
+                                            <th>@Model.Direccion.Ciudad</th>
+                                        <tr>
+                                            <th>Estado</th>
+                                            <th>@Model.Direccion.Estado.Nombre</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <div class="col-12 d-flex justify-content-end">
+                                @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-light-secondary rounded-pill me-1 mb-1" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Productos solicitados</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-lg table-hover">
+                                        <thead>
+                                            <tr class="table-success">
+                                                <th>Producto</th>
+                                                <th>Imagen</th>
+                                                <th>Precio</th>
+                                                <th>Cantidad</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.DetallesPedidos != null)
+                                            {
+                                                foreach (var detalle in Model.DetallesPedidos)
+                                                {
+                                                    <tr>
+                                                        <td>@detalle.Producto.Nombre</td>
+                                                        <td><img class="img-responsive" src="@detalle.Funda_Disenos.FirstOrDefault().Imagen" alt="Imagen del Producto" style="height: 250px" /></td>
+                                                        <td>@detalle.PrecioUnitario</td>
+                                                        <td>@detalle.Cantidad</td>
+                                                        <td>@(detalle.PrecioUnitario * detalle.Cantidad)</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+}

@@ -141,7 +141,6 @@ namespace IdentitySample.Controllers
 
             var userRoles = await UserManager.GetRolesAsync(user.Id);
 
-            ViewBag.RoleId = new SelectList(await RoleManager.Roles.Where(r => r.Name == "Admin" || r.Name == "Empleado").ToListAsync(), "Name", "Name");
             return View(new EditUserViewModel()
             {
                 Id = user.Id,
@@ -150,7 +149,7 @@ namespace IdentitySample.Controllers
                 Apellido1 = user.Apellido1,
                 Apellido2 = user.Apellido2,
                 Telefono = user.Telefono,
-                RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
+                RolesList = RoleManager.Roles.Where(r => r.Name == "Admin" || r.Name == "Empleado").ToList().Select(x => new SelectListItem()
                 {
                     Selected = userRoles.Contains(x.Name),
                     Text = x.Name,
@@ -218,6 +217,7 @@ namespace IdentitySample.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.RoleNames = await UserManager.GetRolesAsync(user.Id);
             return View(user);
         }
 

@@ -48,43 +48,6 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             return PartialView("_Profile", cliente);
         }
 
-        // GET: Cliente/Create
-        /*public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Cliente/Create
-        [HttpPost]
-        public ActionResult Create(Cliente cliente)
-        {
-            try
-            {
-                ApplicationUser userCliente = new ApplicationUser {  };
-                Cliente objCliente = new Cliente { };
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Cliente/Edit/5
-        [Authorize(Roles = "Admin,Empleado")]
-        public ActionResult Edit(int? id)
-        {
-            if(id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Cliente cliente = db.Clientes.Find(id);
-
-            return View(cliente);
-        }*/
-
         [Authorize(Roles = "Cliente")]
         public ActionResult EditProfile(int? id)
         {
@@ -168,6 +131,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         }
 
         // GET: Cliente/Delete/5
+        [Authorize(Roles = "Admin,Empleado")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -179,7 +143,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             {
                 return HttpNotFound();
             }
-            return View();
+            return View(cliente);
         }
 
         // POST: Cliente/Delete/5

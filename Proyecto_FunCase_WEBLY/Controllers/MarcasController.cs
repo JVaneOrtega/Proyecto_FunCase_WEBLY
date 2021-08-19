@@ -11,7 +11,7 @@ using Proyecto_FunCase_WEBLY.Models;
 
 namespace Proyecto_FunCase_WEBLY.Views.Home
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Empleado")]
     public class MarcasController : Controller
     {
         private FunCaseModelContext db = new FunCaseModelContext();
@@ -48,7 +48,7 @@ namespace Proyecto_FunCase_WEBLY.Views.Home
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MarcaID,Nombre")] Marca marca)
+        public ActionResult Create(Marca marca)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace Proyecto_FunCase_WEBLY.Views.Home
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MarcaID,Nombre")] Marca marca)
+        public ActionResult Edit(Marca marca)
         {
             if (ModelState.IsValid)
             {

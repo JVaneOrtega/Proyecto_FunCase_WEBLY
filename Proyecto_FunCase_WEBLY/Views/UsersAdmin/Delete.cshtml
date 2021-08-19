@@ -2,30 +2,100 @@
 
 @{
     ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Eliminar.</h2>
-
-<h3>¿Esta seguro de querer eliminar este usuario?</h3>
-<div>
-    <h4>User.</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <button type="submit" class="btn btn-info">Eliminar</button> |
-            @Html.ActionLink("Regresar al listado", "Index")
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Eliminar</h3>
+                <p class="text-subtitle text-muted">¿Esta seguro de eliminar este Empleado?</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end float-md-end float-sm-end">
+                    <ol class="breadcrumb breadcrumb-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("IndexAdmin", "Home")">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "UsersAdmin")">Empleados</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Eliminar</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
-    }
+    </div>
+</div>
+
+<div class="page-content">
+    <section class="section">
+        <div class="row match-height">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Empleado: @Model.UserName</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Nombre</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.Nombre" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Primer Apellido</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.Apellido1" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Segundo Apellido</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.Apellido2" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Teléfono</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.Telefono" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.Email" class="form-control" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <ul class="list-group">
+                                <li class="list-group-item active">Lista de Roles para este Usuario</li>
+                                @if (ViewBag.RoleNames.Count == 0)
+                                {
+                                    <li class="list-group-item">No se encontraron usuarios.</li>
+                                }
+                                @foreach (var item in ViewBag.RoleNames)
+                                {
+                                    <li class="list-group-item">@item</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <div class="col-12 d-flex justify-content-end">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger rounded-pill me-1 mb-1">Eliminar</button>
+                                @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-light-secondary rounded-pill me-1 mb-1" })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>

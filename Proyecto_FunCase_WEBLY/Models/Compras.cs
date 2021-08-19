@@ -10,14 +10,18 @@ namespace Proyecto_FunCase_WEBLY.Models
     {
         public int ComprasID { get; set; }
         public DateTime FechaCompra { get; set; }
-        public ApplicationUser UsuarioRegistro { get; set; }
-        public int Cantidad { get; set; }
-        public int PrecioCompra { get; set; }
+        public int UserId { get; set; }
+        public virtual ApplicationUser UsuarioRegistro { get; set; }
         public string NotaCompra { get; set; }
         public string FotoTicket { get; set; }
-        public int ProductoID { get; set; }
-        public Producto Producto { get; set; }
+        public double Total { get; set; }
         public int ProveedorID { get; set; }
-        public Proveedor Proveedor {get; set;}
+        public virtual Proveedor Proveedor {get; set;}
+
+        public Compras()
+        {
+            this.DetalleCompras = new HashSet<DetalleCompra>();
+        }
+        public virtual ICollection<DetalleCompra> DetalleCompras { get; set; }
     }
 }

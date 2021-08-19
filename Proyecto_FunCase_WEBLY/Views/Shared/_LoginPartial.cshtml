@@ -1,17 +1,46 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated) {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" })) {
-        @Html.AntiForgeryToken()
+@if (Request.IsAuthenticated)
+{
+    if (User.IsInRole("Cliente") || User.IsInRole("Diseñador"))
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
 
-        <ul class="navbar-nav navbar-right">
-            <li class="nav-item">
-                @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
-            </li>
-            <li class="nav-item"><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">Log off</a></li>
-        </ul>
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item">
+                    @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
+                </li>
+                <li class="nav-item"><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">Cerrar Sesión</a></li>
+            </ul>
+        }
     }
+    else
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+            <li class="sidebar-title">Sesión</li>
+
+            <li class="sidebar-item  ">
+                <a href="@Url.Action("Index", "Manage")" class='sidebar-link'>
+                    <i class="bi bi-person-circle"></i>
+                    <span>Mi usuario</span>
+                </a>
+            </li>
+            <li class="sidebar-item  ">
+                <a href="javascript:document.getElementById('logoutForm').submit()" class='sidebar-link'>
+                    <i class="bi bi-door-open-fill"></i>
+                    <span>Cerrar Sesión</span>
+                </a>
+            </li>
+
+        }
+    }
+
 }
-else {
+else
+{
     <ul class="navbar-nav navbar-right">
         <li class="nav-item">@Html.ActionLink("Registrarme", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</li>
         <li class="nav-item">@Html.ActionLink("Iniciar Sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>

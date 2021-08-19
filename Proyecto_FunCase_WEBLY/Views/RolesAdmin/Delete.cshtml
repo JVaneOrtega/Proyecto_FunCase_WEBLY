@@ -2,30 +2,65 @@
 
 @{
     ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Eliminar.</h2>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Eliminar</h3>
+                <p class="text-subtitle text-muted">¿Esta seguro de eliminar este Rol?</p>
+                <p class="text-subtitle text-muted">Eliminar este rol removerá todos los usuarios para este rol. No eliminar a todos los usuarios de este rol.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end float-md-end float-sm-end">
+                    <ol class="breadcrumb breadcrumb-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("IndexAdmin", "Home")">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "RolesAdmin")">Roles</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Eliminar</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h3>¿Esta seguro de querer eliminar este Rol? </h3>
-<p>Eliminar este rol removerá todos los usuarios para este rol. No eliminar a todos los usuarios de este rol.</p>
-<div>
-    <h4>Rol.</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        
-            <button type="submit" class="btn btn-primary">Eliminar</button> |
-            @Html.ActionLink("Regresar al listado", "Index")
-    }
+<div class="page-content">
+    <section class="section">
+        <div class="row match-height">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Nombre: @Model.Name</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item active">Lista de Usuarios con este Rol</li>
+                                @if (ViewBag.UserCount == 0)
+                                {
+                                    <li class="list-group-item">No se encontraron usuarios.</li>
+                                }
+                                @foreach (var item in ViewBag.Users)
+                                {
+                                    <li class="list-group-item">@item.UserName</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <div class="col-12 d-flex justify-content-end">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger rounded-pill me-1 mb-1">Eliminar</button>
+                                @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-light-secondary rounded-pill me-1 mb-1" })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>

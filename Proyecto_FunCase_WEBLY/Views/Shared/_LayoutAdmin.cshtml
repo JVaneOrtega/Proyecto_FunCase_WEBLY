@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Admin FunCase</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    @Styles.Render("~/Admin/css")
+    <link rel="shortcut icon" href="/Content/assetsAdmin/images/favicon.svg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="@Url.Action("IndexAdmin", "Home")"><img src="https://res.cloudinary.com/dj2f7ngpv/image/upload/v1629227087/vane/Logo_hc6hth.jpg" alt="Logo" srcset="" style="width: 70px; height: 70px; align-self: center;"></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+
+                        <li class="sidebar-item active ">
+                            <a href="@Url.Action("IndexAdmin", "Home")" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        @Html.Partial("_LoginPartial")
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="sidebar-title">Administración</li>
+
+                            <li class="sidebar-item">
+                                <a href="@Url.Action("Index", "RolesAdmin")" class='sidebar-link'>
+                                    <i class="bi bi-briefcase-fill"></i>
+                                    <span>Roles</span>
+                                </a>
+                            </li>
+
+                            <li class="sidebar-item  has-sub">
+                                <a href="#" class='sidebar-link'>
+                                    <i class="bi bi-people-fill"></i>
+                                    <span>Usuarios</span>
+                                </a>
+                                <ul class="submenu ">
+                                    <li class="submenu-item ">
+                                        <a href="@Url.Action("Index", "UsersAdmin")">Empleados</a>
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a href="@Url.Action("Index", "Cliente")">Clientes</a>
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a href="@Url.Action("Index", "Designer")">Diseñadores</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
+                        @if (User.IsInRole("Empleado"))
+                        {
+                            <li class="sidebar-title">Administración</li>
+
+                            <li class="sidebar-item  has-sub">
+                                <a href="#" class='sidebar-link'>
+                                    <i class="bi bi-people-fill"></i>
+                                    <span>Usuarios</span>
+                                </a>
+                                <ul class="submenu ">
+                                    <li class="submenu-item ">
+                                        <a href="@Url.Action("Index", "Cliente")">Clientes</a>
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a href="@Url.Action("Index", "Designer")">Diseñadores</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="sidebar-title">Inventario</li>
+
+                            <li class="sidebar-item  has-sub">
+                                <a href="#" class='sidebar-link'>
+                                    <i class="bi bi-folder-fill"></i>
+                                    <span>Productos</span>
+                                </a>
+                                <ul class="submenu ">
+                                    <li class="submenu-item ">
+                                        <a href="@Url.Action("Index", "Productos")">Fundas</a>
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a href="@Url.Action("Index", "Marcas")">Marcas</a>
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a href="@Url.Action("Index", "Modeloes")">Modelos</a>
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a href="@Url.Action("Index", "Materiales")">Materiales</a>
+                                    </li>                                
+                                </ul>
+                            </li>
+
+                            <li class="sidebar-title">Movimientos</li>
+
+                            <li class="sidebar-item  has-sub">
+                                <a href="#" class='sidebar-link'>
+                                    <i class="bi bi-credit-card-fill"></i>
+                                    <span>Compras</span>
+                                </a>
+                                <ul class="submenu ">
+                                    <li class="submenu-item ">
+                                        <a href="@Url.Action("Index", "Cliente")">Proveedores</a>
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a href="@Url.Action("Index", "Designer")">Orden de Compra</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="sidebar-item  ">
+                                <a href="@Url.Action("Index", "Pedidos")" class='sidebar-link'>
+                                    <i class="bi bi-mailbox2"></i>
+                                    <span>Pedidos</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            @RenderBody()
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2021 &copy; WEBLY</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/admin")
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

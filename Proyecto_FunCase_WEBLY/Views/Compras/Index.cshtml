@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Proyecto_FunCase_WEBLY.Models.Compras>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Producto.ImagenFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Proveedor.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCompra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrecioCompra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NotaCompra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FotoTicket)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Producto.ImagenFinal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Proveedor.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaCompra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrecioCompra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NotaCompra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FotoTicket)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ComprasID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ComprasID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ComprasID })
+        </td>
+    </tr>
+}
+
+</table>
