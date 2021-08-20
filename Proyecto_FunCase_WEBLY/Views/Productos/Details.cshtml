@@ -107,7 +107,8 @@ else
         <h2>@Model.Producto.Nombre</h2>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-4">
-                <img class="img-responsive" src="@Model.Producto.ImagenFinal" alt="Imagen del Producto" id="imagenProducto" />
+                <canvas style="margin-top: 10px; z-index: 9999" width="500" height="600" id="canvas"></canvas>
+                <img class="img-responsive" src="@Model.Producto.ImagenFinal" alt="Imagen del Producto" id="imagenProducto" style="display:none" />
             </div>
             <div class="col-lg-6 col-md-6 col-sm-8">
                 <h3>Datos del Producto</h3>
@@ -129,9 +130,35 @@ else
                 </div>
                 <hr />
                 <h4>Imagen</h4>
-                <div class="mb-3 row">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="designerIlustration" checked>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Usar la Ilustración del diseñador
+                            </label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="userIlustration">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Usar mi Ilustración / Imagen
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+               
+             
+                <div class="mb-3 row" id="divImageUser" style="display: none">
+                    <label class="form-label col-lg-5 col-md-4 col-sm-4 col-form-label">Sube tu imagen</label>
+                    <input type="file" class="form-control" id="userImage" />
+                </div>
+                <div class="mb-3 row" id="divImageDesigner">
                     <label class="form-label col-lg-5 col-md-4 col-sm-4 col-form-label">Selecciona una imagen</label>
-                    <div class="col-lg-7 col-md-8 col-sm-8">
+                    <div class="col-lg-7 col-md-8 col-sm-8 mb-2">
                         <select id="Imagen" name="Imagen" class="form-control">
                             @foreach (var imagen in Model.Imagenes)
                             {
@@ -139,12 +166,13 @@ else
                             }
                         </select>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <img id="PreviewImagen" class="img-responsive" src="@Model.Imagenes.FirstOrDefault().Ruta" alt="Imagen" style="height: 150px;" />
+                    <div class="row">
+                        <div class="col-12">
+                            <img id="PreviewImagen" class="img-responsive" src="@Model.Imagenes.FirstOrDefault().Ruta" alt="Imagen" style="height: 150px;" />
+                        </div>
                     </div>
                 </div>
+                
                 <hr />
 
                 <div class="row">
@@ -157,7 +185,7 @@ else
                         <button class="agregar btn btn-primary" id="btnAgregar">Agregar</button>
                     </div>
                 </div>
-                <canvas style="margin-top: 10px" width="500" height="600" id="canvas"></canvas>
+
             </div>
         </div>
     </div>
@@ -176,20 +204,68 @@ else
                 var cantidad = document.getElementById("cantidad").value;
                 var ImagenId = document.getElementById("Imagen").valUE.split(";")[1];
 
-                fetch("@Url.Action("AgregaCarrito", "Carrito")", {
-                    method: 'POST',
-                    body: { idProducto: ProductoId, idImagen: ImagenId, cantidad: cantidad }
-                }).then(data => data.text()
-                ).then(data => {
-                    window.location.href = "@Url.Action("AgregaCarrito", "Carrito")";
-                }).catch(error => console.log(error));
+                $.ajax(
+                {
+                    url: "@Url.Action("AgregaCarrito", "Carrito")",
+                    data: { idProducto: ProductoId, idImagen: ImagenId, cantidad: cantidad },
+                    type: "POST",
+                    success: function (response) {
+                        window.location.href = "@Url.Action("AgregaCarrito", "Carrito")";
+                    },
+                        error: function (err, error) {
+                            alert(err.responseText);
+                    }
+                });
+            });
+
+            //Método de validación para el campo de cantidad
+            $(".numbers").keydown(function (e) {
+                //alert(e.keyCode);
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 40]) !== -1 ||
+                    (e.keyCode == 65 && e.ctrlkey === true) ||
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    return;
+                }
+
+                if ((e.shiftkey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 165)) {
+                    e.preventDefault();
+                }
+            });
+
+            var productImageSetted = null;
+            var userDesigImageSetted = null;
+            var listenMove = true;
+            var isVertical = true;
+
+            const encoded = (file) => {
+
+                return new Promise((resolve, reject) => {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        //$('#blah').attr('src', e.target.result); // Renderizamos la imagen            
+                        resolve(e.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                })
+
             }
+           
 
             const changeCanvasImage = async(e) => {
-                console.log(e.target.value);
-                const newImg = document.getElementById("PreviewImagen").src;
+                let newImg = null;
                 //const canvas = document.getElementById('canvas');
+                if (e.target.id === "userImage") {
+                    
+                    newImg = document.getElementById("userImage").files[0];
+                    newImg = await encoded(newImg);
+                  
+                } else {
+                    newImg = document.getElementById("PreviewImagen").src;
+                  
+                }
+              
                 const productImage = document.getElementById('imagenProducto').src;
+                            
                 loadCanvas(productImage, newImg)
             }
 
@@ -197,33 +273,126 @@ else
                 return new Promise((resolve, reject) => {
                     const img = new Image();
                     img.onload = () => resolve(img);
-                    img.onerror = () => reject(new Error(`load ${url} fail`));
+                    img.onerror = () => reject(`load ${url} fail`);
                     img.src = url;
                 });
             };
 
-            const loadCanvas = async(productImage, imageUrl) => {
-
+            const loadCanvas = async (productImage, newImage, newPositions = null ) => {
+                productImageSetted = productImage;
+                userDesigImageSetted = newImage;
                 const canvas = document.getElementById('canvas');
-
-                const img1 = await loadImage(productImage);
-                const ctx1 = canvas.getContext('2d');
-                ctx1.drawImage(img1, 0, 0, 550, 500);
-                const img2 = await loadImage(imageUrl)
+                              
+                const img1 = await loadImage(productImage);                
+                const ctx1 = canvas.getContext('2d');                
+                ctx1.drawImage(img1, 0, 0, 492, 492);
+              
+                const img2 = await loadImage(newImage)
                 const ctx2 = canvas.getContext('2d');
-                ctx2.drawImage(img2, 165, 50, 210, 400);
+                
+                const porcentajeHeight = (img2.height * 100) / img2.width;
+                const relacion = 100 - porcentajeHeight; // = 30
+                //console.log(newPositions)
+                if (newPositions !== null) {
+                    let { xFixed, yFixed } = newPositions;
+                    
+                    if (relacion > 25) {
+                        console.log(img2.height)
+                        if (yFixed > img2.height) {
 
+                            yFixed = img2.height;
+                        }
+                        isVertical = false;
+                        ctx2.drawImage(img2, xFixed , yFixed , 350, 150, 150, 160, 183, 150);
+                    } else {
+                        isVertical = true;
+                        ctx2.drawImage(img2, 150, 50, 185, 400);
+                    }
+                } else {
+                    if (relacion > 25) {
+                        isVertical = false;
+                        ctx2.drawImage(img2, 150, 50, 350, 150, 150, 160, 183, 150);
+                    } else {
+                        isVertical = true;
+                        ctx2.drawImage(img2, 150, 50, 185, 400);
+                    }
+                }
+
+                
+                
             }
 
-
             document.getElementById("Imagen").addEventListener('change', changeCanvasImage);
+            document.getElementById("userImage").addEventListener('change', changeCanvasImage);
 
             window.onload = () => {
                 const firstImagen = document.getElementById('PreviewImagen').src;
                 const productImage = document.getElementById('imagenProducto').src;
-                console.log(productImage)
-                loadCanvas(productImage,  firstImagen.split(';')[0]);
+              
+                loadCanvas(productImage, firstImagen.split(';')[0]);
+                if (document.getElementById("designerIlustration").checked) {
+                    document.getElementById("divImageDesigner").style.display = 'block';
+                    document.getElementById("divImageUser").style.display = 'none';
+                } else {
+                    document.getElementById("divImageDesigner").style.display = 'none';
+                    document.getElementById("divImageUser").style.display = 'block';
+                }
+
             }
+
+
+            const resizeImages = (x, y) => {
+                let yFixed = y ;
+                let xFixed = x;
+                if (yFixed > 550) {
+                    yFixed = 550;
+                }
+                
+                listenMove && !isVertical && loadCanvas(productImageSetted, userDesigImageSetted, { xFixed, yFixed });
+            }
+
+            document.getElementById("canvas").addEventListener('pointermove', e => {
+                if (productImageSetted !== null && userDesigImageSetted !== null) {
+
+                    resizeImages(e.offsetX, e.offsetY)
+                }
+
+            });
+
+            document.getElementById("canvas").addEventListener('click', e => {
+                if (listenMove) {
+                    listenMove = false;
+                } else {
+                    listenMove = true;
+                }
+            })
+
+            document.getElementById("userIlustration").addEventListener('change', async e => {
+                if (e.target.checked) {
+
+                    if (userDesigImageSetted !== null) {
+                        const userImg = document.getElementById("userImage").files[0];
+                        const userEncodedImg = await encoded(userImg);
+                        loadCanvas(productImageSetted, userEncodedImg);
+                    }
+                    
+
+                    document.getElementById("divImageUser").style.display = 'block';
+                    document.getElementById("divImageDesigner").style.display = 'none';
+                }
+                
+            });
+
+            document.getElementById("designerIlustration").addEventListener('change', e => {
+                if (e.target.checked) {
+                    const designerImg = document.getElementById("PreviewImagen").src;
+                    loadCanvas(productImageSetted, designerImg);
+                    document.getElementById("divImageDesigner").style.display = 'block';
+                    document.getElementById("divImageUser").style.display = 'none';
+                }
+
+            });
+            
         </script>
     }
 }
