@@ -160,21 +160,34 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                             producto.Stock -= compra.Cantidad;
                             db.Entry(producto).State = System.Data.Entity.EntityState.Modified;
 
-                            Funda_Diseno fd = new Funda_Diseno
+                            if (compra.customImage != null)
                             {
-                                Imagen = compra.Imagen.Ruta,
-                                ValorNeto = compra.Producto.Total,
-                                DetallesPedidoID = dp.DetallesPedidoID
-                            };
-                            db.Funda_Disenos.Add(fd);
-
-                            Imagen_Diseno id = new Imagen_Diseno
+                                Funda_Diseno fd = new Funda_Diseno
+                                {
+                                    Imagen = compra.customImage,
+                                    ValorNeto = compra.Producto.Total,
+                                    DetallesPedidoID = dp.DetallesPedidoID
+                                };
+                                db.Funda_Disenos.Add(fd);
+                            }
+                            else
                             {
-                                ImagenID = compra.Imagen.ImagenID,
-                                Funda_DisenoID = fd.Funda_DisenoID
-                            };
+                                Funda_Diseno fd = new Funda_Diseno
+                                {
+                                    Imagen = compra.Imagen.Ruta,
+                                    ValorNeto = compra.Producto.Total,
+                                    DetallesPedidoID = dp.DetallesPedidoID
+                                };
+                                db.Funda_Disenos.Add(fd);
 
-                            db.Imagen_Disenos.Add(id);
+                                Imagen_Diseno id = new Imagen_Diseno
+                                {
+                                    ImagenID = compra.Imagen.ImagenID,
+                                    Funda_DisenoID = fd.Funda_DisenoID
+                                };
+
+                                db.Imagen_Disenos.Add(id);
+                            }
                            
                         }
                         db.SaveChanges();
