@@ -13,6 +13,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     @Styles.Render("~/Plantilla/css")
+    @Styles.Render("~/Content/toastify")
 </head>
 <body>
     <nav class="navbar navbar-expand-lg">
@@ -85,6 +86,7 @@
         </div>
     </section>
 
+    @Scripts.Render("~/bundles/toastify")
     @Scripts.Render("~/bundles/plantilla")
     @RenderSection("scripts", required: false)
 </body>

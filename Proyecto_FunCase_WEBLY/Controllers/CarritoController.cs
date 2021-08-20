@@ -142,7 +142,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                     
                 }
 
-                RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
             return View();
