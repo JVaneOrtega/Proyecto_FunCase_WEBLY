@@ -42,7 +42,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // GET: Modeloes/Create
         public ActionResult Create()
         {
-            ViewBag.MarcaID = new SelectList(db.Marcas, "MarcaID", "Nombre");
+            ViewBag.MarcaID = new SelectList(db.Marcas.Where(m => m.Estatus == true), "MarcaID", "Nombre");
             return View();
         }
 

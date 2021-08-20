@@ -83,5 +83,49 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                 return Json(new { message = "Server Error", error = e.Message, trace = e.StackTrace, status = false});
             }
         }
+
+        [HttpGet]
+        public JsonResult ActualizarPedidoEnviado(int idPedido)
+        {
+            try
+            {
+                Pedido pedido = db.Pedidos.Find(idPedido);
+                if(pedido != null)
+                {
+                    pedido.EstatusPedido = "Enviado";
+                    db.Entry(pedido).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+
+                    return Json(new { response = true, mensaje = "Pedido enviado" }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { response = false, mensaje = "Pedido no encontrado" }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new { response = false, mensaje = "Error del servidor" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        public JsonResult ActualizarPedidoEntregado(int idPedido)
+        {
+            try
+            {
+                Pedido pedido = db.Pedidos.Find(idPedido);
+                if (pedido != null)
+                {
+                    pedido.EstatusPedido = "Entregado";
+                    db.Entry(pedido).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+
+                    return Json(new { response = true, mensaje = "Pedido enviado" }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { response = false, mensaje = "Pedido no encontrado" }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new { response = false, mensaje = "Error del servidor" }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

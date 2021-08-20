@@ -41,8 +41,8 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // GET: Compras/Create
         public ActionResult Create()
         {
-            ViewBag.ProveedorID = new SelectList(db.Proveedores, "ProveedorID", "NombreCompleto");
-            ViewBag.Modelos = new SelectList(db.Modelos, "ModeloID", "Nombre");
+            ViewBag.ProveedorID = new SelectList(db.Proveedores.Where(p => p.Estatus == true), "ProveedorID", "NombreCompleto");
+            ViewBag.Modelos = new SelectList(db.Modelos.Where(m => m.Estatus == true), "ModeloID", "Nombre");
             return View();
         }
 

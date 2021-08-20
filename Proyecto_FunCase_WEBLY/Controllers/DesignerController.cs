@@ -15,6 +15,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
     {
         FunCaseModelContext db = new FunCaseModelContext();
         // GET: Designer
+        [Authorize(Roles = "Admin,Empleado,Diseñador")]
         public ActionResult Index()
         {
             ViewBag.Initial = 0;
@@ -98,6 +99,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         }
 
         // GET: Designer/Delete/5
+        [Authorize(Roles = "Empleado,Diseñador")]
         public ActionResult Delete(int id)
         {
             if (id == null)

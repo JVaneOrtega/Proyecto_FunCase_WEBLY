@@ -41,9 +41,11 @@ namespace IdentitySample
                       "~/Content/assetsAdmin/js/bootstrap.bundle.min.js",
                       "~/Content/assetsAdmin/js/main.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/bundles/toastify").Include(
+                      "~/Content/assetsAdmin/vendors/toastify/toastify.js"));
+
+            bundles.Add(new StyleBundle("~/Content/toastify").Include(
+                      "~/Content/assetsAdmin/vendors/toastify/toastify.css"));
 
             bundles.Add(new StyleBundle("~/Plantilla/css").Include(
                       "~/Content/assetsPlantilla/css/animate.css",

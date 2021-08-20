@@ -14,7 +14,7 @@ namespace IdentitySample.Controllers
             {
                 return RedirectToAction("IndexAdmin");
             }
-            return View(db.Imagenes.ToList().Take(10));
+            return View(db.Imagenes.Where(i => i.Estatus == true).ToList().Take(10));
         }
 
         [HttpGet]

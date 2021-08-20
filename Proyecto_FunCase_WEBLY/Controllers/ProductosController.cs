@@ -33,7 +33,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             {
                 return HttpNotFound();
             }
-            List<Imagen> imagenes = db.Imagenes.ToList();
+            List<Imagen> imagenes = db.Imagenes.Where(i => i.Estatus == true).ToList();
             ProductoDetalle detalle = new ProductoDetalle(producto, imagenes);
             return View(detalle);
         }
@@ -42,8 +42,8 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // GET: Productos/Create
         public ActionResult Create()
         {
-            ViewBag.MaterialID = new SelectList(db.Materiales, "MaterialID", "NombreMaterial");
-            ViewBag.ModeloID = new SelectList(db.Modelos, "ModeloID", "Nombre");
+            ViewBag.MaterialID = new SelectList(db.Materiales.Where(m => m.Estatus == true), "MaterialID", "NombreMaterial");
+            ViewBag.ModeloID = new SelectList(db.Modelos.Where(m => m.Estatus == true), "ModeloID", "Nombre");
             return View();
         }
 

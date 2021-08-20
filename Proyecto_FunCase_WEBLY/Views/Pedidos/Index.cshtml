@@ -88,6 +88,14 @@
                                                 <td>
                                                     <div class="float-start float-lg-end float-md-end float-sm-end">
                                                         @Html.ActionLink("Detalles", "Details", new { id = item.PedidoID }, new { @class = "btn btn-info rounded-pill" })
+                                                        @if (item.EstatusPedido == "Generado")
+                                                        {
+                                                            <button type="button" class="btn btn-success rounded-pill" onclick="EnviarPedido(@item.PedidoID)">Enviado</button>
+                                                        }
+                                                        else if(item.EstatusPedido == "Enviado")
+                                                        {
+                                                            <button type="button" class="btn btn-success rounded-pill" onclick="EntregarPedido(@item.PedidoID)">Entregado</button>
+                                                        }
                                                     </div>
                                                 </td>
                                             </tr>
@@ -102,6 +110,67 @@
             </div>
         </section>
     </div>
+
+    @section scripts{
+        <script>
+            const EnviarPedido = (id) => {
+                fetch("@Url.Action("ActualizarPedidoEnviado", "Pedidos")/" + id, {
+                    method: 'GET',
+                }).then(data => data.json()
+                ).then(data => {
+                    if (data.response) {
+                        Toastify({
+                            text: data.mensaje,
+                            duration: 3000,
+                            close: true,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#4fbe87",
+                        }).showToast();
+                        window.location.reload();
+                    } else {
+                        Toastify({
+                            text: data.mensaje,
+                            duration: 3000,
+                            close: true,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#f3616d",
+                        }).showToast();
+                    }
+                }).catch(error => console.log(error));
+            }
+
+            const EntregarPedido = (id) => {
+                fetch("@Url.Action("ActualizarPedidoEntregado", "Pedidos")/" + id, {
+                    method: 'GET',
+                }).then(data => data.json()
+                ).then(data => {
+                    if (data.response) {
+                        Toastify({
+                            text: data.mensaje,
+                            duration: 3000,
+                            close: true,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#4fbe87",
+                        }).showToast();
+                        window.location.reload();
+                    } else {
+                        Toastify({
+                            text: data.mensaje,
+                            duration: 3000,
+                            close: true,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#f3616d",
+                        }).showToast();
+                    }
+                }).catch(error => console.log(error));
+            }
+        }
+        </script>
+    }
 }
 else
 {
@@ -181,6 +250,10 @@ else
                                                 <td>
                                                     <div class="float-start float-lg-end float-md-end float-sm-end">
                                                         @Html.ActionLink("Detalles", "Details", new { id = item.PedidoID }, new { @class = "btn btn-info rounded-pill" })
+                                                        @if(item.EstatusPedido == "Enviado")
+                                                        {
+                                                            <button type="button" class="btn btn-success rounded-pill" onclick="EntregarPedido(@item.PedidoID)">Recibido</button>
+                                                        }
                                                     </div>
                                                 </td>
                                             </tr>
@@ -195,4 +268,36 @@ else
             </div>
         </section>
     </div>
+
+    @section scripts {
+        <script>
+            const EntregarPedido = (id) => {
+                fetch("@Url.Action("ActualizarPedidoEntregado", "Pedidos")/" + id, {
+                    method: 'GET',
+                }).then(data => data.json()
+                ).then(data => {
+                    if (data.response) {
+                        Toastify({
+                            text: data.mensaje,
+                            duration: 3000,
+                            close: true,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#4fbe87",
+                        }).showToast();
+                        window.location.reload();
+                    } else {
+                        Toastify({
+                            text: data.mensaje,
+                            duration: 3000,
+                            close: true,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#f3616d",
+                        }).showToast();
+                    }
+                }).catch(error => console.log(error));
+            }
+        </script>    
+    }
 }
