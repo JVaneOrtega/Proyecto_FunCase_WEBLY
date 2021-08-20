@@ -2080,7 +2080,6 @@
     <Content Include="Views\Direccion\Create.cshtml" />
     <Content Include="Views\Direccion\Details.cshtml" />
     <Content Include="Views\Direccion\Edit.cshtml" />
-    <Content Include="Views\Direccion\Delete.cshtml" />
     <Content Include="Views\Imagenes\Index.cshtml" />
     <Content Include="Views\Imagenes\Create.cshtml" />
     <Content Include="Views\Imagenes\Edit.cshtml" />

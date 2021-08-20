@@ -131,6 +131,9 @@ else
                                     <table class="table table-lg table-hover">
                                         <tr>
                                             <th>
+                                                Número de Pedido
+                                            </th>
+                                            <th>
                                                 Método de Pago
                                             </th>
                                             <th>
@@ -154,6 +157,9 @@ else
                                         @foreach (var item in Model)
                                         {
                                             <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.PedidoID)
+                                                </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.MetodoPago.Nombre)
                                                 </td>

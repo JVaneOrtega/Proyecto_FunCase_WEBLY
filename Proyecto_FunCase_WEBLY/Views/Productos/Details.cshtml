@@ -165,47 +165,25 @@ else
     @section Scripts
     {
         <script>
-            $("#Imagen").on("change", function () {
-                let data = this.value.split(";");
+            document.getElementById("Imagen").onchange = () => {
+                let data = document.getElementById("Imagen").value.split(";");
                 let ruta = data[0];
-                $("#PreviewImagen").attr("src", ruta)
-            });
+                document.getElementById("PreviewImagen").src = ruta;
+            }
 
-            $("#btnAgregar").on("click", function (evemt) {
-                event.preventDefault();
-                var ProductoId = $("#idProducto").val();
-                var cantidad = $("#cantidad").val();
-                var ImagenId = $("#Imagen").val().split(";")[1];
+            document.getElementById("btnAgregar").onclick = () => {
+                var ProductoId = document.getElementById("idProducto").value;
+                var cantidad = document.getElementById("cantidad").value;
+                var ImagenId = document.getElementById("Imagen").valUE.split(";")[1];
 
-                $.ajax(
-                {
-                    url: "@Url.Action("AgregaCarrito", "Carrito")",
-                    data: { idProducto: ProductoId, idImagen: ImagenId, cantidad: cantidad },
-                    type: "POST",
-                    success: function (response) {
-                        window.location.href = "@Url.Action("AgregaCarrito", "Carrito")";
-                    },
-                        error: function (err, error) {
-                            alert(err.responseText);
-                    }
-                });
-            });
-
-            //Método de validación para el campo de cantidad
-            $(".numbers").keydown(function (e) {
-                //alert(e.keyCode);
-                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 40]) !== -1 ||
-                    (e.keyCode == 65 && e.ctrlkey === true) ||
-                    (e.keyCode >= 35 && e.keyCode <= 39)) {
-                    return;
-                }
-
-                if ((e.shiftkey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 165)) {
-                    e.preventDefault();
-                }
-            });
-
-           
+                fetch("@Url.Action("AgregaCarrito", "Carrito")", {
+                    method: 'POST',
+                    body: { idProducto: ProductoId, idImagen: ImagenId, cantidad: cantidad }
+                }).then(data => data.text()
+                ).then(data => {
+                    window.location.href = "@Url.Action("AgregaCarrito", "Carrito")";
+                }).catch(error => console.log(error));
+            }
 
             const changeCanvasImage = async(e) => {
                 console.log(e.target.value);
@@ -227,14 +205,14 @@ else
             const loadCanvas = async(productImage, imageUrl) => {
 
                 const canvas = document.getElementById('canvas');
-                              
+
                 const img1 = await loadImage(productImage);
                 const ctx1 = canvas.getContext('2d');
                 ctx1.drawImage(img1, 0, 0, 550, 500);
                 const img2 = await loadImage(imageUrl)
-                const ctx2 = canvas.getContext('2d');                                               
+                const ctx2 = canvas.getContext('2d');
                 ctx2.drawImage(img2, 165, 50, 210, 400);
-               
+
             }
 
 

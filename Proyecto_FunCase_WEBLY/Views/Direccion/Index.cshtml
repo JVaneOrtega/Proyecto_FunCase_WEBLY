@@ -23,7 +23,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-6">
-                                <h4 class="card-title">Materiales registrados</h4>
+                                <h4 class="card-title">Direcciones registrados</h4>
                             </div>
                             <div class="col-6">
                                 <p class="float-start float-lg-end float-md-end float-sm-end" style="text-align: right;">
@@ -63,36 +63,35 @@
 
                                     @foreach (var item in Model)
                                     {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Estado.Nombre)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Calle)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.NumeroExt)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.NumeroInt)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Colonia)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.CodigoPostal)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Estatus)
-                                    </td>
-                                    <td>
-                                        <div class="float-start float-lg-end float-md-end float-sm-end">
-                                            @Html.ActionLink("Editar", "Edit", new { id = item.DireccionID }, new { @class = "btn btn-primary rounded-pill" })
-                                            @Html.ActionLink("Detalles", "Details", new { id = item.DireccionID }, new { @class = "btn btn-info rounded-pill" })
-                                            @Html.ActionLink("Eliminar", "Delete", new { id = item.DireccionID }, new { @class = "btn btn-danger rounded-pill" })
-                                        </div>
-                                    </td>
-                                </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Estado.Nombre)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Calle)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NumeroExt)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NumeroInt)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Colonia)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CodigoPostal)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Estatus)
+                                            </td>
+                                            <td>
+                                                <div class="float-start float-lg-end float-md-end float-sm-end">
+                                                    @Html.ActionLink("Editar", "Edit", new { id = item.DireccionID }, new { @class = "btn btn-primary rounded-pill" })
+                                                    @Html.ActionLink("Detalles", "Details", new { id = item.DireccionID }, new { @class = "btn btn-info rounded-pill" })
+                                                </div>
+                                            </td>
+                                        </tr>
                                     }
 
                                 </table>
