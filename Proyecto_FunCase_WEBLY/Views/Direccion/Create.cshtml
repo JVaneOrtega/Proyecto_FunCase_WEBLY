@@ -31,14 +31,14 @@
 
                                 <div class="row">
                                     <div class="col-sm-4 col-md-5 col-lg-6">
-                                        @Html.LabelFor(model => model.Calle, "Modelo")
+                                        @Html.LabelFor(model => model.Calle, "Calle")
                                     </div>
                                     <div class="col-sm-8 col-md-7 col-lg-6 form-group">
                                         @Html.EditorFor(model => model.Calle, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.Calle, "", new { @class = "form-text text-danger" })
                                     </div>
                                     <div class="col-sm-4 col-md-5 col-lg-6">
-                                        @Html.LabelFor(model => model.NumeroExt, "Material")
+                                        @Html.LabelFor(model => model.NumeroExt)
                                     </div>
                                     <div class="col-sm-8 col-md-7 col-lg-6 form-group">
                                         @Html.EditorFor(model => model.NumeroExt, new { htmlAttributes = new { @class = "form-control" } })

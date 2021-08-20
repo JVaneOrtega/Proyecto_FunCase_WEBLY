@@ -12,10 +12,13 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Required]
         public string Nombre { get; set; }
         [Required]
+        [Display(Name = "Ancho (mm)")]
         public double Ancho { get; set; }
         [Required]
+        [Display(Name = "Alto (mm)")]
         public double Alto { get; set; }
         [Required]
+        [Display(Name = "Grosor (mm)")]
         public double Grosor { get; set; }
         [Display(Name = "Imagen de Referencia")]
         public string ImagenReferencia { get; set; }

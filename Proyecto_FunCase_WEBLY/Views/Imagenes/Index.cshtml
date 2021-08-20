@@ -22,7 +22,7 @@
                 <div class="card">
                     <div class="card-header" style="text-align: right;">
                         <p class="float-start float-lg-end float-md-end float-sm-end">
-                            @Html.ActionLink("Crear nuevo registro", "Create", "", new { @class = "btn btn-outline-success" })
+                            @Html.ActionLink("Crear nuevo registro", "Create", null, new { @class = "btn btn-outline-success" })
                         </p>
                     </div>
                     <div class="card-content">
@@ -39,6 +39,9 @@
                                         <th>
                                             @Html.DisplayNameFor(model => model.Estatus)
                                         </th>
+                                        <th>
+                                            Número de pedidos
+                                        </th>
                                         <th></th>
                                     </tr>
 
@@ -54,6 +57,9 @@
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.Estatus)
+                                            </td>
+                                            <td>
+                                                @item.Imagen_Disenos.Count()
                                             </td>
                                             <td>
                                                 @Html.ActionLink("Editar", "Edit", new { id = item.ImagenID }, new { @class = "btn btn-primary rounded-pill" })

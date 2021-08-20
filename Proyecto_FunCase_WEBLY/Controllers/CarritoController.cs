@@ -19,7 +19,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         {
 
             string pathCustomImage = "";
-            if(customImage != null)
+            if(customImage != "null")
             {
                 var image = Base64ToImage(customImage);
                 string ruta = Path.Combine(Server.MapPath("~/Images/CustomUserPersonalization/" + idProducto));
@@ -112,7 +112,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                 string currentUserId = User.Identity.GetUserId();
                 Cliente cliente = db.Clientes.Single(c => c.UserId == currentUserId);
               
-                ViewBag.DireccionID = new SelectList(db.Direcciones.Where(d => d.ClienteID == cliente.ClienteID), "DireccionID", "NombreDireccion");
+                ViewBag.DireccionID = new SelectList(db.Direcciones.Where(d => d.ClienteID == cliente.ClienteID && d.Estatus == true), "DireccionID", "NombreDireccion");
                 ViewBag.MetodosPagoID = new SelectList(db.MetodosPagos, "MetodosPagoID", "Nombre");
                 ViewBag.Producto = 1;
                
@@ -188,23 +188,24 @@ namespace Proyecto_FunCase_WEBLY.Controllers
 
                                 db.Imagen_Disenos.Add(id);
                             }
-                           
+                            db.SaveChanges();
                         }
-                        db.SaveChanges();
-                    } catch
+                    } catch (Exception e)
                     {
                         string currentUserId = User.Identity.GetUserId();
                         Cliente cliente = db.Clientes.Where(c => c.UserId == currentUserId).FirstOrDefault();
-                        ViewBag.DireccionID = new SelectList(db.Direcciones.Where(d => d.ClienteID == cliente.ClienteID), "DireccionID", "Calle,NumExt");
+                        ViewBag.DireccionID = new SelectList(db.Direcciones.Where(d => d.ClienteID == cliente.ClienteID && d.Estatus == true), "DireccionID", "NombreDireccion");
                         ViewBag.MetodosPagoID = new SelectList(db.MetodosPagos, "MetodosPagoID", "Nombre");
                         ViewBag.Producto = 1;
+                        ModelState.AddModelError("", e.Message);
                         ModelState.AddModelError("", "Debe tener una direcicón y un método de pago seleccionado");
                         return View("ConfirmarPedido");
                     }
                     
                 }
 
-                return RedirectToAction("Index");
+                Session["carrito"] = null;
+                return RedirectToAction("Index", "Pedidos");
             }
 
             return View();
@@ -215,7 +216,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             List<CarritoItem> compras = (List<CarritoItem>)Session["carrito"];
             for (int i = 0; i < compras.Count; i++)
             {
-                if (idImagen != 0)
+                if (idImagen != 0 && idImagen != null)
                 {
                     if (compras[i].Producto.ProductoID == idProducto && compras[i].Imagen.ImagenID == idImagen)
                         return i;

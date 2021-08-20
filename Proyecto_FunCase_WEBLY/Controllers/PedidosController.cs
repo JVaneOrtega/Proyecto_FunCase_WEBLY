@@ -19,9 +19,9 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             Cliente cliente = db.Clientes.Where(c => c.UserId == currentUserId).FirstOrDefault();
             if(cliente != null)
             {
-                return View(db.Pedidos.Where(p => p.ClienteID == cliente.ClienteID).ToList());
+                return View(db.Pedidos.Where(p => p.ClienteID == cliente.ClienteID).OrderByDescending(p => p.PedidoID).ToList());
             }
-            return View(db.Pedidos.ToList());
+            return View(db.Pedidos.OrderByDescending(p => p.PedidoID).ToList());
         }
 
         // GET: Pedidos/Details/5
@@ -85,11 +85,11 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         }
 
         [HttpGet]
-        public JsonResult ActualizarPedidoEnviado(int idPedido)
+        public JsonResult ActualizarPedidoEnviado(int id)
         {
             try
             {
-                Pedido pedido = db.Pedidos.Find(idPedido);
+                Pedido pedido = db.Pedidos.Find(id);
                 if(pedido != null)
                 {
                     pedido.EstatusPedido = "Enviado";
@@ -107,11 +107,11 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         }
 
         [HttpGet]
-        public JsonResult ActualizarPedidoEntregado(int idPedido)
+        public JsonResult ActualizarPedidoEntregado(int id)
         {
             try
             {
-                Pedido pedido = db.Pedidos.Find(idPedido);
+                Pedido pedido = db.Pedidos.Find(id);
                 if (pedido != null)
                 {
                     pedido.EstatusPedido = "Entregado";

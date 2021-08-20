@@ -50,7 +50,7 @@
                                             ID
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.Proveedor.Nombre)
+                                            Nombre de Proveedor
                                         </th>
                                         <th>
                                             @Html.DisplayNameFor(model => model.FechaCompra)
@@ -77,7 +77,7 @@
                                         @Html.DisplayFor(modelItem => item.ComprasID)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Proveedor.Nombre)
+                                        @Html.DisplayFor(modelItem => item.Proveedor.Nombre) @Html.DisplayFor(modelItem => item.Proveedor.Apellido1) / @Html.DisplayFor(modelItem => item.Proveedor.Email)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.FechaCompra)

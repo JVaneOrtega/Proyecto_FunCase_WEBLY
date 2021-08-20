@@ -19,7 +19,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // GET: Compras
         public ActionResult Index()
         {
-            return View(db.Compras.ToList());
+            return View(db.Compras.OrderByDescending(c => c.ComprasID).ToList());
         }
 
         // GET: Compras/Details/5
@@ -86,7 +86,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                     }
                 }
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Compras");
             }
             catch
             {

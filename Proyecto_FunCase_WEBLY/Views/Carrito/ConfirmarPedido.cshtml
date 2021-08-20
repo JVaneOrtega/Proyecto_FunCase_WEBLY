@@ -22,7 +22,7 @@
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Pedidos recibidos</h4>
+                            <h4 class="card-title">Datos del Pedido</h4>
                         </div>
                         <div class="card-content">
                             <div class="card-body">
@@ -31,8 +31,6 @@
                                     @Html.AntiForgeryToken()
 
                                     <div class="form-horizontal">
-                                        <h4>Datos del Pedido</h4>
-                                        <hr />
                                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                         <div class="mb-3 row">
                                             @Html.LabelFor(model => model.MetodosPagoID, "Metodos de Pago", htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
@@ -41,7 +39,6 @@
                                                 @Html.ValidationMessageFor(model => model.MetodosPagoID, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
-
                                         <div class="mb-3 row">
                                             @Html.LabelFor(model => model.DireccionID, "Dirección de Envío", htmlAttributes: new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
                                             <div class="col-lg-7 col-md-8 col-sm-8">
@@ -50,8 +47,8 @@
                                             </div>
                                         </div>
 
-                                        <a href="@Url.Action("Create","Direccion")" class="btn btn-info">Registrar Dirección</a>
-                                        <button type="submit" class="btn btn-success">Pedir</button>
+                                        <a href="@Url.Action("Create","Direccion")" class="btn btn-outline-info">Registrar Dirección</a>
+                                        <button type="submit" class="btn btn-outline-success">Pedir</button>
                                     </div>
                                 }
                             </div>
@@ -61,7 +58,7 @@
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Pedidos recibidos</h4>
+                            <h4 class="card-title">Productos Agregados</h4>
                         </div>
                         <div class="card-content">
                             <div class="card-body">
@@ -88,11 +85,21 @@
                                                     total += item.calcularTotal();
                                                     <tr>
                                                         <td>@item.Producto.Nombre</td>
-                                                        <td><img class="img-responsive" src="@item.Imagen.Ruta" alt="Imagen" style="height: 150px;" /></td>
+                                                        <td>
+                                                            @if (item.Imagen != null)
+                                                            {
+                                                                <img class="img-responsive" src="@item.Imagen.Ruta" alt="Imagen" style="height: 150px;" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <img class="img-responsive" src="@item.customImage" alt="Imagen" style="height: 150px;" />
+                                                            }
+
+                                                        </td>
                                                         <td>@String.Format("{0:C}", item.Producto.Total)</td>
                                                         <td>@item.Cantidad</td>
                                                         <td>@String.Format("{0:C}", item.calcularTotal())</td>
-                                                        <td>@Html.ActionLink("Eliminar", "Delete", "Carrito", new { idProducto = item.Producto.ProductoID, idImagen = item.Imagen.ImagenID }, null)</td>
+                                                        <td>@Html.ActionLink("Eliminar", "Delete", "Carrito", new { idProducto = item.Producto.ProductoID, idImagen = (item.Imagen != null) ? item.Imagen.ImagenID : 0, customImage = item.customImage }, null)</td>
                                                     </tr>
                                                 }
                                             }
@@ -112,21 +119,33 @@
             </div>
         </section>
     </div>
-
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6">
-            
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6">
-            <h2>Mi Carrito</h2>
-            
-        </div>
-    </div>
 }
 else
 {
-    <h2>Agregue productos para realizar la compra</h2>
-    <p>@Html.ActionLink("Comprar", "Index", "Productos", null, new { @class = "btn btn-outline-info" })</p>
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>Carrito</h3>
+                    <p class="text-subtitle text-muted">Estos son los productos que has agregado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <section class="section">
+            <div class="row">
+                <div class="col-12">
+                    <p>Agregue productos para realizar una compra</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" style="text-align: right;">
+                    @Html.ActionLink("Comprar", "Index", "Productos", null, new { @class = "btn btn-outline-info" })
+                </div>
+            </div>
+        </section>
+    </div>
 
 }
 

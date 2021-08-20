@@ -38,6 +38,9 @@
                                     <table class="table table-lg table-hover">
                                         <tr class="table-success">
                                             <th>
+                                                Número Pedido
+                                            </th>
+                                            <th>
                                                 @Html.DisplayNameFor(model => model.Cliente.User.Nombre)
                                             </th>
                                             <th>
@@ -65,6 +68,9 @@
                                         {
                                             <tr>
                                                 <td>
+                                                    @Html.DisplayFor(modelItem => item.PedidoID)
+                                                </td>
+                                                <td>
                                                     @item.Cliente.User.Nombre @item.Cliente.User.Apellido1 @item.Cliente.User.Apellido2
                                                 </td>
                                                 <td>
@@ -90,7 +96,7 @@
                                                         @Html.ActionLink("Detalles", "Details", new { id = item.PedidoID }, new { @class = "btn btn-info rounded-pill" })
                                                         @if (item.EstatusPedido == "Generado")
                                                         {
-                                                            <button type="button" class="btn btn-success rounded-pill" onclick="EnviarPedido(@item.PedidoID)">Enviado</button>
+                                                            <button type="button" class="btn btn-primary rounded-pill" onclick="EnviarPedido(@item.PedidoID)">Enviado</button>
                                                         }
                                                         else if(item.EstatusPedido == "Enviado")
                                                         {
@@ -127,7 +133,7 @@
                             position: "right",
                             backgroundColor: "#4fbe87",
                         }).showToast();
-                        window.location.reload();
+                        setTimeout(window.location.reload(), 3000);
                     } else {
                         Toastify({
                             text: data.mensaje,
@@ -168,7 +174,7 @@
                     }
                 }).catch(error => console.log(error));
             }
-        }
+        
         </script>
     }
 }
@@ -192,7 +198,7 @@ else
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Pedidos recibidos</h4>
+                            <h4 class="card-title">Mis pedidos</h4>
                         </div>
                         <div class="card-content">
                             <div class="card-body">
