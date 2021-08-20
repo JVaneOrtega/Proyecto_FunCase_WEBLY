@@ -71,10 +71,10 @@ namespace IdentitySample.Models
         [Required]
         public string Nombre { get; set; }
         [Required]
-        [Display(Name = "Apellido Paterno")]
+        [Display(Name = "Primer Apellido")]
         public string Apellido1 { get; set; }
 
-        [Display(Name = "Apellido Materno")]
+        [Display(Name = "Segundo Apellido")]
         public string Apellido2 { get; set; }
         public string Telefono { get; set; }
 

@@ -4,67 +4,102 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Direcciones</h3>
+                <p class="text-subtitle text-muted">Administra tus direcciones.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Crear Nuevo Registro", "Create")
-</p>
-<table class="table">
-    <tr>
-      
-        <th>
-            @Html.DisplayNameFor(model => model.Estado.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Calle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumeroExt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumeroInt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Colonia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CodigoPostal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estatus)
-        </th>
-        <th></th>
-    </tr>
+<div class="page-content">
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 class="card-title">Direcciones registrados</h4>
+                            </div>
+                            <div class="col-6">
+                                <p class="float-start float-lg-end float-md-end float-sm-end" style="text-align: right;">
+                                    @Html.ActionLink("Crear nuevo registro", "Create", "", new { @class = "btn btn-outline-success" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-lg table-hover">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Estado.Nombre)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Calle)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.NumeroExt)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.NumeroInt)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Colonia)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.CodigoPostal)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Estatus)
+                                        </th>
+                                        <th></th>
+                                    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-    
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Calle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumeroExt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumeroInt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Colonia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CodigoPostal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estatus)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.DireccionID }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.DireccionID }) |            
-        </td>
-    </tr>
-}
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Estado.Nombre)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Calle)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NumeroExt)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NumeroInt)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Colonia)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CodigoPostal)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Estatus)
+                                            </td>
+                                            <td>
+                                                <div class="float-start float-lg-end float-md-end float-sm-end">
+                                                    @Html.ActionLink("Editar", "Edit", new { id = item.DireccionID }, new { @class = "btn btn-primary rounded-pill" })
+                                                    @Html.ActionLink("Detalles", "Details", new { id = item.DireccionID }, new { @class = "btn btn-info rounded-pill" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
 
-</table>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

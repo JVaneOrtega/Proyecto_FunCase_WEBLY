@@ -2,32 +2,85 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index.</h2>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Marcas</h3>
+                <p class="text-subtitle text-muted">Lista de marcas de dispositivos móviles agregados.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end float-md-end float-sm-end">
+                    <ol class="breadcrumb breadcrumb-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("IndexAdmin", "Home")">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Marcas</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Crear Nuevo Registro", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.MarcaID }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.MarcaID }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.MarcaID })
-        </td>
-    </tr>
-}
+<div class="page-content">
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 class="card-title">Materiales registrados</h4>
+                            </div>
+                            <div class="col-6">
+                                <p class="float-start float-lg-end float-md-end float-sm-end">
+                                    @Html.ActionLink("Crear nuevo registro", "Create", "", new { @class = "btn btn-outline-success" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-lg table-hover">
+                                    <tr class="table-success">
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Nombre)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Estatus)
+                                        </th>
+                                        <th></th>
+                                    </tr>
 
-</table>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Nombre)
+                                            </td>
+                                            <th>
+                                                @Html.DisplayFor(modelItem => item.Estatus)
+                                            </th>
+                                            <td>
+                                                <div class="float-start float-lg-end float-md-end float-sm-end">
+                                                    @Html.ActionLink("Editar", "Edit", new { id = item.MarcaID }, new { @class = "btn btn-primary rounded-pill" })
+                                                    @Html.ActionLink("Detalles", "Details", new { id = item.MarcaID }, new { @class = "btn btn-info rounded-pill" })
+                                                    @Html.ActionLink("Eliminar", "Delete", new { id = item.MarcaID }, new { @class = "btn btn-danger rounded-pill" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -163,6 +163,19 @@ namespace IdentitySample.Controllers
             {
                 return HttpNotFound();
             }
+            // Get the list of Users in this Role
+            var users = new List<ApplicationUser>();
+            // Get the list of Users in this Role
+            foreach (var user in UserManager.Users.ToList())
+            {
+                if (await UserManager.IsInRoleAsync(user.Id, role.Name))
+                {
+                    users.Add(user);
+                }
+            }
+
+            ViewBag.Users = users;
+            ViewBag.UserCount = users.Count();
             return View(role);
         }
 

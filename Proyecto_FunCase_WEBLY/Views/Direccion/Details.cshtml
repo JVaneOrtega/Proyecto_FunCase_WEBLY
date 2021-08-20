@@ -4,80 +4,88 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Direccion</h4>
-    <hr />
-    <dl class="dl-horizontal">
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Estado.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Estado.Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Calle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Calle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NumeroExt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NumeroExt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NumeroInt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NumeroInt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Colonia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Colonia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CodigoPostal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CodigoPostal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ciudad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ciudad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Estatus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Estatus)
-        </dd>
-
-    </dl>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Detalles</h3>
+                <p class="text-subtitle text-muted">Visualiza los datos de tu dirección.</p>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.DireccionID }) |
-    @Html.ActionLink("Volver al Listado", "Index")
-</p>
+
+<div class="page-content">
+    <section class="section">
+        <div class="row match-height">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <formc class="form form-horizontal">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Calle</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.Calle" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Número Ext.</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.NumeroExt" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Número Int.</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.NumeroInt" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Colonia</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.Colonia" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Código Postal</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.CodigoPostal" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Ciudad</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.Ciudad" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Estado</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.Estado.Nombre" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Estatus</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            @Html.DisplayFor(model => model.Estatus)
+                                        </div>
+                                    </div>
+                                </div>
+                            </formc>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <div class="col-12 d-flex justify-content-end">
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-light-secondary rounded-pill me-1 mb-1" })
+                            @Html.ActionLink("Editar Material", "Edit", new { id = Model.DireccionID }, new { @class = "btn btn-info rounded-pill me-1 mb-1" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

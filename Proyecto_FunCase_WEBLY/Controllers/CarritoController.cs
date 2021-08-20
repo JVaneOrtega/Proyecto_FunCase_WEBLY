@@ -94,7 +94,6 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                         pedido.Total = total;
 
                         db.Pedidos.Add(pedido);
-                        db.SaveChanges();
 
                         List<DetallesPedido> detalles = new List<DetallesPedido>();
                         foreach (var compra in compras)
@@ -107,12 +106,10 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                                 PedidoID = pedido.PedidoID
                             };
                             db.DetallePedidos.Add(dp);
-                            db.SaveChanges();
 
                             Producto producto = db.Productos.Single(p => p.ProductoID == compra.Producto.ProductoID);
                             producto.Stock -= compra.Cantidad;
                             db.Entry(producto).State = System.Data.Entity.EntityState.Modified;
-                            db.SaveChanges();
 
                             Funda_Diseno fd = new Funda_Diseno
                             {
@@ -121,7 +118,6 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                                 DetallesPedidoID = dp.DetallesPedidoID
                             };
                             db.Funda_Disenos.Add(fd);
-                            db.SaveChanges();
 
                             Imagen_Diseno id = new Imagen_Diseno
                             {
@@ -130,8 +126,9 @@ namespace Proyecto_FunCase_WEBLY.Controllers
                             };
 
                             db.Imagen_Disenos.Add(id);
-                            db.SaveChanges();
+                           
                         }
+                        db.SaveChanges();
                     } catch
                     {
                         string currentUserId = User.Identity.GetUserId();

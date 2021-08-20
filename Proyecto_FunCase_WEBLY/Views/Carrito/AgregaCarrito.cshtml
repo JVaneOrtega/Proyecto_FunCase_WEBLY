@@ -1,45 +1,69 @@
 ﻿@{
-    ViewBag.Title = "Agrega Carrito";
+    ViewBag.Title = "Mi Carrito";
 }
 
-<h2>Mi Carrito</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Imagen</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-            <th>Total</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            double total = 0;
-        }
-        @if (Session["carrito"] != null)
-        {
-            foreach (var item in Session["carrito"] as List<Proyecto_FunCase_WEBLY.Models.CarritoItem>)
-            {
-                total += item.calcularTotal();
-                <tr>
-                    <td>@item.Producto.Nombre</td>
-                    <td><img class="img-responsive" src="@item.Imagen.Ruta" alt="Imagen" style="height: 150px;" /></td>
-                    <td>@String.Format("{0:C}", item.Producto.Total)</td>
-                    <td>@item.Cantidad</td>
-                    <td>@String.Format("{0:C}", item.calcularTotal())</td>
-                    <td>@Html.ActionLink("Eliminar", "Delete", "Carrito", new { idProducto = item.Producto.ProductoID, idImagen = item.Imagen.ImagenID }, null)</td>
-                </tr>
-            }
-        }
-    </tbody>
-    <tfoot>
-        <tr>
-            <th colspan="4">Total</th>
-            <th>@String.Format("{0:C}", total)</th>
-        </tr>
-    </tfoot>
-</table>
-@Html.ActionLink("Seguir Comprando", "Index", "Productos", null, null) |
-@Html.ActionLink("Confirmar Compra", "ConfirmarPedido", "Carrito", null, null)
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Carrito</h3>
+                <p class="text-subtitle text-muted">Estos son los productos que has agregado.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-content">
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Imagen</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                double total = 0;
+                            }
+                            @if (Session["carrito"] != null)
+                            {
+                                foreach (var item in Session["carrito"] as List<Proyecto_FunCase_WEBLY.Models.CarritoItem>)
+                                {
+                                    total += item.calcularTotal();
+                                    <tr>
+                                        <td>@item.Producto.Nombre</td>
+                                        <td><img class="img-responsive" src="@item.Imagen.Ruta" alt="Imagen" style="height: 150px;" /></td>
+                                        <td>@String.Format("{0:C}", item.Producto.Total)</td>
+                                        <td>@item.Cantidad</td>
+                                        <td>@String.Format("{0:C}", item.calcularTotal())</td>
+                                        <td>@Html.ActionLink("Eliminar", "Delete", "Carrito", new { idProducto = item.Producto.ProductoID, idImagen = item.Imagen.ImagenID }, null)</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="4">Total</th>
+                                <th>@String.Format("{0:C}", total)</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" style="text-align: right;">
+                @Html.ActionLink("Seguir Comprando", "Index", "Productos", null, new { @class = "btn btn-outline-info" })
+                @Html.ActionLink("Confirmar Compra", "ConfirmarPedido", "Carrito", null, new { @class = "btn btn-outline-success" })
+            </div>
+        </div>
+    </section>
+</div>

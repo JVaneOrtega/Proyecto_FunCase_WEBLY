@@ -2,53 +2,52 @@
 
 @{
     ViewBag.Title = "Iniciar Sesión";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
+<div class="row h-100">
+    <div class="col-lg-5 col-12">
+        <div id="auth-left">
+            <div class="auth-logo">
+                <a href="@Url.Action("Index", "Home")"><img src="https://res.cloudinary.com/dj2f7ngpv/image/upload/v1629227087/vane/Logo_hc6hth.jpg" alt="Logo" srcset="" style="width: 80px; height: 80px; align-self: center;"></a>
+            </div>
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+            {
                 @Html.AntiForgeryToken()
+                <h2>@ViewBag.Title.</h2>
                 <h4>Inicia sesión con tu cuenta.</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="mb-3 row">
+                <div class="form-group position-relative mb-4">
                     @Html.LabelFor(m => m.Email, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
-                    <div class="col-lg-7 col-md-8 col-sm-8">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-xl" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
-                <div class="mb-3 row">
+                <div class="form-group position-relative mb-4">
                     @Html.LabelFor(m => m.Password, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
-                    <div class="col-lg-7 col-md-8 col-sm-8">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-xl" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
-                <div class="mb-3 row">
-                    <div class="col-md-offset-2 col-lg-7 col-md-8 col-sm-8">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
+                <div class="form-check form-check-lg d-flex align-items-end">
+                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input me-2" })
+                    @Html.LabelFor(m => m.RememberMe, new { @class = "form-check-label text-gray-600" })
                 </div>
-                <button type="submit" value="Log in" class="btn btn-outline-primary">Ingresar</button>
-                <p>
-                    @Html.ActionLink("Crear una cuenta", "Register")
-                </p>
-                <p>
-                    @Html.ActionLink("¿Has olvidado tu contraseña?", "ForgotPassword")
-                </p>
+                <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Ingresar</button>
+                <div class="text-center mt-5 text-lg fs-4">
+                    <p>
+                        @Html.ActionLink("Crear una cuenta", "Register", "", new { @class = "font-bold" })
+                    </p>
+                    <p>
+                        @Html.ActionLink("¿Has olvidado tu contraseña?", "ForgotPassword", "", new { @class = "font-bold" })
+                    </p>
+                </div>
             }
-        </section>
+        </div>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new IdentitySample.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
+    <div class="col-lg-7 d-none d-lg-block">
+        <div id="auth-right" style="text-align: center;">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/814aPFny%2BnL._AC_SL1500_.jpg" style="align-self: center; width:1100px;"/>
+        </div>
     </div>
 </div>
 @section Scripts {

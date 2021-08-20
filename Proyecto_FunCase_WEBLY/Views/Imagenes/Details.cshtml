@@ -1,44 +1,70 @@
 ﻿@model Proyecto_FunCase_WEBLY.Models.Imagen
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
 }
 
-<h2>Detalles</h2>
-
-<div>
-    <h4>Imagen</h4>
-    <hr />
-    <dl class="dl-horizontal">
-   
-        <dt>
-            @Html.DisplayNameFor(model => model.NombreImagen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NombreImagen)
-        </dd>
-
-        <dt>
-            Ilustración
-        </dt>
-
-        <dd>
-            
-            <img src="@Model.Ruta" height="300" class="mt-2"/>
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Estatus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Estatus)
-        </dd>
-
-    </dl>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Detalles</h3>
+                <p class="text-subtitle text-muted">Visualiza los datos de tu diseño.</p>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.ImagenID }) |
-    @Html.ActionLink("Volver", "Index")
-</p>
+
+<div class="page-content">
+    <section class="section">
+        <div class="row match-height">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Diseño: @Model.NombreImagen</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Estatus</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            @Html.DisplayFor(model => model.Estatus)
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <div class="col-12 d-flex justify-content-end">
+                            @Html.ActionLink("Editar Diseño", "Edit", new { id = Model.ImagenID }, new { @class = "btn btn-info rounded-pill me-1 mb-1" })
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-light-secondary rounded-pill me-1 mb-1" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Mi diseño</h4>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12" style="text-align: center;">
+                                    <img src="@Model.Ruta" alt="Imagen del Modelo" style="height: 300px;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -32,6 +32,15 @@ namespace IdentitySample
                       "~/Content/assetsPlantilla/js/wow.min.js",
                       "~/Content/assetsPlantilla/js/main.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/admin").Include(
+                      "~/Content/assetsAdmin/vendors/perfect-scrollbar/perfect-scrollbar.min.js",
+                      "~/Content/assetsAdmin/vendors/apexcharts/apexcharts.js",
+                      "~/Content/assetsAdmin/vendors/sweetalert2/sweetalert2.all.min.js",
+                      "~/Content/assetsAdmin/vendors/toastify/toastify.js",
+                      "~/Content/assetsAdmin/js/pages/dashboard.js",
+                      "~/Content/assetsAdmin/js/bootstrap.bundle.min.js",
+                      "~/Content/assetsAdmin/js/main.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
@@ -43,6 +52,21 @@ namespace IdentitySample
                       "~/Content/assetsPlantilla/css/Linelcons-2.0.css",
                       "~/Content/assetsPlantilla/css/main.css",
                       "~/Content/assetsPlantilla/css/tiny-slider.css"));
+
+            bundles.Add(new StyleBundle("~/Admin/css").Include(
+                      "~/Content/assetsAdmin/css/bootstrap.css",
+                      "~/Content/assetsAdmin/vendors/iconly/bold.css",
+                      "~/Content/assetsAdmin/vendors/perfect-scrollbar/perfect-scrollbar.css",
+                      "~/Content/assetsAdmin/vendors/bootstrap-icons/bootstrap-icons.css",
+                      "~/Content/assetsAdmin/vendors/sweetalert2/sweetalert2.min.css",
+                      "~/Content/assetsAdmin/vendors/toastify/toastify.css",
+                      "~/Content/assetsAdmin/css/app.css"));
+
+            bundles.Add(new StyleBundle("~/Login/css").Include(
+                      "~/Content/assetsAdmin/css/bootstrap.css",
+                      "~/Content/assetsAdmin/vendors/bootstrap-icons/bootstrap-icons.css",
+                      "~/Content/assetsAdmin/css/app.css",
+                      "~/Content/assetsAdmin/css/pages/auth.css"));
         }
     }
 }

@@ -30,10 +30,11 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             return View(db.Pedidos.Find(id));
         }
 
+        [Authorize(Roles = "Empleado")]
         // GET: Pedidos/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(db.Pedidos.Find(id));
         }
 
         // POST: Pedidos/Delete/5
@@ -42,7 +43,10 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                Pedido pedido = db.Pedidos.Find(id);
+                pedido.EstatusPedido = "Cancelado";
+                db.Entry(pedido).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
 
                 return RedirectToAction("Index");
             }

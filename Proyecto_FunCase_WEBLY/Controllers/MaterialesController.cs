@@ -10,6 +10,7 @@ using Proyecto_FunCase_WEBLY.Models;
 
 namespace Proyecto_FunCase_WEBLY.Controllers
 {
+    [Authorize(Roles = "Empleado")]
     public class MaterialesController : Controller
     {
         private FunCaseModelContext db = new FunCaseModelContext();
@@ -46,7 +47,7 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaterialID,Nombre,Color,Precio")] Material material)
+        public ActionResult Create(Material material)
         {
             if (ModelState.IsValid)
             {

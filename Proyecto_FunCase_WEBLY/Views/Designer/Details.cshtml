@@ -2,60 +2,90 @@
 
 @{ 
     ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-<h4>Detalles.</h4>
 
-<div>
-    <h4>Diseñador</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.Nombre)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Apellido1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.Apellido1)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Apellido2)
-        </dt>
-
-        @if (Model.User.Apellido2 == "" || Model.User.Apellido2 == null)
-        {
-            <dd>N/A</dd>
-        }
-        else
-        {
-            <dd>
-                @Html.DisplayFor(model => model.User.Apellido2)
-            </dd>
-
-        }
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NombrePresentacion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NombrePresentacion)
-        </dd>
-
-    </dl>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Detalles</h3>
+                <p class="text-subtitle text-muted">Visualiza los datos del diseñador.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end float-md-end float-sm-end">
+                    <ol class="breadcrumb breadcrumb-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("IndexAdmin", "Home")">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Cliente")">Diseñadores</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.DesignerID }) |
-    @Html.ActionLink("Volver al Listado", "Index")
-</p>
+
+<div class="page-content">
+    <section class="section">
+        <div class="row match-height">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Diseñador: @Model.DesignerID</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Nombre</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.User.Nombre" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Primer Apellido</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.User.Apellido1" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Segundo Apellido</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.User.Apellido2" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Teléfono</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.User.Telefono" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.User.Email" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Nombre de Presentación</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.NombrePresentacion" class="form-control" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <div class="col-12 d-flex justify-content-end">
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-light-success rounded-pill me-1 mb-1" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

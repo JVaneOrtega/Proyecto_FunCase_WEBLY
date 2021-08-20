@@ -2,25 +2,68 @@
 
 @{
     ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Detalles.</h2>
-
-<div>
-    <h4>Marca</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-
-    </dl>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Detalles</h3>
+                <p class="text-subtitle text-muted">Visualiza los datos de la marca.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end float-md-end float-sm-end">
+                    <ol class="breadcrumb breadcrumb-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("IndexAdmin", "Home")">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Marcas")">Marcas</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.MarcaID }) |
-    @Html.ActionLink("Volver al Listado", "Index")
-</p>
+
+<div class="page-content">
+    <section class="section">
+        <div class="row match-height">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Marca: @Model.MarcaID</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Nombre</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            <input type="text" value="@Model.Nombre" class="form-control" readonly />
+                                        </div>
+                                        <div class="col-sm-4 col-md-5 col-lg-6">
+                                            <label>Estatus</label>
+                                        </div>
+                                        <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                            @Html.DisplayFor(model => model.Estatus)
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <div class="col-12 d-flex justify-content-end">
+                            @Html.ActionLink("Editar Marca", "Edit", new { id = Model.MarcaID }, new { @class = "btn btn-info rounded-pill me-1 mb-1" })
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-light-secondary rounded-pill me-1 mb-1" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

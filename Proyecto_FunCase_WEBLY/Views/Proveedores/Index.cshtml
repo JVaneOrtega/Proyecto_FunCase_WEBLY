@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Proyecto_FunCase_WEBLY.Models.Proveedor>
+
+@{ 
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Proveedores</h3>
+                <p class="text-subtitle text-muted">Lista de los proveedores registrados.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end float-md-end float-sm-end">
+                    <ol class="breadcrumb breadcrumb-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("IndexAdmin", "Home")">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Proveedores</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-content">
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 class="card-title">Proveedores registrados</h4>
+                            </div>
+                            <div class="col-6">
+                                <p class="float-start float-lg-end float-md-end float-sm-end">
+                                    @Html.ActionLink("Crear nuevo registro", "Create", "", new { @class = "btn btn-outline-success" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-lg table-hover">
+                                    <thead>
+                                        <tr class="table-success">
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Nombre)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Apellido1)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Apellido2)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Email)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Telefono)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Empresa)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Estatus)
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Apellido1)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Apellido2)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Email)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Telefono)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Empresa)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Estatus)
+                                                </td>
+                                                <td>
+                                                    <div class="float-start float-lg-end float-md-end float-sm-end">
+                                                        @Html.ActionLink("Editar", "Edit", new { id = item.ProveedorID }, new { @class = "btn btn-primary rounded-pill" })
+                                                        @Html.ActionLink("Detalles", "Details", new { id = item.ProveedorID }, new { @class = "btn btn-info rounded-pill" })
+                                                        @Html.ActionLink("Eliminar", "Delete", new { id = item.ProveedorID }, new { @class = "btn btn-danger rounded-pill" })
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
