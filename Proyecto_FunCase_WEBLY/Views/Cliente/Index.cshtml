@@ -2,30 +2,43 @@
 
 @if (User.IsInRole("Cliente"))
 {
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Perfil";
     var Cliente = Model.ToList().Where(c => c.User.UserName == User.Identity.Name).FirstOrDefault();
 
-    <h2>Mis datos.</h2>
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>Mis datos</h3>
+                    <p class="text-subtitle text-muted">Actualiza tus datos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <div class="row">
-        <div class="col-lg-6 col-md-4 col-sm-4" id="opciones">
-            <div class="list-group">
-                <a onclick="MostrarPerfil()" class="list-group-item" id="buttonMostrar">
-                    Ver mi perfil
-                </a>
-                <a onclick="EditarPerfil()" class="list-group-item" id="buttonEditar">
-                    Cambiar mi perfil
-                </a>
+    <div class="page-content">
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-6 col-md-4 col-sm-4" id="opciones">
+                    <div class="list-group">
+                        <a onclick="MostrarPerfil()" class="list-group-item" id="buttonMostrar">
+                            Ver mi perfil
+                        </a>
+                        <a onclick="EditarPerfil()" class="list-group-item" id="buttonEditar">
+                            Cambiar mi perfil
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-8 col-sm-8" id="contenido">
+                    <div id="edit" style="display:none">
+                        @Html.Partial("_EditProfile", (Proyecto_FunCase_WEBLY.Models.Cliente)Cliente)
+                    </div>
+                    <div id="show" style="display:block">
+                        @Html.Partial("_Profile", (Proyecto_FunCase_WEBLY.Models.Cliente)Cliente)
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-6 col-md-8 col-sm-8" id="contenido">
-            <div id="edit" style="display:none">
-                @Html.Partial("_EditProfile", (Proyecto_FunCase_WEBLY.Models.Cliente)Cliente)
-            </div>
-            <div id="show" style="display:block">
-                @Html.Partial("_Profile", (Proyecto_FunCase_WEBLY.Models.Cliente)Cliente)
-            </div>
-        </div>
+        </section>
     </div>
 
     <input type="hidden" value="@ViewBag.Initial" id="initial" />

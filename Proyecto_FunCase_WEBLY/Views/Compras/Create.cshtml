@@ -1,77 +1,226 @@
 ﻿@model Proyecto_FunCase_WEBLY.Models.Compras
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Compras</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.FechaCompra, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaCompra, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FechaCompra, "", new { @class = "text-danger" })
-            </div>
-        </div>
+@{
+    ViewBag.Title = "Crear";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cantidad, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Crear</h3>
+                <p class="text-subtitle text-muted">Registrar una nueva compra.</p>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PrecioCompra, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PrecioCompra, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PrecioCompra, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.NotaCompra, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NotaCompra, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NotaCompra, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FotoTicket, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FotoTicket, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FotoTicket, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProductoID, "ProductoID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ProductoID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ProductoID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProveedorID, "ProveedorID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ProveedorID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ProveedorID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end float-md-end float-sm-end">
+                    <ol class="breadcrumb breadcrumb-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("IndexAdmin", "Home")">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Compras")">Compras</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Crear</li>
+                    </ol>
+                </nav>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+<section>
+    <div class="row match-height">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Ingrese los datos</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-body">
+                            @Html.ValidationSummary("", new { @class = "text-error" })
+
+                            <div class="row">
+                                <div class="col-sm-4 col-md-5 col-lg-6">
+                                    @Html.LabelFor(model => model.ProveedorID, "Proveedor")
+                                </div>
+                                <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                    @Html.DropDownList("ProveedorID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ProveedorID, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-sm-4 col-md-5 col-lg-6">
+                                    Modelo
+                                </div>
+                                <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                    @Html.DropDownList("Modelos", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                                <div class="col-sm-4 col-md-5 col-lg-6">
+                                    @Html.LabelFor(model => model.NotaCompra)
+                                </div>
+                                <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                    @Html.TextAreaFor(model => model.NotaCompra, new { @class = "form-control" })
+                                </div>
+                                <div class="col-sm-4 col-md-5 col-lg-6">
+                                    @Html.LabelFor(model => model.FotoTicket)
+                                </div>
+                                <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                    @Html.TextBoxFor(model => model.FotoTicket, new { type = "file", @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Productos del Modelo</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr class="table-success">
+                                        <th>Nombre</th>
+                                        <th>Imagen</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio de Compra</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableProductos">
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="4">Total</th>
+                                        <th id="TotalCompra"></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button type="button" onclick="guardarCompra()" class="btn btn-primary rounded-pill me-1 mb-1">Guardar</button>
+                        @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "btn btn-light-secondary rounded-pill me-1 mb-1" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script>
+
+        let totalCompra = 0;
+
+        const cargarProductos = (id) => {
+            fetch("@Url.Action("ProductosDisponibles", "Compras")/" + id, {
+                method: 'GET'
+            }).then(data => data.text()
+            ).then(data => {
+                document.getElementById("tableProductos").innerHTML = data;
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+
+        const validar = (value) => {
+            const number = Number(value);
+            if (!isNaN(value) && !Number.isNaN(value)) {
+                if (value >= 0) {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+
+        const calcularTotal = (e) => {
+            const id = e.id.split('-')[1];
+            const value = document.getElementById(`PrecioCompra-${id}`).value;
+            const cantidad = document.getElementById(`Cantidad-${id}`).value;
+
+            if (validar(value) && validar(cantidad)) {
+                const options = { style: 'currency', currency: 'MXN' };
+                const resultado = parseInt(cantidad) * parseFloat(value);
+                document.getElementById(`Total-${id}`).innerText = new Intl.NumberFormat('es-MX', options).format(resultado);
+                totalCompra += + resultado;
+                document.getElementById("TotalCompra").innerText = new Intl.NumberFormat('es-MX', options).format(totalCompra);
+            } else {
+                Toastify({
+                    text: "Verfique que los valores ingresados",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#f3616d",
+                }).showToast();
+            }
+        }
+
+        document.getElementById("Modelos").onchange = (e) => {
+            cargarProductos(e.target.value);
+        }
+
+        const guardarCompra = () => {
+            var formData = new FormData();
+            let foto = document.getElementById("FotoTicket");
+
+            if (totalCompra === 0) {
+                Toastify({
+                    text: "No se puede generar una compra sin productos",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#f3616d",
+                }).showToast();
+                return;
+            }
+
+            let detalle = {};
+            const id = document.getElementById("TotalCantidadProductos").value;
+
+            let idProd = id.substring(0, (id.length - 1)).split(",");
+            let detalleProductos = [];
+            for (const id of idProd) {
+               
+                let detalleProducto = {};
+                console.log(id);
+                detalleProducto.ProductoID = id;
+                detalleProducto.Cantidad = document.getElementById(`Cantidad-'${id}'`).value;
+                detalleProducto.PrecioCompra = document.getElementById(`PrecioCompra-'${id}'`).value;
+                detalleProductos.push(detalleProducto);
+            }
+            
+           
+            formData.append("NotaCompra", document.getElementById("NotaCompra").value);
+            formData.append("FechaCompra", new Date());
+            formData.append("UserId", null);
+            formData.append("FotoTicket", "");
+            formData.append("Total", totalCompra);
+            formData.append("EstatusCompra", "");
+            formData.append("ProveedorID", document.getElementById("ProveedorID").value);
+            formData.append("Foto", foto.files[0]);
+            formData.append("detalles", JSON.stringify(detalleProductos));
+
+            fetch("@Url.Action("Create", "Compras")", {
+                method: 'POST',
+                body: formData
+            }).then(data => data.json()
+            ).then(data => console.log(data)
+            ).catch(error => console.log(error))
+        }
+
+        window.onload = () => {
+            let idModelo = document.getElementById("Modelos").value;
+            cargarProductos(idModelo);
+        }
+    </script>
+}

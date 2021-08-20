@@ -1,68 +1,132 @@
 ﻿@model Proyecto_FunCase_WEBLY.Models.Compras
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Detalles";
+}
 
-<div>
-    <h4>Compras</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Producto.ImagenFinal)
-        </dt>
+<link href="/Content/stripe.css" />
 
-        <dd>
-            @Html.DisplayFor(model => model.Producto.ImagenFinal)
-        </dd>
+<script defer src="https://js.stripe.com/v3/"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Proveedor.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Proveedor.Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaCompra)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaCompra)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cantidad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cantidad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PrecioCompra)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PrecioCompra)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NotaCompra)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NotaCompra)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FotoTicket)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FotoTicket)
-        </dd>
-
-    </dl>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Detalles</h3>
+                <p class="text-subtitle text-muted">Información sobre el pedido recibido.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end float-md-end float-sm-end">
+                    <ol class="breadcrumb breadcrumb-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("IndexAdmin", "Home")">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Compras")">Compras</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ComprasID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+<div class="page-content">
+    <section class="section">
+        <div class="row match-height">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Detalle de la Compra: @Model.ComprasID</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Compra Registrada por</th>
+                                        <th>@Model.User.Nombre @Model.User.Apellido1 @Model.User.Apellido2</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Registrada el:</th>
+                                        <th>@Model.FechaCompra</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Total</th>
+                                        <th>@Model.Total</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Estatus de la Compra</th>
+                                        <th>@Model.EstatusCompra</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Notas sobre la compra</th>
+                                        <th>@Model.NotaCompra</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Imagen Ticket</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="img-responsive">
+                                <img src="@Model.FotoTicket" style="width: 100px;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        @if (Model.EstatusCompra == "Registrada")
+                        {
+                            <button type="button" class="btn btn-success" onclick="ValidarPedido(@Model.ComprasID)">Validar</button>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Productos comprados</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-lg table-hover">
+                                    <thead>
+                                        <tr class="table-success">
+                                            <th>Producto</th>
+                                            <th>Imagen</th>
+                                            <th>Precio de Compra</th>
+                                            <th>Cantidad</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.DetalleCompras != null)
+                                        {
+                                            foreach (var detalle in Model.DetalleCompras)
+                                            {
+                                                <tr>
+                                                    <td>@detalle.Producto.Nombre</td>
+                                                    <td><img class="img-responsive" src="@detalle.Producto.ImagenFinal" alt="Imagen del Producto" style="height: 250px" /></td>
+                                                    <td>@detalle.PrecioCompra</td>
+                                                    <td>@detalle.Cantidad</td>
+                                                    <td>@(detalle.PrecioCompra * detalle.Cantidad)</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

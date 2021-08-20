@@ -68,22 +68,8 @@
                                             <li class="nav-item">@Html.ActionLink("Mis pedidos", "Index", "Pedidos", null, htmlAttributes: new { @class = "nav-link" })</li>
                                             <li class="nav-item">@Html.ActionLink("Mis direcciones", "Index", "Direccion", null, htmlAttributes: new { @class = "nav-link" })</li>
                                         }
-                                        else if (User.IsInRole("Admin"))
-                                        {
-                                            <li class="nav-item">@Html.ActionLink("Diseñadores", "Index", "Designer", null, htmlAttributes: new { @class = "nav-link" })</li>
-                                            <li class="nav-item">@Html.ActionLink("Clientes", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
-                                            <li class="nav-item">@Html.ActionLink("Usuarios", "Index", "UsersAdmin", null, htmlAttributes: new { @class = "nav-link" })</li>
-                                            <li class="nav-item">@Html.ActionLink("Roles", "Index", "RolesAdmin", null, htmlAttributes: new { @class = "nav-link" })</li>
-                                        }
-                                        else if (User.IsInRole("Empleado"))
-                                        {
-                                            <li class="nav-item">@Html.ActionLink("Marcas", "Index", "Marcas", null, htmlAttributes: new { @class = "nav-link" })</li>
-                                            <li class="nav-item">@Html.ActionLink("Modelos", "Index", "Modeloes", null, htmlAttributes: new { @class = "nav-link" })</li>
-                                            <li class="nav-item">@Html.ActionLink("Materiales", "Index", "Materiales", null, htmlAttributes: new { @class = "nav-link" })</li>
-                                            <li class="nav-item">@Html.ActionLink("Pedidos", "Index", "Pedidos", null, htmlAttributes: new { @class = "nav-link" })</li>
-                                            <li class="nav-item">@Html.ActionLink("Clientes", "Index", "Cliente", null, htmlAttributes: new { @class = "nav-link" })</li>
-                                        }
                                     }
+                                    <li class="nav-item">@Html.ActionLink("Catálogo", "Index", "Productos", null, htmlAttributes: new { @class = "nav-link" })</li>
                                     <li class="nav-item"><a href="@Url.Action("AgregaCarrito", "Carrito")" class="nav-link"><img class="img-responsive" style="height: 20px;" src="https://res.cloudinary.com/dj2f7ngpv/image/upload/v1629227088/vane/carrito_csmivj.png" /></a></li>
                                     @Html.Partial("_LoginPartial")
                                 </ul>

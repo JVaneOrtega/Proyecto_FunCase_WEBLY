@@ -1,63 +1,149 @@
 ﻿@model IEnumerable<Proyecto_FunCase_WEBLY.Models.Compras>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Producto.ImagenFinal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Proveedor.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaCompra)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cantidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrecioCompra)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NotaCompra)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FotoTicket)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Producto.ImagenFinal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Proveedor.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaCompra)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cantidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrecioCompra)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NotaCompra)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FotoTicket)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ComprasID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ComprasID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ComprasID })
-        </td>
-    </tr>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-</table>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Compras</h3>
+                <p class="text-subtitle text-muted">Lista de las compras realizadas.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end float-md-end float-sm-end">
+                    <ol class="breadcrumb breadcrumb-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("IndexAdmin", "Home")">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Compras</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-content">
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 class="card-title">Compras registradas</h4>
+                            </div>
+                            <div class="col-6">
+                                <p class="float-start float-lg-end float-md-end float-sm-end">
+                                    @Html.ActionLink("Crear nuevo registro", "Create", null, new { @class = "btn btn-outline-success" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-lg table-hover">
+                                    <tr class="table-success">
+                                        <th>
+                                            ID
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Proveedor.Nombre)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FechaCompra)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Total)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.EstatusCompra)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FotoTicket)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.NotaCompra)
+                                        </th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in Model)
+                                    {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ComprasID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Proveedor.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FechaCompra)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Total)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EstatusCompra)
+                                    </td>
+                                    <td>
+                                        <img class="img-responsive" src="@item.FotoTicket" alt="Imagen del Producto" style="height: 100px;" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NotaCompra)
+                                    </td>
+                                    <td>
+                                        <div class="float-start float-lg-end float-md-end float-sm-end">
+                                            @Html.ActionLink("Detalles", "Details", new { id = item.ComprasID }, new { @class = "btn btn-info rounded-pill" })
+                                            @if (item.EstatusCompra == "Registrada")
+                                            {
+                                                <button type="button" class="btn btn-success rounded-pill" onclick="ValidarPedido(@item.ComprasID)">Validar</button>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                                    }
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section scripts{
+    <script>
+        const ValidarPedido = (id) => {
+            fetch("@Url.Action("ConfirmarCompra", "Compras")/" + id, {
+                method: 'GET',
+            }).then(data => data.json()
+            ).then(data => {
+                if (data.response) {
+                    Toastify({
+                        text: data.mensaje,
+                        duration: 3000,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "#4fbe87",
+                    }).showToast();
+                    window.location.reload();
+                } else {
+                    Toastify({
+                        text: data.mensaje,
+                        duration: 3000,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "#f3616d",
+                    }).showToast();
+                }
+            }).catch(error => console.log(error));
+        }
+    </script>    
+}

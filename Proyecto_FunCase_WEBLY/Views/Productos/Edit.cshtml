@@ -39,55 +39,49 @@
                         {
                             @Html.AntiForgeryToken()
 
-                            <div class="form-body">
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                @Html.HiddenFor(model => model.ProductoID)
-                                @Html.HiddenFor(model => model.MaterialID)
-                                @Html.HiddenFor(model => model.ModeloID)
-                                <div class="row">
-                                    <div class="col-sm-4 col-md-5 col-lg-6">
-                                        @Html.LabelFor(model => model.Nombre)
-                                    </div>
-                                    <div class="col-sm-8 col-md-7 col-lg-6 form-group">
-                                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "form-text invalid-feedback" })
-                                    </div>
-                                    <div class="col-sm-4 col-md-5 col-lg-6">
-                                        @Html.LabelFor(model => model.Total)
-                                    </div>
-                                    <div class="col-sm-8 col-md-7 col-lg-6 form-group">
-                                        @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Total, "", new { @class = "form-text text-danger" })
-                                    </div>
-                                    <div class="col-sm-4 col-md-5 col-lg-6">
-                                        @Html.LabelFor(model => model.Stock)
-                                    </div>
-                                    <div class="col-sm-8 col-md-7 col-lg-6 form-group">
-                                        @Html.EditorFor(model => model.Stock, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Stock, "", new { @class = "form-text text-danger" })
-                                    </div>
-                                    <div class="col-sm-4 col-md-5 col-lg-6">
-                                        @Html.LabelFor(model => model.Estatus)
-                                    </div>
-                                    <div class="col-sm-8 col-md-7 col-lg-6 form-group">
-                                        @Html.EditorFor(model => model.Estatus, new { @class = "form-check-input" })
-                                        @Html.ValidationMessageFor(model => model.Estatus, "", new { @class = "form-text text-danger" })
-                                    </div>
-                                    <p class="form-text">Eliga un archivo solo si desea cambiar la imagen</p>
-                                    <div class="col-sm-4 col-md-5 col-lg-6">
-                                        @Html.LabelFor(model => model.ImagenFinal)
-                                    </div>
-                                    <div class="col-sm-8 col-md-7 col-lg-6 form-group">
-                                        <input type="file" id="Imagen" name="Imagen" class="form-control" />
-                                        @Html.HiddenFor(model => model.ImagenFinal)
-                                        @Html.ValidationMessageFor(model => model.ImagenFinal, "", new { @class = "form-text text-danger" })
-                                    </div>
-                                    <div class="col-sm-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary rounded-pill me-1 mb-1">Guardar</button>
-                                        @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "btn btn-light-secondary rounded-pill me-1 mb-1" })
-                                    </div>
+                        <div class="form-body">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.ProductoID)
+                            @Html.HiddenFor(model => model.MaterialID)
+                            @Html.HiddenFor(model => model.ModeloID)
+                            @Html.HiddenFor(model => model.Stock)
+                            <div class="row">
+                                <div class="col-sm-4 col-md-5 col-lg-6">
+                                    @Html.LabelFor(model => model.Nombre)
+                                </div>
+                                <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "form-text invalid-feedback" })
+                                </div>
+                                <div class="col-sm-4 col-md-5 col-lg-6">
+                                    @Html.LabelFor(model => model.Total)
+                                </div>
+                                <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                    @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Total, "", new { @class = "form-text text-danger" })
+                                </div>
+                                <div class="col-sm-4 col-md-5 col-lg-6">
+                                    @Html.LabelFor(model => model.Estatus)
+                                </div>
+                                <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                    @Html.EditorFor(model => model.Estatus, new { @class = "form-check-input" })
+                                    @Html.ValidationMessageFor(model => model.Estatus, "", new { @class = "form-text text-danger" })
+                                </div>
+                                <p class="form-text">Eliga un archivo solo si desea cambiar la imagen</p>
+                                <div class="col-sm-4 col-md-5 col-lg-6">
+                                    @Html.LabelFor(model => model.ImagenFinal)
+                                </div>
+                                <div class="col-sm-8 col-md-7 col-lg-6 form-group">
+                                    <input type="file" id="Imagen" name="Imagen" class="form-control" />
+                                    @Html.HiddenFor(model => model.ImagenFinal)
+                                    @Html.ValidationMessageFor(model => model.ImagenFinal, "", new { @class = "form-text text-danger" })
+                                </div>
+                                <div class="col-sm-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary rounded-pill me-1 mb-1">Guardar</button>
+                                    @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "btn btn-light-secondary rounded-pill me-1 mb-1" })
                                 </div>
                             </div>
+                        </div>
                         }
                     </div>
                 </div>

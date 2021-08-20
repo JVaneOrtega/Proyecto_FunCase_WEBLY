@@ -1,4 +1,4 @@
-ï»¿namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
+namespace Proyecto_FunCase_WEBLY.FunCaseMigrations
 {
     using IdentitySample.Models;
     using Microsoft.AspNet.Identity;
@@ -41,10 +41,10 @@
                     context.Roles.Add(new IdentityRole { Name = "Cliente" });
                 }
 
-                var roleDesigner = context.Roles.Where(r => r.Name == "DiseÃ±ador").FirstOrDefault();
+                var roleDesigner = context.Roles.Where(r => r.Name == "Diseñador").FirstOrDefault();
                 if (roleDesigner == null)
                 {
-                    context.Roles.Add(new IdentityRole { Name = "DiseÃ±ador" });
+                    context.Roles.Add(new IdentityRole { Name = "Diseñador" });
                 }
 
                 var userAdmin = context.Users.Where(u => u.Email == "admin@example.com").FirstOrDefault();
@@ -63,34 +63,38 @@
                 context.Estados.Add(new Estado { Nombre = "Campeche" });
                 context.Estados.Add(new Estado { Nombre = "Chiapas" });
                 context.Estados.Add(new Estado { Nombre = "Chihuahua" });
-                context.Estados.Add(new Estado { Nombre = "Ciudad de MÃ©xico" });
+                context.Estados.Add(new Estado { Nombre = "Ciudad de México" });
                 context.Estados.Add(new Estado { Nombre = "Coahuila" });
                 context.Estados.Add(new Estado { Nombre = "Colima" });
                 context.Estados.Add(new Estado { Nombre = "Durango" });
-                context.Estados.Add(new Estado { Nombre = "Estado de MÃ©xico" });
+                context.Estados.Add(new Estado { Nombre = "Estado de México" });
                 context.Estados.Add(new Estado { Nombre = "Guanajuato" });
                 context.Estados.Add(new Estado { Nombre = "Guerrero" });
                 context.Estados.Add(new Estado { Nombre = "Hidalgo" });
                 context.Estados.Add(new Estado { Nombre = "Jalisco" });
-                context.Estados.Add(new Estado { Nombre = "MichoacÃ¡n" });
+                context.Estados.Add(new Estado { Nombre = "Michoacán" });
                 context.Estados.Add(new Estado { Nombre = "Morelos" });
                 context.Estados.Add(new Estado { Nombre = "Nayarit" });
-                context.Estados.Add(new Estado { Nombre = "Nuevo LeÃ³n" });
+                context.Estados.Add(new Estado { Nombre = "Nuevo León" });
                 context.Estados.Add(new Estado { Nombre = "Oaxaca" });
                 context.Estados.Add(new Estado { Nombre = "Puebla" });
-                context.Estados.Add(new Estado { Nombre = "QuerÃ©taro" });
+                context.Estados.Add(new Estado { Nombre = "Querétaro" });
                 context.Estados.Add(new Estado { Nombre = "Quintana Roo" });
-                context.Estados.Add(new Estado { Nombre = "San Luis PotosÃ­" });
+                context.Estados.Add(new Estado { Nombre = "San Luis Potosí" });
                 context.Estados.Add(new Estado { Nombre = "Sinaloa" });
                 context.Estados.Add(new Estado { Nombre = "Sonora" });
                 context.Estados.Add(new Estado { Nombre = "Tabasco" });
                 context.Estados.Add(new Estado { Nombre = "Tamaulipas" });
                 context.Estados.Add(new Estado { Nombre = "Tlaxcala" });
                 context.Estados.Add(new Estado { Nombre = "Veracruz" });
-                context.Estados.Add(new Estado { Nombre = "YucatÃ¡n" });
+                context.Estados.Add(new Estado { Nombre = "Yucatán" });
                 context.Estados.Add(new Estado { Nombre = "Zacatecas" });
 
-                context.MetodosPagos.Add(new MetodosPago { Nombre = "Stripe" });
+                var stripe = context.MetodosPagos.Where(m => m.Nombre == "Stripe").FirstOrDefault();
+                if(stripe == null)
+                {
+                    context.MetodosPagos.Add(new MetodosPago { Nombre = "Stripe" });
+                }
 
                 context.SaveChanges();
             }

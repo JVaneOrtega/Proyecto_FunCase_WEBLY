@@ -203,29 +203,17 @@
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
-    <Compile Include="FunCaseMigrations\202108171948314_FunCaseInitial.cs" />
-    <Compile Include="FunCaseMigrations\202108171948314_FunCaseInitial.Designer.cs">
-      <DependentUpon>202108171948314_FunCaseInitial.cs</DependentUpon>
+    <Compile Include="FunCaseMigrations\202108192308322_FunCaseInitial.cs" />
+    <Compile Include="FunCaseMigrations\202108192308322_FunCaseInitial.Designer.cs">
+      <DependentUpon>202108192308322_FunCaseInitial.cs</DependentUpon>
     </Compile>
-    <Compile Include="FunCaseMigrations\202108172020144_FunCaseAdjustment.cs" />
-    <Compile Include="FunCaseMigrations\202108172020144_FunCaseAdjustment.Designer.cs">
-      <DependentUpon>202108172020144_FunCaseAdjustment.cs</DependentUpon>
+    <Compile Include="FunCaseMigrations\202108200038073_FunCaseAjusteCompra.cs" />
+    <Compile Include="FunCaseMigrations\202108200038073_FunCaseAjusteCompra.Designer.cs">
+      <DependentUpon>202108200038073_FunCaseAjusteCompra.cs</DependentUpon>
     </Compile>
-    <Compile Include="FunCaseMigrations\202108172111079_FunCaseDireccion.cs" />
-    <Compile Include="FunCaseMigrations\202108172111079_FunCaseDireccion.Designer.cs">
-      <DependentUpon>202108172111079_FunCaseDireccion.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FunCaseMigrations\202108172304559_FunCaseCompras.cs" />
-    <Compile Include="FunCaseMigrations\202108172304559_FunCaseCompras.Designer.cs">
-      <DependentUpon>202108172304559_FunCaseCompras.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FunCaseMigrations\202108172306475_FunCaseCompras1.cs" />
-    <Compile Include="FunCaseMigrations\202108172306475_FunCaseCompras1.Designer.cs">
-      <DependentUpon>202108172306475_FunCaseCompras1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FunCaseMigrations\202108181947184_FunCaseDetallesCompra.cs" />
-    <Compile Include="FunCaseMigrations\202108181947184_FunCaseDetallesCompra.Designer.cs">
-      <DependentUpon>202108181947184_FunCaseDetallesCompra.cs</DependentUpon>
+    <Compile Include="FunCaseMigrations\202108200046184_FunCaseAjusteUsuarioCompra.cs" />
+    <Compile Include="FunCaseMigrations\202108200046184_FunCaseAjusteUsuarioCompra.Designer.cs">
+      <DependentUpon>202108200046184_FunCaseAjusteUsuarioCompra.cs</DependentUpon>
     </Compile>
     <Compile Include="FunCaseMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -2112,11 +2100,10 @@
     <Content Include="Views\Compras\Index.cshtml" />
     <Content Include="Views\Compras\Details.cshtml" />
     <Content Include="Views\Compras\Create.cshtml" />
-    <Content Include="Views\Compras\Edit.cshtml" />
-    <Content Include="Views\Compras\Delete.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Home\IndexAdmin.cshtml" />
+    <Content Include="Views\Compras\ProductosDisponibles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2128,27 +2115,18 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FunCaseMigrations\202108171948314_FunCaseInitial.resx">
-      <DependentUpon>202108171948314_FunCaseInitial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108172020144_FunCaseAdjustment.resx">
-      <DependentUpon>202108172020144_FunCaseAdjustment.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108172111079_FunCaseDireccion.resx">
-      <DependentUpon>202108172111079_FunCaseDireccion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108172304559_FunCaseCompras.resx">
-      <DependentUpon>202108172304559_FunCaseCompras.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108172306475_FunCaseCompras1.resx">
-      <DependentUpon>202108172306475_FunCaseCompras1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FunCaseMigrations\202108181947184_FunCaseDetallesCompra.resx">
-      <DependentUpon>202108181947184_FunCaseDetallesCompra.cs</DependentUpon>
-    </EmbeddedResource>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <EmbeddedResource Include="FunCaseMigrations\202108192308322_FunCaseInitial.resx">
+      <DependentUpon>202108192308322_FunCaseInitial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunCaseMigrations\202108200038073_FunCaseAjusteCompra.resx">
+      <DependentUpon>202108200038073_FunCaseAjusteCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunCaseMigrations\202108200046184_FunCaseAjusteUsuarioCompra.resx">
+      <DependentUpon>202108200046184_FunCaseAjusteUsuarioCompra.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

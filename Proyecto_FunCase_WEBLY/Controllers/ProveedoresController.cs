@@ -1,23 +1,37 @@
-﻿using System;
+﻿using Proyecto_FunCase_WEBLY.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Proyecto_FunCase_WEBLY.Controllers
 {
+    [Authorize(Roles = "Empleado")]
     public class ProveedoresController : Controller
     {
+        FunCaseModelContext db = new FunCaseModelContext();
         // GET: Proveedores
         public ActionResult Index()
         {
-            return View();
+            return View(db.Proveedores.ToList());
         }
 
         // GET: Proveedores/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Proveedor proveedor = db.Proveedores.Find(id);
+            if (proveedor == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return View(proveedor);
         }
 
         // GET: Proveedores/Create
@@ -28,35 +42,54 @@ namespace Proyecto_FunCase_WEBLY.Controllers
 
         // POST: Proveedores/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Proveedor proveedor)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    db.Proveedores.Add(proveedor);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-                return RedirectToAction("Index");
+                return View(proveedor);
             }
             catch
             {
-                return View();
+                return View(proveedor);
             }
         }
 
         // GET: Proveedores/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Proveedor proveedor = db.Proveedores.Find(id);
+            if (proveedor == null)
+            {
+                return HttpNotFound();
+            }
+            return View(proveedor);
         }
 
         // POST: Proveedores/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Proveedor proveedor)
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    db.Entry(proveedor).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-                return RedirectToAction("Index");
+                return View(proveedor);
             }
             catch
             {
@@ -65,18 +98,30 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         }
 
         // GET: Proveedores/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Proveedor proveedor = db.Proveedores.Find(id);
+            if (proveedor == null)
+            {
+                return HttpNotFound();
+            }
+            return View(proveedor);
         }
 
         // POST: Proveedores/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                Proveedor proveedor = db.Proveedores.Find(id);
+                proveedor.Estatus = false;
+                db.Entry(proveedor).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
 
                 return RedirectToAction("Index");
             }

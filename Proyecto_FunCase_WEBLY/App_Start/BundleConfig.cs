@@ -35,6 +35,8 @@ namespace IdentitySample
             bundles.Add(new ScriptBundle("~/bundles/admin").Include(
                       "~/Content/assetsAdmin/vendors/perfect-scrollbar/perfect-scrollbar.min.js",
                       "~/Content/assetsAdmin/vendors/apexcharts/apexcharts.js",
+                      "~/Content/assetsAdmin/vendors/sweetalert2/sweetalert2.all.min.js",
+                      "~/Content/assetsAdmin/vendors/toastify/toastify.js",
                       "~/Content/assetsAdmin/js/pages/dashboard.js",
                       "~/Content/assetsAdmin/js/bootstrap.bundle.min.js",
                       "~/Content/assetsAdmin/js/main.js"));
@@ -56,6 +58,8 @@ namespace IdentitySample
                       "~/Content/assetsAdmin/vendors/iconly/bold.css",
                       "~/Content/assetsAdmin/vendors/perfect-scrollbar/perfect-scrollbar.css",
                       "~/Content/assetsAdmin/vendors/bootstrap-icons/bootstrap-icons.css",
+                      "~/Content/assetsAdmin/vendors/sweetalert2/sweetalert2.min.css",
+                      "~/Content/assetsAdmin/vendors/toastify/toastify.css",
                       "~/Content/assetsAdmin/css/app.css"));
 
             bundles.Add(new StyleBundle("~/Login/css").Include(

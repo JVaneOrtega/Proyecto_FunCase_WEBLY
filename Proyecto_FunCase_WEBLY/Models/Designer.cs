@@ -14,8 +14,10 @@ namespace Proyecto_FunCase_WEBLY.Models
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DesignerID { get; set; }
+
         [Display(Name = "Nombre de Presentación")]
         public string NombrePresentacion { get; set; }
+
         [Display(Name = "Estatus del Diseñador")]
         public bool Estatus;
 

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Proyecto_FunCase_WEBLY.Models.Producto>
+
+@{  
+    var id = "";
+    foreach (var item in Model)
+    {
+        id += String.Format("{0},", item.ProductoID);
+    }
+
+    ViewBag.TotalProductos = id;
+}
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            <img src="@item.ImagenFinal" style="height: 50px;" />
+        </td>
+        <td style="width: 100px">
+            <input type="number" id="Cantidad-'@item.ProductoID'" onchange="calcularTotal(this)" class="form-control" value="0"/>
+        </td>
+        <td>
+            <input type="text" id="PrecioCompra-'@item.ProductoID'" onchange="calcularTotal(this)" class="form-control" value="0"/>
+        </td>
+        <td id="Total-'@item.ProductoID'">
+            $0.00
+        </td>
+    </tr>
+}
+<input type="hidden" id="TotalCantidadProductos" value='@ViewBag.TotalProductos' />
