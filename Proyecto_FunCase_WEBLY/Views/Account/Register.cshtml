@@ -1,81 +1,89 @@
 ﻿@model IdentitySample.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Registrate";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
     string[] TipoUsuario = { "Cliente", "Diseñador" };
 }
 
-<h2>@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Crear una nueva cuenta</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <h4>Tipo de cuenta</h4>
-    <div class="mb-3 row">
-        @Html.LabelFor(m => m.Tipo, new { @class = "col-md-2 control-label" })
-        <div class="col-lg-7 col-md-8 col-sm-8">
-            @foreach (var tipo in TipoUsuario)
+<div class="row h-100">
+    <div class="col-lg-5 col-12">
+        <div id="auth-left">
+            <div style="height: 90px;">
+                <a href="@Url.Action("Index", "Home")"><img src="https://res.cloudinary.com/dj2f7ngpv/image/upload/v1629227087/vane/Logo_hc6hth.jpg" alt="Logo" srcset="" style="width: 80px; height: 80px; align-self: center;"></a>
+            </div>
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form", role = "form" }))
             {
-                <div class="form-check form-check-inline">
-                    @Html.RadioButtonFor(model => model.Tipo, tipo, new { @class = "form-check-input" })
-                    <label class="form-check-label">
-                        @tipo
-                    </label>
+                @Html.AntiForgeryToken()
+                <h2>@ViewBag.Title.</h2>
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <h4>Tipo de cuenta</h4>
+                <div class="mb-3 row">
+                    @Html.LabelFor(m => m.Tipo, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+                    <div class="col-lg-7 col-md-8 col-sm-8">
+                        @foreach (var tipo in TipoUsuario)
+                        {
+                            <div class="form-check form-check-inline">
+                                @Html.RadioButtonFor(model => model.Tipo, tipo, new { @class = "form-check-input" })
+                                <label class="form-check-label">
+                                    @tipo
+                                </label>
+                            </div>
+                        }
+                    </div>
                 </div>
+                <div class="mb-3 row">
+                    @Html.LabelFor(m => m.Nombre, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+                    <div class="col-lg-7 col-md-8 col-sm-8">
+                        @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    @Html.LabelFor(m => m.Apellido1, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+                    <div class="col-lg-7 col-md-8 col-sm-8">
+                        @Html.TextBoxFor(m => m.Apellido1, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    @Html.LabelFor(m => m.Apellido2, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+                    <div class="col-lg-7 col-md-8 col-sm-8">
+                        @Html.TextBoxFor(m => m.Apellido2, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    @Html.LabelFor(m => m.Telefono, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+                    <div class="col-lg-7 col-md-8 col-sm-8">
+                        @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    @Html.LabelFor(m => m.Email, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+                    <div class="col-lg-7 col-md-8 col-sm-8">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    @Html.LabelFor(m => m.Password, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+                    <div class="col-lg-7 col-md-8 col-sm-8">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
+                    <div class="col-lg-7 col-md-8 col-sm-8">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Registrarme</button>
             }
         </div>
     </div>
-    <hr />
-    <h4>Datos personales</h4>
-    <div class="mb-3 row">
-        @Html.LabelFor(m => m.Nombre, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
-        <div class="col-lg-7 col-md-8 col-sm-8">
-            @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+    <div class="col-lg-7 d-none d-lg-block">
+        <div id="auth-right" style="text-align: center;">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/814aPFny%2BnL._AC_SL1500_.jpg" style="align-self: center; width:1100px;" />
         </div>
     </div>
-    <div class="mb-3 row">
-        @Html.LabelFor(m => m.Apellido1, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
-        <div class="col-lg-7 col-md-8 col-sm-8">
-            @Html.TextBoxFor(m => m.Apellido1, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="mb-3 row">
-        @Html.LabelFor(m => m.Apellido2, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
-        <div class="col-lg-7 col-md-8 col-sm-8">
-            @Html.TextBoxFor(m => m.Apellido2, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="mb-3 row">
-        @Html.LabelFor(m => m.Telefono, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
-        <div class="col-lg-7 col-md-8 col-sm-8">
-            @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control" })
-        </div>
-    </div>
-    <hr />
-    <h4>Datos de usuario</h4>
-    <div class="mb-3 row">
-        @Html.LabelFor(m => m.Email, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
-        <div class="col-lg-7 col-md-8 col-sm-8">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="mb-3 row">
-        @Html.LabelFor(m => m.Password, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
-        <div class="col-lg-7 col-md-8 col-sm-8">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="mb-3 row">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label col-lg-5 col-md-4 col-sm-4 col-form-label" })
-        <div class="col-lg-7 col-md-8 col-sm-8">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <hr />
-    <button type="submit" class="btn btn-info">Registrarme</button>
-}
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

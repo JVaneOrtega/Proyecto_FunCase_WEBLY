@@ -1,11 +1,28 @@
 ﻿@{
-    ViewBag.Title = "DEMO Envío de Link";
+    ViewBag.Title = "Prueba Envío de Link";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<p class="text-info">
-    Por favor, verifica tu bandeja de entrada y valida tu email
-</p>
-<p class="text-danger">
-    Solo para DEMO: Puedes dar clic a este link para confirmar tu email: <a href="@ViewBag.Link">link</a>
-    Favor de cambiar este codigo para registrar un email en IdentityConfig para enviar un email.
-</p>
+
+<div class="row h-100">
+    <div class="col-lg-5 col-12">
+        <div id="auth-left">
+            <div class="auth-logo">
+                <a href="@Url.Action("Index", "Home")"><img src="https://res.cloudinary.com/dj2f7ngpv/image/upload/v1629227087/vane/Logo_hc6hth.jpg" alt="Logo" srcset="" style="width: 80px; height: 80px; align-self: center;"></a>
+            </div>
+            <h2>@ViewBag.Title.</h2>
+            <hr />
+            <p class="text-info">
+                Por favor, verifica tu bandeja de entrada y valida tu email
+            </p>
+            <p class="text-danger">
+                Solo por prueba: Puedes dar clic a este link para confirmar tu email: <a href="@ViewBag.Link">link</a>
+                Favor de cambiar este codigo para registrar un email en IdentityConfig para enviar un email.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-7 d-none d-lg-block">
+        <div id="auth-right" style="text-align: center;">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/814aPFny%2BnL._AC_SL1500_.jpg" style="align-self: center; width:1100px;" />
+        </div>
+    </div>
+</div>
