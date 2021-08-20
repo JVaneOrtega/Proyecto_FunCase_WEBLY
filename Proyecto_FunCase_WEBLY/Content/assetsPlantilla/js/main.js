@@ -19,7 +19,7 @@ Author: GrayGrids
     Sticky
     ======================================= */
     window.onscroll = function () {
-        var header_navbar = document.querySelector(".navbar-area");
+        /*var header_navbar = document.querySelector(".navbar-area");
         var sticky = header_navbar.offsetTop;
 
         if (window.pageYOffset > sticky) {
@@ -36,7 +36,7 @@ Author: GrayGrids
             backToTo.style.display = "flex";
         } else {
             backToTo.style.display = "none";
-        }
+        }*/
     };
 
     // for menu scroll 

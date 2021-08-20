@@ -10,17 +10,18 @@ namespace Proyecto_FunCase_WEBLY.Models
         public Producto Producto;
         public int Cantidad;
         public Imagen Imagen;
-
+        public string customImage;
         public CarritoItem()
         {
 
         }
 
-        public CarritoItem(Producto Producto, int Cantidad, Imagen Imagen)
+        public CarritoItem(Producto Producto, int Cantidad, Imagen Imagen, string customImage)
         {
             this.Producto = Producto;
             this.Cantidad = Cantidad;
             this.Imagen = Imagen;
+            this.customImage = customImage;
         }
 
         public double calcularTotal()

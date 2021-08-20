@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,22 +15,55 @@ namespace Proyecto_FunCase_WEBLY.Controllers
         private FunCaseModelContext db = new FunCaseModelContext();
 
         [HttpPost]
-        public JsonResult AgregaCarrito(int idProducto, int idImagen, int cantidad)
+        public JsonResult AgregaCarrito(int idProducto, int idImagen, int cantidad, string customImage)
         {
+
+            string pathCustomImage = "";
+            if(customImage != null)
+            {
+                var image = Base64ToImage(customImage);
+                string ruta = Path.Combine(Server.MapPath("~/Images/CustomUserPersonalization/" + idProducto));
+                if (!Directory.Exists(ruta))
+                {
+                    Directory.CreateDirectory(ruta);
+                }
+                var Timestamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
+                pathCustomImage =  String.Concat("/Images/CustomUserPersonalization/", idProducto, "/" , Timestamp.ToString() , ".png");
+                image.Save(Path.Combine(ruta, Timestamp.ToString() + ".png" ));               
+            }
+
+            
+
             if(Session["carrito"] == null)
             {
                 List<CarritoItem> compras = new List<CarritoItem>();
-                compras.Add(new CarritoItem(db.Productos.Find(idProducto), cantidad, db.Imagenes.Find(idImagen)));
+                if (pathCustomImage.Equals(""))
+                {
+                    compras.Add(new CarritoItem(db.Productos.Find(idProducto), cantidad, db.Imagenes.Find(idImagen), null));
+                }
+                else
+                {
+                    compras.Add(new CarritoItem(db.Productos.Find(idProducto), cantidad, null, pathCustomImage));
+                }
+                
                 Session["carrito"] = compras;
             }
             else
             {
                 List<CarritoItem> compras = (List<CarritoItem>)Session["carrito"];
 
-                int indexExistente = getIndex(idProducto, idImagen);
+                int indexExistente = getIndex(idProducto, idImagen, customImage);
                 if(indexExistente == -1)
                 {
-                    compras.Add(new CarritoItem(db.Productos.Find(idProducto), cantidad, db.Imagenes.Find(idImagen)));
+                    if (pathCustomImage.Equals(""))
+                    {
+                        compras.Add(new CarritoItem(db.Productos.Find(idProducto), cantidad, db.Imagenes.Find(idImagen), null ));
+                    }
+                    else
+                    {
+                        compras.Add(new CarritoItem(db.Productos.Find(idProducto), cantidad, null, pathCustomImage));
+                    }
+                        
                 }
                 else
                 {
@@ -41,16 +76,30 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             return Json(new { response = true }, JsonRequestBehavior.AllowGet);
         }
 
+
+        private Image Base64ToImage(string base64String)
+        {
+            // Convert base 64 string to byte[]
+            string base64 = base64String.Split(',')[1];
+            byte[] imageBytes = Convert.FromBase64String(base64);
+            // Convert byte[] to Image
+            using (var ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
+            {
+                Image image = Image.FromStream(ms, true);
+                return image;
+            }
+        }
         [HttpGet]
         public ActionResult AgregaCarrito()
         {
             return View();
         }
 
-        public ActionResult Delete(int idProducto, int idImagen)
+        public ActionResult Delete(int idProducto, int idImagen, string customImage)
         {
             List<CarritoItem> compras = (List<CarritoItem>)Session["carrito"];
-            compras.RemoveAt(getIndex(idProducto, idImagen));
+        
+            compras.RemoveAt(getIndex(idProducto, idImagen, customImage));
 
             return View("AgregaCarrito");
         }
@@ -148,13 +197,22 @@ namespace Proyecto_FunCase_WEBLY.Controllers
             return View();
         }
 
-        private int getIndex(int idProducto, int idImagen)
+        private int getIndex(int idProducto, int idImagen, string customImage)
         {
             List<CarritoItem> compras = (List<CarritoItem>)Session["carrito"];
             for (int i = 0; i < compras.Count; i++)
             {
-                if (compras[i].Producto.ProductoID == idProducto && compras[i].Imagen.ImagenID == idImagen)
-                    return i;
+                if (idImagen != 0)
+                {
+                    if (compras[i].Producto.ProductoID == idProducto && compras[i].Imagen.ImagenID == idImagen)
+                        return i;
+                }
+                else
+                {
+                    if (compras[i].Producto.ProductoID == idProducto && compras[i].customImage == customImage)
+                        return i;
+                }
+                
             }
 
             return -1;

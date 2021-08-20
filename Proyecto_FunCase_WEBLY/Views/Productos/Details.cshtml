@@ -197,40 +197,44 @@ else
                 let data = document.getElementById("Imagen").value.split(";");
                 let ruta = data[0];
                 document.getElementById("PreviewImagen").src = ruta;
-            }
+                }
+                document.getElementById("btnAgregar").onclick = () => {
+                    const ProductoId = document.getElementById("idProducto").value;
+                    const cantidad = document.getElementById("cantidad").value;
+                    let ImagenId = 0;
+                    let customImage = null;
+                    if (document.getElementById("designerIlustration").checked) {
+                        ImagenId = document.getElementById("Imagen").value.split(";")[1];
+                    } else {
+                        const files = customImage = document.getElementById("userImage").files;
+                        if (files.length === 0) {
+                            return Toastify({
+                                text: "Seleccione su imagen para la personalización",
+                                duration: 3000,
+                                close: true,
+                                gravity: "top",
+                                position: "right",
+                                backgroundColor: "#f3616d",
+                            }).showToast();
+                        }
+                        customImage = document.getElementById("canvas").toDataURL();
 
-            document.getElementById("btnAgregar").onclick = () => {
-                var ProductoId = document.getElementById("idProducto").value;
-                var cantidad = document.getElementById("cantidad").value;
-                var ImagenId = document.getElementById("Imagen").valUE.split(";")[1];
-
-                $.ajax(
-                {
-                    url: "@Url.Action("AgregaCarrito", "Carrito")",
-                    data: { idProducto: ProductoId, idImagen: ImagenId, cantidad: cantidad },
-                    type: "POST",
-                    success: function (response) {
-                        window.location.href = "@Url.Action("AgregaCarrito", "Carrito")";
-                    },
-                        error: function (err, error) {
-                            alert(err.responseText);
                     }
-                });
-            });
 
-            //Método de validación para el campo de cantidad
-            $(".numbers").keydown(function (e) {
-                //alert(e.keyCode);
-                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 40]) !== -1 ||
-                    (e.keyCode == 65 && e.ctrlkey === true) ||
-                    (e.keyCode >= 35 && e.keyCode <= 39)) {
-                    return;
-                }
-
-                if ((e.shiftkey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 165)) {
-                    e.preventDefault();
-                }
-            });
+                    const formData = new FormData();
+                    formData.append("idProducto", ProductoId);
+                    formData.append("idImagen", ImagenId);           
+                    formData.append("cantidad", cantidad);
+                    formData.append("customImage", customImage);
+                    
+                    fetch("@Url.Action("AgregaCarrito", "Carrito")", {
+                        method: 'POST',
+                        body: formData
+                    }).then(data => data.text()
+                    ).then(data => {                        
+                        window.location.href = "@Url.Action("AgregaCarrito", "Carrito")";
+                    }).catch(error => console.log(error));
+            }
 
             var productImageSetted = null;
             var userDesigImageSetted = null;
@@ -242,30 +246,30 @@ else
                 return new Promise((resolve, reject) => {
                     var reader = new FileReader();
                     reader.onload = function (e) {
-                        //$('#blah').attr('src', e.target.result); // Renderizamos la imagen            
+                        //$('#blah').attr('src', e.target.result); // Renderizamos la imagen
                         resolve(e.target.result);
                     }
                     reader.readAsDataURL(file);
                 })
 
             }
-           
+
 
             const changeCanvasImage = async(e) => {
                 let newImg = null;
                 //const canvas = document.getElementById('canvas');
                 if (e.target.id === "userImage") {
-                    
+
                     newImg = document.getElementById("userImage").files[0];
                     newImg = await encoded(newImg);
-                  
+
                 } else {
                     newImg = document.getElementById("PreviewImagen").src;
-                  
+
                 }
-              
+
                 const productImage = document.getElementById('imagenProducto').src;
-                            
+
                 loadCanvas(productImage, newImg)
             }
 
@@ -282,20 +286,20 @@ else
                 productImageSetted = productImage;
                 userDesigImageSetted = newImage;
                 const canvas = document.getElementById('canvas');
-                              
-                const img1 = await loadImage(productImage);                
-                const ctx1 = canvas.getContext('2d');                
+
+                const img1 = await loadImage(productImage);
+                const ctx1 = canvas.getContext('2d');
                 ctx1.drawImage(img1, 0, 0, 492, 492);
-              
+
                 const img2 = await loadImage(newImage)
                 const ctx2 = canvas.getContext('2d');
-                
+
                 const porcentajeHeight = (img2.height * 100) / img2.width;
                 const relacion = 100 - porcentajeHeight; // = 30
                 //console.log(newPositions)
                 if (newPositions !== null) {
                     let { xFixed, yFixed } = newPositions;
-                    
+
                     if (relacion > 25) {
                         console.log(img2.height)
                         if (yFixed > img2.height) {
@@ -318,8 +322,8 @@ else
                     }
                 }
 
-                
-                
+
+
             }
 
             document.getElementById("Imagen").addEventListener('change', changeCanvasImage);
@@ -328,7 +332,7 @@ else
             window.onload = () => {
                 const firstImagen = document.getElementById('PreviewImagen').src;
                 const productImage = document.getElementById('imagenProducto').src;
-              
+
                 loadCanvas(productImage, firstImagen.split(';')[0]);
                 if (document.getElementById("designerIlustration").checked) {
                     document.getElementById("divImageDesigner").style.display = 'block';
@@ -347,7 +351,7 @@ else
                 if (yFixed > 550) {
                     yFixed = 550;
                 }
-                
+
                 listenMove && !isVertical && loadCanvas(productImageSetted, userDesigImageSetted, { xFixed, yFixed });
             }
 
@@ -362,25 +366,41 @@ else
             document.getElementById("canvas").addEventListener('click', e => {
                 if (listenMove) {
                     listenMove = false;
+                    return Toastify({
+                        text: "Ya no puedes Ajustar la imagen en la previsualización, da click en la imagen para volver a habilitarlo",
+                        duration: 3000,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "#f3616d",
+                    }).showToast();
                 } else {
                     listenMove = true;
+                    return Toastify({
+                        text: "Puedes Ajustar la Imagen en la previsualización :D, da click en la imagen para deshabilitar está acción",
+                        duration: 4000,
+                        close: true,
+                        gravity: "top",
+                        position: "left",
+                        backgroundColor: "#4fbe87",
+                    }).showToast();
                 }
             })
 
             document.getElementById("userIlustration").addEventListener('change', async e => {
                 if (e.target.checked) {
 
-                    if (userDesigImageSetted !== null) {
-                        const userImg = document.getElementById("userImage").files[0];
+                    
+                    const userImg = document.getElementById("userImage").files;
+                    if (userImg.length > 0) {
                         const userEncodedImg = await encoded(userImg);
                         loadCanvas(productImageSetted, userEncodedImg);
                     }
-                    
-
+                                            
                     document.getElementById("divImageUser").style.display = 'block';
                     document.getElementById("divImageDesigner").style.display = 'none';
                 }
-                
+
             });
 
             document.getElementById("designerIlustration").addEventListener('change', e => {
@@ -392,7 +412,7 @@ else
                 }
 
             });
-            
+
         </script>
     }
 }

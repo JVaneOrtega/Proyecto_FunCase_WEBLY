@@ -40,11 +40,21 @@
                                     total += item.calcularTotal();
                                     <tr>
                                         <td>@item.Producto.Nombre</td>
-                                        <td><img class="img-responsive" src="@item.Imagen.Ruta" alt="Imagen" style="height: 150px;" /></td>
+                                        <td>
+                                            @if (item.Imagen != null)
+                                            {
+                                                <img class="img-responsive" src="@item.Imagen.Ruta" alt="Imagen" style="height: 150px;" />
+                                            }
+                                            else
+                                            {
+                                                <img class="img-responsive" src="@item.customImage" alt="Imagen" style="height: 150px;" />
+                                            }
+
+                                        </td>
                                         <td>@String.Format("{0:C}", item.Producto.Total)</td>
                                         <td>@item.Cantidad</td>
                                         <td>@String.Format("{0:C}", item.calcularTotal())</td>
-                                        <td>@Html.ActionLink("Eliminar", "Delete", "Carrito", new { idProducto = item.Producto.ProductoID, idImagen = item.Imagen.ImagenID }, null)</td>
+                                        <td>@Html.ActionLink("Eliminar", "Delete", "Carrito", new { idProducto = item.Producto.ProductoID, idImagen = (item.Imagen != null) ? item.Imagen.ImagenID : 0, customImage = item.customImage }, null)</td>
                                     </tr>
                                 }
                             }
